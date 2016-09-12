@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<fieldset
+		name="records"
+		label="COM_FREFORM_CONFIG_RECORDS_SETTINGS_LABEL"
+		description="COM_FREFORM_CONFIG_RECORDS_SETTINGS_DESC"
+	>
+		<field
+			name="email_admins"
+			type="textarea"
+			label="COM_FREFORM_CONFIG_EMAIL_ADMINS_LABEL"
+			description="COM_FREFORM_CONFIG_EMAIL_ADMINS_DESC"
+            cols="50"
+            rows="10"
+            filter="string"
+		/>
+	</fieldset>
+    
+    <fieldset name="permissions"
+		description="JCONFIG_PERMISSIONS_DESC"
+		label="JCONFIG_PERMISSIONS_LABEL"
+	>
+
+		<field name="rules" type="rules"
+			component="com__freform"
+			filter="rules"
+			validate="rules"
+			label="JCONFIG_PERMISSIONS_LABEL"
+			section="component" />
+	</fieldset>
+</config>
