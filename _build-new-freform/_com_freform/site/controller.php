@@ -1,7 +1,13 @@
 <?php
-// No direct access to this file
-defined('_JEXEC') or die;
+/**
+ * @package     Joomla.Site
+ * @subpackage  com__freform
+ *
+ * @copyright   Copyright (C) NPEU 2018.
+ * @license     MIT License; see LICENSE.md
+ */
 
+defined('_JEXEC') or die;
 /**
  * _Freform Component Controller
  */

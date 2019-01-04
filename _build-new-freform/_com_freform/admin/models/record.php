@@ -1,5 +1,12 @@
 <?php
-// No direct access to this file
+/**
+ * @package     Joomla.Site
+ * @subpackage  com__freform
+ *
+ * @copyright   Copyright (C) NPEU 2018.
+ * @license     MIT License; see LICENSE.md
+ */
+
 defined('_JEXEC') or die;
 
 // Force-load the Admin language file to avoid repeating form language strings:
