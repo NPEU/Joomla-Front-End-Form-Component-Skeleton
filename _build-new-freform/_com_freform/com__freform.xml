@@ -2,15 +2,15 @@
 <extension type="component" version="3.2.0" method="upgrade">
 
     <name>COM_FREFORM</name>
-    <!-- The following elements are optional and free of formatting constraints -->
-    <creationDate>June 2016</creationDate>
     <author>Andy Kirk</author>
     <authorEmail>andy.kirk@npeu.ox.ac.uk</authorEmail>
-    <authorUrl>https://intranet.npeu.ox.ac.uk</authorUrl>
-    <copyright>Copyright Info</copyright>
-    <license>License Info</license>
+    <authorUrl>https://www.npeu.ox.ac.uk</authorUrl>
+    <creationDate>January 2019</creationDate>
+    <copyright>(C) NPEU 2019</copyright>
+    <license>MIT License; see LICENSE.md</license>
+
     <!--  The version string is recorded in the components table -->
-    <version>0.0.1</version>
+    <version>1.0.0</version>
     <!-- The description is optional and defaults to the name -->
     <description>COM_FREFORM_DESCRIPTION</description>
 
