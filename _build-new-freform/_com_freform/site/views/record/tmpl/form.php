@@ -1,7 +1,13 @@
 <?php
-// No direct access to this file
-defined('_JEXEC') or die('Restricted access');
+/**
+ * @package     Joomla.Site
+ * @subpackage  com__freform
+ *
+ * @copyright   Copyright (C) NPEU 2019.
+ * @license     MIT License; see LICENSE.md
+ */
 
+defined('_JEXEC') or die;
 
 // These are for the Joomla way of doing things. You may not need them if you're using other data
 // validation libraries:
@@ -12,11 +18,11 @@ $form_id = '_freform_form';
 $route   = JRoute::_(JUri::current());
 ?>
 <script type="text/javascript">
-	Joomla.submitbutton = function(task)
-	{
+    Joomla.submitbutton = function(task)
+    {
         var form = document.getElementById('<?php echo $form_id; ?>');
         var $form = jQuery(<?php echo $form_id; ?>);
-		if (task == 'record.cancel') {
+        if (task == 'record.cancel') {
             Joomla.submitform(task, form);
         } else if (document.formvalidator.isValid(form)) {
             Joomla.submitform(task, form);
@@ -47,9 +53,9 @@ $route   = JRoute::_(JUri::current());
                 url: "<?php echo $route; ?>",
                 data: data + '&ajax=1'
             });*/
-		}
+        }
         return false;
-	}
+    }
 </script>
 
 <form action="<?php echo $route; ?>" method="post" name="_freform_form" id="<?php echo $form_id; ?>" class="">
@@ -81,8 +87,8 @@ $hidden_inputs = array();
         <?php echo JHtml::_('form.token'); ?>
         <?php /* You may not need these if you're not using return value or Joomla data validation: */ ?>
         <input type="hidden" name="return" value="<?php echo $this->return_page;?>" />
-		<input type="hidden" name="task" value="" />
-		
+        <input type="hidden" name="task" value="" />
+        
     </fieldset>
 <?php
 $controls_fieldset = $this->form->getFieldset('controls');

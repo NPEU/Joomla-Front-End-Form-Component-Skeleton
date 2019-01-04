@@ -3,7 +3,7 @@
  * @package     Joomla.Site
  * @subpackage  com__freform
  *
- * @copyright   Copyright (C) NPEU 2018.
+ * @copyright   Copyright (C) NPEU 2019.
  * @license     MIT License; see LICENSE.md
  */
 

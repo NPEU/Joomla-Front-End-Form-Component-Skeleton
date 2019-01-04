@@ -1,5 +1,12 @@
 <?php
-// No direct access to this file
+/**
+ * @package     Joomla.Site
+ * @subpackage  com__freform
+ *
+ * @copyright   Copyright (C) NPEU 2019.
+ * @license     MIT License; see LICENSE.md
+ */
+
 defined('_JEXEC') or die;
 
 // Load the Admin language file to avoid repoeating form language strings:
@@ -15,9 +22,9 @@ $lang->load($extension, $base_dir, $language_tag, $reload);
  */
 class _FreformViewRecords extends JViewLegacy
 {
-	// Overwriting JView display method
-	function display($tpl = null)
-	{
+    // Overwriting JView display method
+    function display($tpl = null)
+    {
         $user = JFactory::getUser();
         
         
@@ -36,13 +43,13 @@ class _FreformViewRecords extends JViewLegacy
         #echo '<pre>'; var_dump($form); echo '</pre>'; exit;
         
         
-        $app	= JFactory::getApplication();
-		$menus	= $app->getMenu();
-		$menu	= $menus->getActive();
+        $app    = JFactory::getApplication();
+        $menus  = $app->getMenu();
+        $menu   = $menus->getActive();
 
-		// Get the parameters
-		$this->com_params  = JComponentHelper::getParams('com__freform');
-		$this->menu_params = $menu->params;
+        // Get the parameters
+        $this->com_params  = JComponentHelper::getParams('com__freform');
+        $this->menu_params = $menu->params;
         
         $layout = $this->getLayout();
         if ($layout != 'default') {
@@ -50,29 +57,29 @@ class _FreformViewRecords extends JViewLegacy
             
             #echo '<pre>'; var_dump($breadcrumb_title); echo '</pre>'; exit;
         
-            $app	 = JFactory::getApplication();
+            $app     = JFactory::getApplication();
             $pathway = $app->getPathway();
             $pathway->addItem($breadcrumb_title);
         }
 
-		// Check for errors.
-		if (count($errors = $this->get('Errors')))
-		{
-			JLog::add(implode('<br />', $errors), JLog::WARNING, 'jerror');
+        // Check for errors.
+        if (count($errors = $this->get('Errors')))
+        {
+            JLog::add(implode('<br />', $errors), JLog::WARNING, 'jerror');
 
-			return false;
-		}
+            return false;
+        }
         
         // Assign data to the view:      
         $this->items = $this->get('Items');
-		#$this->items = $this->get('AllItems');
-		#$this->items = $this->get('UnpublishedItems');
+        #$this->items = $this->get('AllItems');
+        #$this->items = $this->get('UnpublishedItems');
 
         $this->user  = $user;
-		$this->title = $menu->title;
+        $this->title = $menu->title;
         $this->form  = $form;
         
-		// Display the view
-		parent::display($tpl);
-	}
+        // Display the view
+        parent::display($tpl);
+    }
 }

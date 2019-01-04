@@ -1,6 +1,13 @@
 <?php
-// No direct access to this file
-defined('_JEXEC') or die('Restricted access');
+/**
+ * @package     Joomla.Site
+ * @subpackage  com__freform
+ *
+ * @copyright   Copyright (C) NPEU 2019.
+ * @license     MIT License; see LICENSE.md
+ */
+
+defined('_JEXEC') or die;
 
 $table_id = 'recordsTable';
 // If you need specific JS/CSS for this view, add them here.
