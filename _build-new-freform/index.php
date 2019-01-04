@@ -19,7 +19,7 @@ echo 'Classname: ' . $classname . "\n";
 
 include_once('_functions.php');
 
-$new_dir     = dirname(__DIR__) . '/' . $com_lc_name;
+$new_dir     = dirname(__DIR__) . '/__builds/' . $com_lc_name;
 
 copy_dir(__DIR__ . '/_com_freform', $new_dir);
 
