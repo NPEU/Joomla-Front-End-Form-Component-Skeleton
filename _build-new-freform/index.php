@@ -1,12 +1,11 @@
 #!/usr/bin/php5
 <?php
-//echo 'Started'; exit;
 // Parse command line arguments into the $_GET variable:
 parse_str(implode('&', array_slice($argv, 1)), $_GET);
 
 echo 'Name: ' . $_GET['name'] . "\n";
 echo 'Description: ' . $_GET['description'] . "\n";
-#exit;
+
 $name        = ucwords($_GET['name']);
 $lc_name     = strtolower($name);
 $uc_name     = strtoupper($name);
