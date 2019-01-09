@@ -1,4 +1,5 @@
-/__builds
+/__builds/*
+!/__builds/.gitkeep
 
 ####################################################################################################
 # Windows (https://github.com/github/gitignore/blob/master/Global/Windows.gitignore)               #
