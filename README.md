@@ -9,9 +9,9 @@ Provides the back-end stuff too.
 Database
 --------
 
-**Important** - this is only a skeleton so you'll need to dop some work on your database schema and models to reflect what you actually need.
+**Important** - this is only a skeleton so you'll need to do some work on your database schema and models to reflect what you actually need.
 However, this extension is meant to work out of the box so you can see it working and get you up and running as quickly as possible.
-Because of this, the extension will install without anby errors, but you'll need to confident changing the database after-installation, so I recommend figuring that out first.
+Because of this, the extension will install without anby errors, but you'll need to be confident changing the database after-installation, so I recommend figuring that out first.
 This also means changing the front- and back-end forms and table views etc.
 
 
