@@ -29,8 +29,35 @@ If you're not using windows you can use the PHP-CLI directly by replacing the pl
 `php -f _build-new/index.php name=%Nm% description=%Ds%`
 
 
-About the `com__skeleton.script.php` file
------------------------------------------
+Don't need a front-end form?
+----------------------------
 
-As this is a front-end comnponent, we don't need (or want) a menu item showing up in the 'Components' Admin menu.
-This script removes that menu item for you on installation.
+Make the following changes:
+
+
+Router
+======
+
+If you don't need routes at all, you can delete this file. Remember to remove it from teh manifest.
+
+If you do need routing, just not front-end editing, then delete the 'edit' route block which begins:
+
+`if ($segments[0] == 'edit') {`
+
+
+Views
+=====
+
+Again, if you're not using routes, you probablty only need one view, so delete the 'Record' view.
+Otherwise, just delete `$form = $this->get('Form');` and anything that refers to `$form` from the 
+views and delete the 'fprm' template: "site/views/record/tmpl/form.php"
+
+Models
+======
+
+You can also delete "site/models/forms/record.xml".
+
+Controllers
+===========
+
+Similarly, you can delete "site/controllers" directory.
