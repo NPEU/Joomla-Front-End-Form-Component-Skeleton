@@ -1,9 +1,9 @@
 <?php
 /**
- * @package     Joomla.Site
+ * @package     Joomla.Administrator
  * @subpackage  com__freform
  *
- * @copyright   Copyright (C) NPEU 2018.
+ * @copyright   Copyright (C) {{OWNER}} {{YEAR}}.
  * @license     MIT License; see LICENSE.md
  */
 
@@ -14,11 +14,11 @@ defined('_JEXEC') or die;
  */
 class _FreformController extends JControllerLegacy
 {
-	/**
-	 * The default view for the display method.
-	 *
-	 * @var string
-	 * @since 12.2
-	 */
-	protected $default_view = 'records';
+    /**
+     * The default view for the display method.
+     *
+     * @var string
+     * @since 12.2
+     */
+    protected $default_view = 'records';
 }

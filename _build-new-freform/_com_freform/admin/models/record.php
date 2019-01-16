@@ -1,9 +1,9 @@
 <?php
 /**
- * @package     Joomla.Site
+ * @package     Joomla.Administrator
  * @subpackage  com__freform
  *
- * @copyright   Copyright (C) NPEU 2018.
+ * @copyright   Copyright (C) {{OWNER}} {{YEAR}}.
  * @license     MIT License; see LICENSE.md
  */
 
@@ -19,7 +19,7 @@ $reload = true;
 $lang->load($extension, $base_dir, $language_tag, $reload);
 
 /**
- * _Freform Model
+ * _Freform Record Model
  */
 class _FreformModelRecord extends JModelAdmin
 {

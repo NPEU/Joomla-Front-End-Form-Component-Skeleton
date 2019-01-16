@@ -1,18 +1,16 @@
 <?php
 /**
- * @package     Joomla.Site
+ * @package     Joomla.Administrator
  * @subpackage  com__freform
  *
- * @copyright   Copyright (C) NPEU 2019.
+ * @copyright   Copyright (C) {{OWNER}} {{YEAR}}.
  * @license     MIT License; see LICENSE.md
  */
 
 defined('_JEXEC') or die;
 
 /**
- * RecordsList Model
- *
- * @since  0.0.1
+ * _Freform Records List Model
  */
 class _FreformModelRecords extends JModelList
 {

@@ -1,9 +1,9 @@
 <?php
 /**
- * @package     Joomla.Site
+ * @package     Joomla.Administrator
  * @subpackage  com__freform
  *
- * @copyright   Copyright (C) NPEU 2019.
+ * @copyright   Copyright (C) {{OWNER}} {{YEAR}}.
  * @license     MIT License; see LICENSE.md
  */
 

@@ -5,14 +5,19 @@
     <author>Andy Kirk</author>
     <authorEmail>andy.kirk@npeu.ox.ac.uk</authorEmail>
     <authorUrl>https://www.npeu.ox.ac.uk</authorUrl>
-    <creationDate>January 2019</creationDate>
-    <copyright>(C) NPEU 2019</copyright>
+    <creationDate>{{MONTH}} {{YEAR}}</creationDate>
+    <copyright>(C) {{OWNER}} {{YEAR}}</copyright>
     <license>MIT License; see LICENSE.md</license>
 
     <!--  The version string is recorded in the components table -->
     <version>1.0.0</version>
     <!-- The description is optional and defaults to the name -->
     <description>COM_FREFORM_DESCRIPTION</description>
+    
+    <updateservers>
+        <!-- Note: No spaces or linebreaks allowed between the server tags -->
+        <server type="extension" name="{{OWNER}}: com__freform Update Site">https://raw.githubusercontent.com/{{OWNER}}/com__freform/master/update-manifest.xml</server>
+    </updateservers>
 
     <install> <!-- Runs on install -->
         <sql>
@@ -39,6 +44,7 @@
         <filename>_freform.php</filename>
         <filename>index.html</filename>
         <filename>router.php</filename>
+        <filename>update-manifest.xml</filename>
         <folder>controllers</folder>
         <folder>language</folder>
         <folder>models</folder>

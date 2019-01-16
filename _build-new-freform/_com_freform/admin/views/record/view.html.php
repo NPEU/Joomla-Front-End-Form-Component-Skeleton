@@ -1,6 +1,6 @@
 <?php
 /**
- * @package     Joomla.Site
+ * @package     Joomla.Administrator
  * @subpackage  com__freform
  *
  * @copyright   Copyright (C) NPEU 2019.
@@ -10,7 +10,7 @@
 defined('_JEXEC') or die;
 
 /**
- * Record View
+ * _Freform Record View
  */
 class _FreformViewRecord extends JViewLegacy
 {
