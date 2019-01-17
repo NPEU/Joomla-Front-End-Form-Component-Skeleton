@@ -35,8 +35,6 @@ class _FreformModelRecord extends JModelAdmin
      * @param   boolean  $loadData  True if the form is to load its own data (default case), false if not.
      *
      * @return  mixed    A JForm object on success, false on failure
-     *
-     * @since   1.6
      */
     public function getForm($data = array(), $loadData = true)
     {
@@ -74,8 +72,6 @@ class _FreformModelRecord extends JModelAdmin
      * @param   array  $data  The form data.
      *
      * @return  boolean  True on success, False on error.
-     *
-     * @since   11.1
      */
     public function save($data)
     {
