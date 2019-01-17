@@ -36,7 +36,7 @@
             class=""
             labelclass=""
         />
-        <field name="state" type="list" label="JSTATUS"
+        <field name="published" type="list" label="JSTATUS"
             description="JFIELD_PUBLISHED_DESC" class="chzn-color-state"
             filter="intval" size="1" default="1"
         >

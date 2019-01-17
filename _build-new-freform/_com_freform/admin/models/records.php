@@ -49,7 +49,7 @@ class _FreformModelRecords extends JModelList
 
         // Create the base select statement.
         $query->select('a.*')
-              ->from($db->quoteName('#___freformtbl') . ' AS a');
+              ->from($db->quoteName('#___freform') . ' AS a');
               
         // Join over the users for the checked out user.
         $query->select('uc.name AS editor')

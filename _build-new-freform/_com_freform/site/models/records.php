@@ -28,7 +28,7 @@ class _FreformModelRecords extends JModelList
 
         // Create the select statement.
         $query->select('*')
-              ->from($db->quoteName('#___freformtbl'));
+              ->from($db->quoteName('#___freform'));
               
         if (is_numeric($this->published))
         {

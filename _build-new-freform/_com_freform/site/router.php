@@ -444,7 +444,7 @@ class _FreformRouter extends JComponentRouterBase
             $db = JFactory::getDbo();
             $query = $db->getQuery(true)
                 ->select($db->quoteName('id'))
-                ->from($db->quoteName('#___freformtbl'))
+                ->from($db->quoteName('#___freform'))
                 ->where($db->quoteName('id') . ' = ' . (int) $id);
             $db->setQuery($query);
 

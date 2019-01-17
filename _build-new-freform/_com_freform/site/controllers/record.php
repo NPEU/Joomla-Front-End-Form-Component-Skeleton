@@ -115,7 +115,7 @@ class _FreformControllerRecord extends JControllerForm
         if (!isset($data['created_by'])) {
             if ($record_id > 0) {
                 $db = JFactory::getDbo();
-                $db->setQuery('SELECT created_by FROM #___freformtbl WHERE ' . $key . ' = ' . $record_id);
+                $db->setQuery('SELECT created_by FROM #___freform WHERE ' . $key . ' = ' . $record_id);
                 $data['created_by'] = $db->loadResult();
             } else {
                 $data['created_by'] = 0;

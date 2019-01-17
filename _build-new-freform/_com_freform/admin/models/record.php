@@ -32,7 +32,7 @@ class _FreformModelRecord extends JModelAdmin
      *
      * @return  JTable  A JTable object
      */
-    public function getTable($type = '_FreformTbl', $prefix = '_FreformTable', $config = array())
+    public function getTable($type = '_freform', $prefix = '_FreformTable', $config = array())
     {
         return JTable::getInstance($type, $prefix, $config);
     }

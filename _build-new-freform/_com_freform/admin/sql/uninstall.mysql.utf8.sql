@@ -1,1 +1,1 @@
-DROP TABLE IF EXISTS `#___freformtbl`;
+DROP TABLE IF EXISTS `#___freform`;

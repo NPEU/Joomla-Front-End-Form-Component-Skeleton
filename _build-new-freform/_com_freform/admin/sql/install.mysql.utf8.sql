@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS `#___freformtbl`;
+DROP TABLE IF EXISTS `#___freform`;
 
-CREATE TABLE `#___freformtbl` (
+CREATE TABLE `#___freform` (
   `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `title` MEDIUMTEXT COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` VARCHAR(255) COLLATE utf8mb4_unicode_ci NOT NULL,

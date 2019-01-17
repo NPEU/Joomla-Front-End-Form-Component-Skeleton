@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 /**
  * _Freform Table class
  */
-class _FreformTable_FreformTbl extends JTable
+class _FreformTable_freform extends JTable
 {
     /**
      * Constructor
@@ -21,7 +21,7 @@ class _FreformTable_FreformTbl extends JTable
      */
     function __construct(&$db)
     {
-        parent::__construct('#___freformtbl', 'id', $db);
+        parent::__construct('#___freform', 'id', $db);
     }
     /**
      * Overloaded bind function
