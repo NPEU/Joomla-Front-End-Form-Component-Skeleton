@@ -8,6 +8,7 @@
  */
 
 defined('_JEXEC') or die;
+
 /**
  * _Freform Record List Model
  */
