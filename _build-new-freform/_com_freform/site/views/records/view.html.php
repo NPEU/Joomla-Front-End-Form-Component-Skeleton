@@ -63,8 +63,7 @@ class _FreformViewRecords extends JViewLegacy
         }
 
         // Check for errors.
-        if (count($errors = $this->get('Errors')))
-        {
+        if (count($errors = $this->get('Errors'))) {
             JLog::add(implode('<br />', $errors), JLog::WARNING, 'jerror');
 
             return false;
