@@ -37,8 +37,7 @@ class _FreformViewRecords extends JViewLegacy
         $this->activeFilters    = $this->get('ActiveFilters');
 
         // Check for errors.
-        if (count($errors = $this->get('Errors')))
-        {
+        if (count($errors = $this->get('Errors'))) {
             JError::raiseError(500, implode('<br />', $errors));
 
             return false;
@@ -66,8 +65,7 @@ class _FreformViewRecords extends JViewLegacy
     {
         $title = JText::_('COM_FREFORM_MANAGER_RECORDS');
 
-        if ($this->pagination->total)
-        {
+        if ($this->pagination->total) {
             $title .= "<span style='font-size: 0.5em; vertical-align: middle;'> (" . $this->pagination->total . ")</span>";
         }
 

@@ -36,8 +36,7 @@ class _FreformViewRecord extends JViewLegacy
         $this->script = $this->get('Script');
 
         // Check for errors.
-        if (count($errors = $this->get('Errors')))
-        {
+        if (count($errors = $this->get('Errors'))) {
             JError::raiseError(500, implode('<br />', $errors));
 
             return false;
@@ -67,12 +66,9 @@ class _FreformViewRecord extends JViewLegacy
 
         $isNew = ($this->item->id == 0);
 
-        if ($isNew)
-        {
+        if ($isNew) {
             $title = JText::_('COM_FREFORM_MANAGER_RECORD_NEW');
-        }
-        else
-        {
+        } else {
             $title = JText::_('COM_FREFORM_MANAGER_RECORD_EDIT');
         }
 
