@@ -37,7 +37,7 @@ class _FreformTable_freform extends JTable
             // Convert the params field to a string.
             $parameter = new JRegistry;
             $parameter->loadArray($array['params']);
-            $array['params'] = (string)$parameter;
+            $array['params'] = (string) $parameter;
         }
         return parent::bind($array, $ignore);
     }
