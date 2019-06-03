@@ -24,7 +24,7 @@ $lang->load($extension, $base_dir, $language_tag, $reload);
 #$document->addStyleDeclaration('.icon-helloworld {background-image: url(../media/com_helloworld/images/tux-16x16.png);}');
 
 // Require helper file
-JLoader::register('_FreformHelper', JPATH_COMPONENT . '/helpers/_frecom.php');
+JLoader::register('_FreformHelper', JPATH_COMPONENT . '/helpers/_freform.php');
 
 // Get an instance of the controller prefixed by _Freform
 $controller = JControllerLegacy::getInstance('_Freform');
