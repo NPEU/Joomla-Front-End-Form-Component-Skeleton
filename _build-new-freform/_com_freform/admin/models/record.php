@@ -9,11 +9,70 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\String\StringHelper;
+
 /**
  * _Freform Record Model
  */
 class _FreformModelRecord extends JModelAdmin
 {
+    /**
+     * Delete this if not using categories or using standard catid fieldname.
+     * Copied from libraries/src/MVC/Model/AdminModel.php because it uses a hard-coded field name:
+     * catid.
+     * You may want to use a custom field name for clarity purposes, so this method allows that.
+     * 
+     * Method to change the title & alias.
+     *
+     * @param   integer  $category_id  The id of the category.
+	 * @param   string   $alias        The alias.
+	 * @param   string   $title        The title.
+	 *
+	 * @return	array  Contains the modified title and alias.
+	 *
+	 * @since	1.7
+	 */
+	/*protected function generateNewTitle($category_id, $alias, $title)
+	{
+		// Alter the title & alias
+		$table = $this->getTable();
+		while ($table->load(array('alias' => $alias, 'your_catid' => $category_id)))
+		{
+			$title = StringHelper::increment($title);
+			$alias = StringHelper::increment($alias, 'dash');
+		}
+		return array($title, $alias);
+	}*/
+    
+    /**
+     * Delete this if not using categories, at all
+     * Copied from libraries/src/MVC/Model/AdminModel.php because it uses a hard-coded field name:
+     * catid.
+     * If not using categories, you'll need this for 'Save As Copy' to work.
+     * 
+     * Method to change the title & alias.
+     *
+     * @param   string   $alias        The alias.
+     * @param   string   $title        The title.
+     *
+     * @return  array  Contains the modified title and alias.
+     *
+     * @since   1.7
+     */
+    /*protected function generateNew_FreformTitle($alias, $title)
+    {
+        // Alter the title & alias
+        $table = $this->getTable();
+
+        while ($table->load(array('alias' => $alias)))
+        {
+            $title = StringHelper::increment($title);
+            $alias = StringHelper::increment($alias, 'dash');
+        }
+
+        return array($title, $alias);
+    }*/
+    
     /**
      * Method to get a table object, load it if necessary.
      *
@@ -76,6 +135,7 @@ class _FreformModelRecord extends JModelAdmin
     public function save($data)
     {
         $is_new      = empty($data['id']);
+        $input  = JFactory::getApplication()->input;
         
         // The following is generally useful for any app, but you'll need to make sure the database
         // schema includes these fields:
@@ -91,9 +151,10 @@ class _FreformModelRecord extends JModelAdmin
         // Get parameters:
         $params = JComponentHelper::getParams(JRequest::getVar('option'));
         
+        // For reference if needed:
         // By default we're only looking for and acting upon the 'email admins' setting.
         // If any other settings are related to this save method, add them here.
-        $email_admins_string = $params->get('email_admins');
+        /*$email_admins_string = $params->get('email_admins');
         if (!empty($email_admins_string) && $is_new) {
             $email_admins = explode(PHP_EOL, trim($email_admins_string));
             foreach ($email_admins as $email) {
@@ -102,9 +163,62 @@ class _FreformModelRecord extends JModelAdmin
                 $email_data = array('email' => $email);
                 $this->_sendEmail($email_data);
             }
+        }*/
+        
+        // Alter the title for save as copy
+        if ($input->get('task') == 'save2copy') {
+            $origTable = clone $this->getTable();
+            $origTable->load($input->getInt('id'));
+           
+            // Note is using custom category field title, yoiu need to change 'catid':
+            if ($data['title'] == $origTable->title) {
+                list($title, $alias) = $this->generateNewBrandTitle($data['catid'], $data['alias'], $data['title']);
+                $data['title'] = $title;
+                $data['alias'] = $alias;
+            } else {
+                if ($data['alias'] == $origTable->alias) {
+                    $data['alias'] = '';
+                }
+            }
+
+            $data['state'] = 0;
+        }
+
+        // Automatic handling of alias for empty fields
+        // Taken from com_content/models/article.php
+        if (in_array($input->get('task'), array('apply', 'save', 'save2new')) && (!isset($data['id']) || (int) $data['id'] == 0)) {
+            if (empty($data['alias'])) {
+                if (JFactory::getConfig()->get('unicodeslugs') == 1) {
+                    $data['alias'] = JFilterOutput::stringURLUnicodeSlug($data['title']);
+                } else {
+                    $data['alias'] = JFilterOutput::stringURLSafe($data['title']);
+                }
+
+                $table = JTable::getInstance('_Freform', '_FreformTable');
+
+                if ($table->load(array('alias' => $data['alias']))) {
+                    $msg = JText::_('COM_CONTENT_SAVE_WARNING');
+                }
+
+                list($title, $alias) = $this->generateNewTitle($data['alias'], $data['title']);
+                $data['alias'] = $alias;
+
+                if (isset($msg)) {
+                    JFactory::getApplication()->enqueueMessage($msg, 'warning');
+                }
+            }
         }
         
-        return parent::save($data);
+        
+        if (parent::save($data)) {
+            /*if (isset($data['featured'])) {
+                $this->featured($this->getState($this->getName() . '.id'), $data['featured']);
+            }*/
+
+            return true;
+        }
+
+        return false;
     }
     
     /**
@@ -120,8 +234,7 @@ class _FreformModelRecord extends JModelAdmin
             array()
         );
 
-        if (empty($data))
-        {
+        if (empty($data)) {
             $data = $this->getItem();
         }
 
@@ -129,11 +242,12 @@ class _FreformModelRecord extends JModelAdmin
     }
     
     /**
+     * Delete this if not needed. Here for reference.
      * Method to get the data that should be injected in the form.
      *
      * @return  bool  Email success/failed to send.
      */
-    private function _sendEmail($email_data)
+    /*private function _sendEmail($email_data)
     {
             $app        = JFactory::getApplication();
             $mailfrom   = $app->getCfg('mailfrom');
@@ -152,5 +266,5 @@ class _FreformModelRecord extends JModelAdmin
             $sent = $mail->Send();
 
             return $sent;
-    }
+    }*/
 }

@@ -4,15 +4,12 @@
     addfieldpath="/administrator/components/com__freform/models/fields"
 >
     <fieldset
-        name="inputs"
-        label="COM_FREFORM_FORM_LABEL"
+        name="main"
+        label="COM_FREFORM_FIELDSET_MAIN_LABEL"
     >
         <field
             name="id"
-            type="text"
-            label="COM_FREFORM_ID_LABEL"
-            description="COM_FREFORM_ID_DESC"
-            readonly="readonly"
+            type="hidden"
         />
         <field
             name="title"
@@ -26,17 +23,30 @@
             labelclass=""
         />
         <field
-            name="slug"
+            name="alias"
             type="text"
             size="30"
-            label="COM_FREFORM_SLUG_LABEL"
-            description="COM_FREFORM_SLUG_DESC"
+            label="COM_FREFORM_ALIAS_LABEL"
+            description="COM_FREFORM_ALIAS_DESC"
+            hint="COM_FREFORM_ALIAS_HINT"
             filter="string"
-            required="true"
             class=""
             labelclass=""
         />
-        <field name="published" type="list" label="JSTATUS"
+        <!-- Delete if not using categories: -->
+        <field
+            name="catid"
+            type="category"
+            extension="com__freform"
+            class="inputbox"
+            default=""
+            label="COM_FREFORM_CATEGORY_LABEL"
+            description="COM_FREFORM_CATEGORY_DESC"
+            required="true"
+            >
+             <option value="0">JOPTION_SELECT_CATEGORY</option>
+        </field>
+        <field name="state" type="list" label="JSTATUS"
             description="JFIELD_PUBLISHED_DESC" class="chzn-color-state"
             filter="intval" size="1" default="1"
         >

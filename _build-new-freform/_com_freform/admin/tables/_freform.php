@@ -22,7 +22,11 @@ class _FreformTable_freform extends JTable
     function __construct(&$db)
     {
         parent::__construct('#___freform', 'id', $db);
+
+                // Set the alias since the column is called state
+        $this->setColumnAlias('published', 'state');
     }
+
     /**
      * Overloaded bind function
      *

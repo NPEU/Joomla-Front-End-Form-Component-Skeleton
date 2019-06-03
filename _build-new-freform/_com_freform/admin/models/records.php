@@ -29,7 +29,7 @@ class _FreformModelRecords extends JModelList
                 'id',
                 'users_name',
                 'message',
-                'published'
+                'state'
             );
         }
 
@@ -51,6 +51,10 @@ class _FreformModelRecords extends JModelList
         $query->select('a.*')
               ->from($db->quoteName('#___freform') . ' AS a');
               
+        // Join the categories table again for the project group (delete if not using categories):
+        $query->select('c.title AS category')
+            ->join('LEFT', '#__categories AS c ON c.id = a.catid');
+              
         // Join over the users for the checked out user.
         $query->select('uc.name AS editor')
             ->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
@@ -62,19 +66,19 @@ class _FreformModelRecords extends JModelList
         {
             $like = $db->quote('%' . $search . '%');
             $query->where('a.title LIKE ' . $like);
-            $query->where('a.slug LIKE ' . $like);
+            $query->where('a.alias LIKE ' . $like);
         }
 
-        // Filter by published state
-        $published = $this->getState('filter.published');
+        // Filter by state
+        $state = $this->getState('filter.published');
 
-        if (is_numeric($published))
+        if (is_numeric($state))
         {
-            $query->where('a.published = ' . (int) $published);
+            $query->where('a.state = ' . (int) $state);
         }
-        elseif ($published === '')
+        elseif ($state === '')
         {
-            $query->where('(a.published IN (0, 1))');
+            $query->where('(a.state IN (0, 1))');
         }
 
         // Add the list ordering clause.

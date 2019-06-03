@@ -23,12 +23,12 @@
             labelclass=""
         />
         <field
-            name="slug"
+            name="alias"
             type="textarea"
             cols="50"
             rows="10"
-            label="COM_FREFORM_SLUG_LABEL"
-            description="COM_FREFORM_SLUG_DESC"
+            label="COM_FREFORM_ALIAS_LABEL"
+            description="COM_FREFORM_ALIAS_DESC"
             filter="htmlsafe"
             required="true"
             class=""

@@ -31,9 +31,10 @@ class _FreformViewRecord extends JViewLegacy
     public function display($tpl = null)
     {
         // Get the Data
-        $this->form = $this->get('Form');
-        $this->item = $this->get('Item');
+        $this->form   = $this->get('Form');
+        $this->item   = $this->get('Item');
         $this->script = $this->get('Script');
+        $this->canDo  = _FreformHelper::getActions($this->item->id, $this->getModel());
 
         // Check for errors.
         if (count($errors = $this->get('Errors'))) {
@@ -59,25 +60,53 @@ class _FreformViewRecord extends JViewLegacy
      */
     protected function addToolBar()
     {
-        $input = JFactory::getApplication()->input;
+        // Hide Joomla Administrator Main menu:
+        JFactory::getApplication()->input->set('hidemainmenu', true);
 
-        // Hide Joomla Administrator Main menu
-        $input->set('hidemainmenu', true);
+        $user       = JFactory::getUser();
+        $userId     = $user->id;
 
+
+        $checkedOut = !($this->item->checked_out == 0 || $this->item->checked_out == $userId);
         $isNew = ($this->item->id == 0);
 
-        if ($isNew) {
-            $title = JText::_('COM_FREFORM_MANAGER_RECORD_NEW');
-        } else {
-            $title = JText::_('COM_FREFORM_MANAGER_RECORD_EDIT');
-        }
+        // Build the actions for new and existing records.
+        $canDo = $this->canDo;
 
-        JToolBarHelper::title($title, 'record');
-        JToolBarHelper::save('record.save');
-        JToolBarHelper::cancel(
-            'record.cancel',
-            $isNew ? 'JTOOLBAR_CANCEL' : 'JTOOLBAR_CLOSE'
+        // Note 'palette' is an icon/classname. Change to suit.
+        JToolbarHelper::title(
+            JText::_('COM_FREFORM_MANAGER_' . ($checkedOut ? 'RECORD_VIEW' : ($isNew ? 'RECORD_ADD' : 'RECORD_EDIT'))),
+            'palette'
         );
+        
+            // For new records, check the create permission.
+        if ($isNew && (count($user->getAuthorisedCategories('com__freform', 'core.create')) > 0)) {
+            JToolbarHelper::apply('record.apply');
+            JToolbarHelper::save('record.save');
+            JToolbarHelper::save2new('record.save2new');
+            JToolbarHelper::cancel('record.cancel');
+        } else {
+            // Since it's an existing record, check the edit permission, or fall back to edit own if the owner.
+            $itemEditable = $canDo->get('core.edit') || ($canDo->get('core.edit.own') && $this->item->created_by == $userId);
+
+            // Can't save the record if it's checked out and editable
+            if (!$checkedOut && $itemEditable) {
+                JToolbarHelper::apply('record.apply');
+                JToolbarHelper::save('record.save');
+
+                // We can save this record, but check the create permission to see if we can return to make a new one.
+                if ($canDo->get('core.create')) {
+                    JToolbarHelper::save2new('record.save2new');
+                }
+            }
+            // If checked out, we can still save
+            if ($canDo->get('core.create')) {
+                JToolbarHelper::save2copy('record.save2copy');
+            }
+
+
+            JToolbarHelper::cancel('record.cancel', 'JTOOLBAR_CLOSE');
+        }
     }
     /**
      * Method to set up the document properties

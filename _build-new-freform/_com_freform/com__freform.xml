@@ -53,6 +53,20 @@
     <administration>
         <!-- Administration Menu Section -->
         <menu>COM_FREFORM_MENU</menu>
+        <!-- Submenu, delete if component has only one view -->
+        <submenu>
+			<!--
+				Note that all & must be escaped to &amp; for the file to be valid
+				XML and be parsed by the installer
+			-->
+			<menu link="option=com__freform" view="records">
+                COM_FREFORM_MANAGER_SUBMENU_RECORDS
+            </menu>
+			<menu link="option=com_categories&amp;extension=com__freform" view="categories">
+                COM_FREFORM_MANAGER_SUBMENU_CATEGORIES
+            </menu>
+		</submenu>
+        
         <!-- Administration Main File Copy Section -->
         <!-- Note the folder attribute: This attribute describes the folder
                 to copy FROM in the package to install therefore files copied
@@ -65,6 +79,7 @@
             <filename>_freform.php</filename>
             <filename>index.html</filename>
             <folder>controllers</folder>
+            <folder>helpers</folder>
             <folder>language</folder>
             <folder>models</folder>
             <folder>sql</folder>

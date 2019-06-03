@@ -8,6 +8,7 @@
  */
 
 defined('_JEXEC') or die;
+JHtml::_('behavior.tabstate');
 
 // Force-load the Admin language file to avoid repeating form language strings:
 // (this model is used in the front-end too, and the Admin lang isn't auto-loaded there.)
@@ -23,7 +24,7 @@ $lang->load($extension, $base_dir, $language_tag, $reload);
 #$document->addStyleDeclaration('.icon-helloworld {background-image: url(../media/com_helloworld/images/tux-16x16.png);}');
 
 // Require helper file
-#JLoader::register('HelloWorldHelper', JPATH_COMPONENT . '/helpers/helloworld.php');
+JLoader::register('_FreformHelper', JPATH_COMPONENT . '/helpers/_frecom.php');
 
 // Get an instance of the controller prefixed by _Freform
 $controller = JControllerLegacy::getInstance('_Freform');

@@ -46,7 +46,7 @@ $doc->addScriptDeclaration($js);
                 <?php echo JText::_('COM_FREFORM_RECORDS_TITLE'); ?>
             </th>
             <th width="40%">
-                <?php echo JText::_('COM_FREFORM_RECORDS_SLUG'); ?>
+                <?php echo JText::_('COM_FREFORM_RECORDS_ALIAS'); ?>
             </th>
             <th width="10%">
                 <?php echo JText::_('COM_FREFORM_RECORDS_ACTIONS'); ?>
@@ -81,7 +81,7 @@ $doc->addScriptDeclaration($js);
                         </a>
                     </td>
                     <td>
-                        <?php echo $row->slug; ?>
+                        <?php echo $row->alias; ?>
                     </td>
                     <td>
                         <?php if($is_own || $authorised): ?>
