@@ -29,7 +29,7 @@ $listDirn  = $this->escape($this->filter_order_Dir);
     <?php endif;?>
 
         <div class="row-fluid">
-            <div class="span6">
+            <div class="span12">
                 <?php echo JText::_('COM_FREFORM_RECORDS_FILTER'); ?>
                 <?php
                     echo JLayoutHelper::render(

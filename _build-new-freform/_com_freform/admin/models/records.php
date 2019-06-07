@@ -59,6 +59,18 @@ class _FreformModelRecords extends JModelList
         $query->select('uc.name AS editor')
             ->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
 
+        // Filter by a single or group of categories.
+        $categoryId = $this->getState('filter.category_id');
+
+        if (is_numeric($categoryId))
+        {
+            $query->where($db->quoteName('a.catid') . ' = ' . (int) $categoryId);
+        }
+        elseif (is_array($categoryId))
+        {
+            $query->where($db->quoteName('a.catid') . ' IN (' . implode(',', ArrayHelper::toInteger($categoryId)) . ')');
+        }
+
         // Filter: like / search
         $search = $this->getState('filter.search');
 
