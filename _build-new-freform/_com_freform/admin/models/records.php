@@ -59,6 +59,7 @@ class _FreformModelRecords extends JModelList
         $query->select('uc.name AS editor')
             ->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
 
+        // Delete this filter if not using categories.
         // Filter by a single or group of categories.
         $categoryId = $this->getState('filter.category_id');
 

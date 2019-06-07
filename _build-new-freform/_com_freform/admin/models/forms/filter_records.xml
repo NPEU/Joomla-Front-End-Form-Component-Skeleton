@@ -18,6 +18,7 @@
             >
             <option value="">JOPTION_SELECT_PUBLISHED</option>
         </field>
+        <!-- Delete this field if not using categories: -->
         <field
             name="category_id"
             type="category"
