@@ -20,7 +20,7 @@ $lang->load($extension, $base_dir, $language_tag, $reload);
 /**
  * HTML View class for the _Freform Component
  */
-class _FreformViewRecord extends JViewLegacy
+class _FreformView_Freform1 extends JViewLegacy
 {
     // Overwriting JView display method
     function display($tpl = null)

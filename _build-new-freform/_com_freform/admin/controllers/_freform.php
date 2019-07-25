@@ -10,8 +10,8 @@
 defined('_JEXEC') or die;
 
 /**
- * _Freform Record Controller
+ * _Freform _Freform1 Controller
  */
-class _FreformControllerRecord extends JControllerForm
+class _FreformController_Freform1 extends JControllerForm
 {
 }

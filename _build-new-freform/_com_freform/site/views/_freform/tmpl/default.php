@@ -29,7 +29,7 @@ $skip = array(
 </dl>
 <?php endforeach; ?>
 <p>
-    <a href="<?php echo JRoute::_('index.php?option=com__freform&task=record.edit&id=' . $this->item->id); ?>">
+    <a href="<?php echo JRoute::_('index.php?option=com__freform&task=_freform1.edit&id=' . $this->item->id); ?>">
         <?php echo JText::_('COM_FREFORM_RECORDS_ACTION_EDIT'); ?>
     </a>
 </p>

@@ -59,7 +59,7 @@
 				Note that all & must be escaped to &amp; for the file to be valid
 				XML and be parsed by the installer
 			-->
-			<menu link="option=com__freform" view="records">
+			<menu link="option=com__freform" view="_freform">
                 COM_FREFORM_MANAGER_SUBMENU_RECORDS
             </menu>
 			<menu link="option=com_categories&amp;extension=com__freform" view="categories">

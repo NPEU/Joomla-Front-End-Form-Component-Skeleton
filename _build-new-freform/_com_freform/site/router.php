@@ -34,7 +34,7 @@ class _FreformRouter extends JComponentRouterBase
 
         // Fix the route for the breadcrumb:
         if (
-            !empty($query['view']) && $query['view'] == 'records'
+            !empty($query['view']) && $query['view'] == '_freform'
          && !empty($query['Itemid'])
         ) {
             unset ($query['view']);
@@ -42,7 +42,7 @@ class _FreformRouter extends JComponentRouterBase
         }
 
         if (
-            isset($query['view']) && $query['view'] == 'record'
+            isset($query['view']) && $query['view'] == '_freform1'
          && isset($query['layout']) && $query['layout'] == 'form'
          && isset($query['id']) && $query['id'] > 0
         ) {
@@ -56,19 +56,19 @@ class _FreformRouter extends JComponentRouterBase
             return $segments;
         }
 
-        if (isset($query['task']) && $query['task'] == 'record.add') {
+        if (isset($query['task']) && $query['task'] == '_freform1.add') {
             $segments[] = 'add';
             unset ($query['task']);
         }
 
-        if (isset($query['task']) && isset($query['id']) && $query['task'] == 'record.edit') {
+        if (isset($query['task']) && isset($query['id']) && $query['task'] == '_freform1.edit') {
             $segments[] = 'edit';
             $segments[] = $query['id'];
             unset ($query['task']);
             unset ($query['id']);
         }
 
-        if (isset($query['task']) && isset($query['id']) && $query['task'] == 'record.view') {
+        if (isset($query['task']) && isset($query['id']) && $query['task'] == '_freform1.view') {
             $segments[] = 'view';
             $segments[] = $query['id'];
             unset ($query['task']);
@@ -273,7 +273,7 @@ class _FreformRouter extends JComponentRouterBase
         #echo '<pre>'; var_dump($session); echo '</pre>'; exit;
         #echo '<pre>'; var_dump($segments); echo '</pre>'; #exit;
         $app   = JFactory::getApplication();
-        $state_ids = $app->getUserState('com__freform.edit.record.id');
+        $state_ids = $app->getUserState('com__freform.edit._freform1.id');
         #echo '<pre>'; var_dump($state); echo '</pre>'; exit;
 
         if (empty($segments)) {
@@ -283,7 +283,7 @@ class _FreformRouter extends JComponentRouterBase
 
         if ($segments[0] == 'add') {
 
-            $vars['view']   = 'record';
+            $vars['view']   = '_freform1';
             $vars['layout'] = 'form';
 
             return $vars;
@@ -291,7 +291,7 @@ class _FreformRouter extends JComponentRouterBase
 
         if ($segments[0] == 'alt') {
 
-            $vars['view']   = 'records';
+            $vars['view']   = '_freform';
             $vars['layout'] = 'alt';
 
             return $vars;
@@ -317,7 +317,7 @@ class _FreformRouter extends JComponentRouterBase
                 return $vars;
             }
 
-            $vars['view'] = 'record';
+            $vars['view'] = '_freform1';
             $vars['id']   = $segments[1];
             //$vars['layout'] = 'form';
 
@@ -338,7 +338,7 @@ class _FreformRouter extends JComponentRouterBase
             }
 
             if ($state_ids == null || (is_array($state_ids) && !in_array($segments[1], $state_ids))) {
-                $vars['task'] = 'record.edit';
+                $vars['task'] = '_freform1.edit';
             }
 
             // 'edit' task will invoke 'edit' controller method which in turn calls the 'check-out'
@@ -346,10 +346,10 @@ class _FreformRouter extends JComponentRouterBase
             // The relevent part of build route above will reconstruct the URL
 
             if (isset($segments[2]) && $segments[2] == 'save') {
-                $vars['task'] = 'record.save';
+                $vars['task'] = '_freform1.save';
             }
 
-            $vars['view']   = 'record';
+            $vars['view']   = '_freform1';
             $vars['layout'] = 'form';
             $vars['id']     = $segments[1];
 

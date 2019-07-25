@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
     <fieldset
-        name="records"
+        name="_freform"
         label="COM_FREFORM_CONFIG_RECORDS_SETTINGS_LABEL"
         description="COM_FREFORM_CONFIG_RECORDS_SETTINGS_DESC"
     >

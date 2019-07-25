@@ -10,9 +10,9 @@
 defined('_JEXEC') or die;
 
 /**
- * _Freform Record List Model
+ * _Freform List Model
  */
-class _FreformModelRecords extends JModelList
+class _FreformModel_Freform extends JModelList
 {
     protected $published = 1;
 

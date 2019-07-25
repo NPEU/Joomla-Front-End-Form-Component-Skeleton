@@ -9,15 +9,21 @@
 
 defined('_JEXEC') or die;
 
+JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
+
+JHtml::_('bootstrap.tooltip');
+JHtml::_('behavior.multiselect');
 JHtml::_('formbehavior.chosen', 'select');
 
 $user      = JFactory::getUser();
 $userId    = $user->get('id');
-$listOrder = $this->escape($this->filter_order);
-$listDirn  = $this->escape($this->filter_order_Dir);
+#$listOrder = $this->escape($this->filter_order);
+#$listDirn  = $this->escape($this->filter_order_Dir);
+$listOrder	= $this->escape($this->state->get('list.ordering'));
+$listDirn	= $this->escape($this->state->get('list.direction'));
 
 ?>
-<form action="index.php?option=com__freform&view=records" method="post" id="adminForm" name="adminForm">
+<form action="<?php echo JRoute::_('index.php?option=com__freform&view=_freform'); ?>" method="post" id="adminForm" name="adminForm">
 
     <?php if (!empty( $this->sidebar)) : ?>
     <div id="j-sidebar-container" class="span2">
@@ -30,13 +36,8 @@ $listDirn  = $this->escape($this->filter_order_Dir);
 
         <div class="row-fluid">
             <div class="span12">
-                <?php echo JText::_('COM_FREFORM_RECORDS_FILTER'); ?>
-                <?php
-                    echo JLayoutHelper::render(
-                        'joomla.searchtools.default',
-                        array('view' => $this)
-                    );
-                ?>
+                <?php #echo JText::_('COM_FREFORM_RECORDS_FILTER'); ?>
+                <?php echo JLayoutHelper::render('joomla.searchtools.default', array('view' => $this)); ?>
             </div>
         </div>
         <?php if (!empty($this->items)): ?>
@@ -48,13 +49,13 @@ $listDirn  = $this->escape($this->filter_order_Dir);
                         <?php echo JHtml::_('grid.checkall'); ?>
                     </th>
                     <th width="40%">
-                        <?php echo JHtml::_('grid.sort', 'COM_FREFORM_RECORDS_TITLE', 'title', $listDirn, $listOrder); ?>
+                        <?php echo JHtml::_('searchtools.sort', 'COM_FREFORM_RECORDS_TITLE', 'title', $listDirn, $listOrder); ?>
                     </th>
                     <th width="10%">
-                        <?php echo JHtml::_('grid.sort', 'COM_FREFORM_PUBLISHED', 'state', $listDirn, $listOrder); ?>
+                        <?php echo JHtml::_('searchtools.sort', 'COM_FREFORM_PUBLISHED', 'state', $listDirn, $listOrder); ?>
                     </th>
                     <th width="4%">
-                        <?php echo JHtml::_('grid.sort', 'COM_FREFORM_ID', 'id', $listDirn, $listOrder); ?>
+                        <?php echo JHtml::_('searchtools.sort', 'COM_FREFORM_ID', 'id', $listDirn, $listOrder); ?>
                     </th>
                 </tr>
             </thead>
@@ -67,7 +68,7 @@ $listDirn  = $this->escape($this->filter_order_Dir);
             </tfoot>
             <tbody>  
             <?php foreach ($this->items as $i => $item) :
-                $link = JRoute::_('index.php?option=com__freform&task=record.edit&id=' . $item->id);
+                $link = JRoute::_('index.php?option=com__freform&task=_freform1.edit&id=' . $item->id);
                 $canCheckin = $user->authorise('core.manage', 'com_checkin') || $item->checked_out == $user->get('id') || $item->checked_out == 0;
                 // Category link. Delete if component has only one view:
                 $cat_link = JRoute::_('index.php?option=com_categories&task=category.edit&id=' . $item->catid . '&extension=com__freform');
@@ -80,7 +81,7 @@ $listDirn  = $this->escape($this->filter_order_Dir);
                     <td>
                         <div class="pull-left break-word">
                             <?php if ($item->checked_out) : ?>
-                                <?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'records.', $canCheckin); ?>
+                                <?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, '_freform.', $canCheckin); ?>
                             <?php endif; ?>
                             <a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_FREFORM_EDIT_RECORD'); ?>">
                                 <?php echo $item->title; ?>
@@ -93,7 +94,7 @@ $listDirn  = $this->escape($this->filter_order_Dir);
                         </div>
                     </td>
                     <td align="center">
-                        <?php echo JHtml::_('jgrid.published', $item->state, $i, 'records.', true, 'cb'); ?>
+                        <?php echo JHtml::_('jgrid.published', $item->state, $i, '_freform.', true, 'cb'); ?>
                     </td>
                     <td align="center">
                         <?php echo $item->id; ?>
@@ -108,10 +109,8 @@ $listDirn  = $this->escape($this->filter_order_Dir);
         </div>
         
         <?php endif; ?>
-        <input type="hidden" name="task" value=""/>
-        <input type="hidden" name="boxchecked" value="0"/>
-        <input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>"/>
-        <input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>"/>
+        <input type="hidden" name="task" value="" />
+        <input type="hidden" name="boxchecked" value="0" />
         <?php echo JHtml::_('form.token'); ?>
     </div>
 </form>

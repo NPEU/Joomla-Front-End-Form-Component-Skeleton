@@ -10,9 +10,9 @@
 defined('_JEXEC') or die;
 
 /**
- * _Freform Records Controller
+ * _Freform Controller
  */
-class _FreformControllerRecords extends JControllerAdmin
+class _FreformController_Freform extends JControllerAdmin
 {
     /**
      * Proxy for getModel.
@@ -23,7 +23,7 @@ class _FreformControllerRecords extends JControllerAdmin
      *
      * @return  object  The model.
      */
-    public function getModel($name = 'Record', $prefix = '_FreformModel', $config = array('ignore_request' => true))
+    public function getModel($name = '_Freform1', $prefix = '_FreformModel', $config = array('ignore_request' => true))
     {
         $model = parent::getModel($name, $prefix, $config);
 

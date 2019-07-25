@@ -22,7 +22,7 @@ $route   = JRoute::_(JUri::current());
     {
         var form = document.getElementById('<?php echo $form_id; ?>');
         var $form = jQuery(<?php echo $form_id; ?>);
-        if (task == 'record.cancel') {
+        if (task == '_freform1.cancel') {
             Joomla.submitform(task, form);
         } else if (document.formvalidator.isValid(form)) {
             Joomla.submitform(task, form);
@@ -105,7 +105,7 @@ $controls_fieldset = $this->form->getFieldset('controls');
         <button class="btn" type="submit"><?php echo JText::_('COM_FREFORM_SUBMIT_LABEL'); ?></button>
         <a class="btn" href="<?php echo JRoute::_('index.php?option=com__freform'); ?>"><?php echo JText::_('JCANCEL') ?></a>
         */ ?>
-        <button class="btn" type="submit" onclick="return Joomla.submitbutton('record.save')"><?php echo JText::_('COM_FREFORM_SUBMIT_LABEL'); ?></button>
-        <a class="btn" href="<?php echo JRoute::_('index.php?option=com__freform'); ?>" onclick="return Joomla.submitbutton('record.cancel')"><?php echo JText::_('JCANCEL') ?></a>
+        <button class="btn" type="submit" onclick="return Joomla.submitbutton('_freform1.save')"><?php echo JText::_('COM_FREFORM_SUBMIT_LABEL'); ?></button>
+        <a class="btn" href="<?php echo JRoute::_('index.php?option=com__freform'); ?>" onclick="return Joomla.submitbutton('_freform1.cancel')"><?php echo JText::_('JCANCEL') ?></a>
     </fieldset>
 </form>

@@ -9,12 +9,12 @@
 
 defined('_JEXEC') or die;
 
-require_once JPATH_COMPONENT_ADMINISTRATOR . '/models/record.php';
+require_once JPATH_COMPONENT_ADMINISTRATOR . '/models/_freform1.php';
 
 /**
- * _Freform Record Form Model
+ * _Freform _Freform1 Form Model
  */
-class _FreformModelRecordform extends _FreformModelRecord
+class _FreformModel_Freform1form extends _FreformModel_Freform1
 {
     /**
      * Model typeAlias string. Used for version history.
@@ -22,7 +22,7 @@ class _FreformModelRecordform extends _FreformModelRecord
      * @var    string
      * @since  3.2
      */
-    public $typeAlias = 'com__freform.record';
+    public $typeAlias = 'com__freform._freform1';
 
     /**
      * Get the return URL.
@@ -45,13 +45,13 @@ class _FreformModelRecordform extends _FreformModelRecord
 
         // Load state from the request.
         $pk = $app->input->getInt('id');
-        $this->setState('record.id', $pk);
+        $this->setState('_freform1.id', $pk);
 
         // Add compatibility variable for default naming conventions.
         $this->setState('form.id', $pk);
 
         $categoryId = $app->input->getInt('catid');
-        $this->setState('record.catid', $categoryId);
+        $this->setState('_freform1.catid', $categoryId);
 
         $return = $app->input->get('return', null, 'base64');
 

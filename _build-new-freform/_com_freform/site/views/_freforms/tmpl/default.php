@@ -9,7 +9,7 @@
 
 defined('_JEXEC') or die;
 
-$table_id = 'recordsTable';
+$table_id = '_freformTable';
 // If you need specific JS/CSS for this view, add them here.
 // Example included for DataTables (https://datatables.net/) delete if you don't want this.
 // Make sure jQuery is loaded first:
@@ -33,7 +33,7 @@ $doc->addScriptDeclaration($js);
 
 ?>
 <p>
-<a href="<?php echo JRoute::_('index.php?option=com__freform&task=record.add'); ?>">Add new</a>
+<a href="<?php echo JRoute::_('index.php?option=com__freform&task=_freform1.add'); ?>">Add new</a>
 </p>
 <table class="table table-striped table-hover" id="<?php echo $table_id; ?>">
     <thead>
@@ -62,8 +62,8 @@ $doc->addScriptDeclaration($js);
     <tbody>
         <?php if (!empty($this->items)) : ?>
             <?php foreach ($this->items as $i => $row) :
-                $view_link = JRoute::_('index.php?option=com__freform&task=record.view&id=' . $row->id);
-                $edit_link = JRoute::_('index.php?option=com__freform&task=record.edit&id=' . $row->id);
+                $view_link = JRoute::_('index.php?option=com__freform&task=_freform1.view&id=' . $row->id);
+                $edit_link = JRoute::_('index.php?option=com__freform&task=_freform1.edit&id=' . $row->id);
                 $is_own = false;
                 if ($this->user->authorise('core.edit.own', 'com__freform') && ($this->user->id == $row->created_by)) {
                     $is_own = true;
@@ -93,7 +93,7 @@ $doc->addScriptDeclaration($js);
                         <?php endif; ?>
                     </td>
                     <?php /*<td align="center">
-                        <?php echo JHtml::_('jgrid.published', $row->published, $i, 'records.', true, 'cb'); ?>
+                        <?php echo JHtml::_('jgrid.published', $row->published, $i, '_freform.', true, 'cb'); ?>
                     </td>
                     <td align="center">
                         <?php echo $row->id; ?>
@@ -108,5 +108,5 @@ $doc->addScriptDeclaration($js);
     <a href="<?php $altview = 'alt'; echo JRoute::_('index.php?option=com__freform&view=' . $altview); ?>">Sample alternative view</a>
 </p>
 <?php /* You can include the form  here if you want like this: 
-include JPATH_SITE . '/components/com__freform/views/record/tmpl/form.php';
+include JPATH_SITE . '/components/com__freform/views/_freform1/tmpl/form.php';
 */?>

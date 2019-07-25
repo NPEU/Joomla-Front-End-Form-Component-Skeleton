@@ -15,7 +15,7 @@ defined('_JEXEC') or die;
 /**
  * _Freform Controller
  */
-class _FreformControllerRecord extends JControllerForm
+class _FreformController_Freform1 extends JControllerForm
 {
     /**
      * The URL view item variable.
@@ -199,7 +199,7 @@ class _FreformControllerRecord extends JControllerForm
      *
      * @return  object  The model.
      */
-    public function getModel($name = 'record', $prefix = '', $config = array('ignore_request' => true))
+    public function getModel($name = '_freform1', $prefix = '', $config = array('ignore_request' => true))
     {
         return parent::getModel($name, $prefix, $config);
     }

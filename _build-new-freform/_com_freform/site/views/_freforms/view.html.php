@@ -20,7 +20,7 @@ $lang->load($extension, $base_dir, $language_tag, $reload);
 /**
  * HTML View class for the _Freform Component
  */
-class _FreformViewRecords extends JViewLegacy
+class _FreformView_Freform extends JViewLegacy
 {
     // Overwriting JView display method
     function display($tpl = null)
@@ -33,13 +33,13 @@ class _FreformViewRecords extends JViewLegacy
         // modal), but it's useful to have the form so we can retrieve language strings without 
         // having to manually reclare them, along with any other properties of the form that may be
         // useful:
-        //$this->setModel($this->getModel('record'));
+        //$this->setModel($this->getModel('_freform'));
         #jimport('joomla.application.component.model');
         #JModelLegacy::addIncludePath(JPATH_SITE . '/components/com_freform/models');
-        require JPATH_SITE . '/components/com__freform/models/record.php';
-        $record_model = JModelLegacy::getInstance('Recordform', '_FreformModel');
-        #echo '<pre>'; var_dump($record_model); echo '</pre>'; exit;
-        $form = $record_model->getForm();
+        require JPATH_SITE . '/components/com__freform/models/_freform.php';
+        $_freform_model = JModelLegacy::getInstance('_Freform1form', '_FreformModel');
+        #echo '<pre>'; var_dump($_freform_model); echo '</pre>'; exit;
+        $form = $_freform_model->getForm();
         #echo '<pre>'; var_dump($form); echo '</pre>'; exit;
         
         

@@ -19,7 +19,7 @@ class _FreformController extends JControllerLegacy
      *
      * @var string
      */
-    #protected $default_view = 'records';
+    #protected $default_view = '_freform';
     
     /**
      * Constructor
@@ -30,7 +30,6 @@ class _FreformController extends JControllerLegacy
     public function __construct($config = array())
     {
         parent::__construct($config);
-        
         // Submenu, delete if component has only one view:
         JLoader::register('MenusHelper', JPATH_ADMINISTRATOR . '/components/com_menus/helpers/menus.php');
         $this->addModelPath(JPATH_ADMINISTRATOR . '/components/com_menus/models');
@@ -47,7 +46,7 @@ class _FreformController extends JControllerLegacy
         $document = JFactory::getDocument();
 
         // Set the default view name and format from the Request.
-        $vName   = $this->input->get('view', 'records');
+        $vName   = $this->input->get('view', '_freform');
         $vFormat = $document->getType();
         $lName   = $this->input->get('layout', 'default', 'string');
 

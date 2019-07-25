@@ -10,9 +10,9 @@
 defined('_JEXEC') or die;
 
 /**
- * _Freform Records List Model
+ * _Freform List Model
  */
-class _FreformModelRecords extends JModelList
+class _FreformModel_Freform extends JModelList
 {
     /**
      * Constructor.
@@ -26,10 +26,9 @@ class _FreformModelRecords extends JModelList
         if (empty($config['filter_fields']))
         {
             $config['filter_fields'] = array(
-                'id',
-                'users_name',
-                'message',
-                'state'
+                'id', 'a.id',
+                'title', 'a.title',
+                'state', 'a.state'
             );
         }
 

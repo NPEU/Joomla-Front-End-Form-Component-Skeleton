@@ -21,10 +21,9 @@ class _FreformHelper
     {
         // Set some global property
         $document = JFactory::getDocument();
-
         // Update this with icon of choice from:
         // /administrator/templates/isis/css/template.css
-        $document->addStyleDeclaration('.icon-record:before {content: "\e014";}');
+        $document->addStyleDeclaration('.icon-_freform1:before {content: "\e222";}');
     }
     
     /**
@@ -32,12 +31,12 @@ class _FreformHelper
      *
      * @param   string  The name of the active view.
      */
-    public static function addSubmenu($vName = 'records')
+    public static function addSubmenu($vName = '_freform')
     {
         JHtmlSidebar::addEntry(
             JText::_('COM_FREFORM_MANAGER_SUBMENU_RECORDS'),
-            'index.php?option=com__freform&view=records',
-            $vName == 'records'
+            'index.php?option=com__freform&view=_freform',
+            $vName == '_freform'
         );
         JHtmlSidebar::addEntry(
             JText::_('COM_FREFORM_MANAGER_SUBMENU_CATEGORIES'),
@@ -59,7 +58,7 @@ class _FreformHelper
             $assetName = 'com__freform';
         }
         else {
-            $assetName = 'com__freform.record.'.(int) $itemId;
+            $assetName = 'com__freform._freform1.'.(int) $itemId;
         }
 
         $actions = JAccess::getActions('com__freform', 'component');

@@ -10,9 +10,9 @@
 defined('_JEXEC') or die;
 
 /**
- * _Freform Record View
+ * _Freform _Freform1 View
  */
-class _FreformViewRecord extends JViewLegacy
+class _FreformView_Freform1 extends JViewLegacy
 {
     /**
      * View form
@@ -73,39 +73,39 @@ class _FreformViewRecord extends JViewLegacy
         // Build the actions for new and existing records.
         $canDo = $this->canDo;
 
-        // Note 'palette' is an icon/classname. Change to suit.
+        // Note 'question-circle' is an icon/classname. Change to suit.
         JToolbarHelper::title(
             JText::_('COM_FREFORM_MANAGER_' . ($checkedOut ? 'RECORD_VIEW' : ($isNew ? 'RECORD_ADD' : 'RECORD_EDIT'))),
-            'palette'
+            'question-circle'
         );
         
-            // For new records, check the create permission.
+        // For new records, check the create permission.
         if ($isNew && (count($user->getAuthorisedCategories('com__freform', 'core.create')) > 0)) {
-            JToolbarHelper::apply('record.apply');
-            JToolbarHelper::save('record.save');
-            JToolbarHelper::save2new('record.save2new');
-            JToolbarHelper::cancel('record.cancel');
+            JToolbarHelper::apply('_freform1.apply');
+            JToolbarHelper::save('_freform1.save');
+            JToolbarHelper::save2new('_freform1.save2new');
+            JToolbarHelper::cancel('_freform1.cancel');
         } else {
             // Since it's an existing record, check the edit permission, or fall back to edit own if the owner.
             $itemEditable = $canDo->get('core.edit') || ($canDo->get('core.edit.own') && $this->item->created_by == $userId);
 
             // Can't save the record if it's checked out and editable
             if (!$checkedOut && $itemEditable) {
-                JToolbarHelper::apply('record.apply');
-                JToolbarHelper::save('record.save');
+                JToolbarHelper::apply('_freform1.apply');
+                JToolbarHelper::save('_freform1.save');
 
                 // We can save this record, but check the create permission to see if we can return to make a new one.
                 if ($canDo->get('core.create')) {
-                    JToolbarHelper::save2new('record.save2new');
+                    JToolbarHelper::save2new('_freform1.save2new');
                 }
             }
             // If checked out, we can still save
             if ($canDo->get('core.create')) {
-                JToolbarHelper::save2copy('record.save2copy');
+                JToolbarHelper::save2copy('_freform1.save2copy');
             }
 
 
-            JToolbarHelper::cancel('record.cancel', 'JTOOLBAR_CLOSE');
+            JToolbarHelper::cancel('_freform1.cancel', 'JTOOLBAR_CLOSE');
         }
     }
     /**
@@ -121,7 +121,7 @@ class _FreformViewRecord extends JViewLegacy
                 JText::_('COM_FREFORM_RECORD_EDITING'));
         $document->addScript(JURI::root() . $this->script);
         $document->addScript(JURI::root() . "/administrator/components/com__freform"
-                                          . "/views/record/submitbutton.js");
+                                          . "/views/_freform1/submitbutton.js");
         JText::script('COM_FREFORM_RECORD_ERROR_UNACCEPTABLE');
     }
 }

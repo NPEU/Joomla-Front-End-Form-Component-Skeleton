@@ -80,6 +80,6 @@ $fieldsets = $this->form->getFieldsets();
             <?php endforeach; ?>
         </div>
     </div>
-    <input type="hidden" name="task" value="record.edit" />
+    <input type="hidden" name="task" value="_freform1.edit" />
     <?php echo JHtml::_('form.token'); ?>
 </form>
