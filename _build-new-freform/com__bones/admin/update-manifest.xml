@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<updates>
+    <update>
+        <name>{{OWNER}}: com__bones</name>
+        <description>Joomla! com__bones component</description>
+        <element>com__bones</element>
+        <type>component</type>
+        <version>1.0.0</version>
+        <client>administrator</client>
+        <infourl title="{{OWNER}}: com__bones">https://github.com/{{OWNER}}/com__bones/releases/tag/v1.0.0</infourl>
+        <downloads>
+            <downloadurl type="full" format="zip">https://github.com/{{OWNER}}/com__bones/archive/v1.0.0.zip</downloadurl>
+        </downloads>
+        <targetplatform name="joomla" />
+        <tags>
+            <tag>stable</tag>
+        </tags>
+    </update>
+</updates>

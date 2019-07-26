@@ -43,7 +43,7 @@ function copy_dir($source = '', $destination = '')
 }
 
 
-function perform_renames($source = '', $file_rename = array(), $content_rename = array())
+function perform_renames($source = '', $file_rename1 = array(), $file_rename2 = array(), $content_rename = array())
 {
 
     if ($handle = opendir($source)) {
@@ -52,9 +52,16 @@ function perform_renames($source = '', $file_rename = array(), $content_rename =
             if (($file != '.') && ($file != '..')) {
                 $source_file = $source . '/' . $file;
                 echo 'Performing renames for: ' . $source_file . "\n";
-                if (strpos($file, $file_rename[0]) !== false) {
+                if (strpos($file, $file_rename1[0]) !== false) {
                     
-                    $new_name = str_replace($file_rename[0], $file_rename[1], $source_file);
+                    $new_name = str_replace($file_rename1[0], $file_rename1[1], $source_file);
+                    rename($source_file, $new_name);
+                    $num++;
+                    $source_file = $new_name;
+                }
+                if (strpos($file, $file_rename2[0]) !== false) {
+                    
+                    $new_name = str_replace($file_rename2[0], $file_rename2[1], $source_file);
                     rename($source_file, $new_name);
                     $num++;
                     $source_file = $new_name;
@@ -67,15 +74,8 @@ function perform_renames($source = '', $file_rename = array(), $content_rename =
                     file_put_contents($source_file, $t);
                 }
                 if (is_dir($source_file)) {
-                    perform_renames($source_file, $file_rename, $content_rename);
+                    perform_renames($source_file, $file_rename1, $file_rename2, $content_rename);
                 }
-                /*if (is_file($source_file)) {
-                    rename($source_file, str_replace($file_rename[0], $file_rename[1], $source_file));
-                } elseif (is_dir($source_file)) {
-                    rename($source_file, str_replace($file_rename[0], $file_rename[1], $source_file));
-                    $num += perform_renames($source_file, $file_rename, $content_rename);
-                    
-                }*/
             }
         }
         closedir($handle);
