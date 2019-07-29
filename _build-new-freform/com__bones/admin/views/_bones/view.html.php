@@ -29,34 +29,24 @@ class _BonesView_Bones extends JViewLegacy
      */
     function display($tpl = null)
     {
-        
-        // Get application
-        $app = JFactory::getApplication();
-        $context = "_bones.list.admin._bone";
-        // Get data from the model
         $this->state         = $this->get('State');
 		$this->items         = $this->get('Items');
 		$this->pagination    = $this->get('Pagination');
 		$this->filterForm    = $this->get('FilterForm');
 		$this->activeFilters = $this->get('ActiveFilters');
-        #$this->filter_order     = $app->getUserStateFromRequest($context.'filter_order', 'filter_order', 'brand', 'cmd');
-        #$this->filter_order_Dir = $app->getUserStateFromRequest($context.'filter_order_Dir', 'filter_order_Dir', 'asc', 'cmd');
 
-        // Check for errors.
-        if (count($errors = $this->get('Errors'))) {
-            JError::raiseError(500, implode('<br />', $errors));
+		BonesHelper::addSubmenu('_bones');
 
-            return false;
-        }
+		// Check for errors.
+		if (count($errors = $this->get('Errors')))
+		{
+			JError::raiseError(500, implode("\n", $errors));
+			return false;
+		}
 
-        // Set the toolbar and number of found items
-        $this->addToolBar();
-
-        // Display the template
-        parent::display($tpl);
-
-        // Set the document
-        $this->setDocument();
+		$this->addToolbar();
+		$this->sidebar = JHtmlSidebar::render();
+		parent::display($tpl);
     }
 
     /**
@@ -66,7 +56,8 @@ class _BonesView_Bones extends JViewLegacy
      */
     protected function addToolBar()
     {
-        $canDo = _BonesHelper::getActions();
+        //$canDo = _BonesHelper::getActions();
+        $canDo = JHelperContent::getActions('com__bones');
         $user  = JFactory::getUser();
         
         $title = JText::_('COM_BONES_MANAGER_RECORDS');
@@ -131,7 +122,7 @@ class _BonesView_Bones extends JViewLegacy
         $document = JFactory::getDocument();
         $document->setTitle(JText::_('COM_BONES_ADMINISTRATION'));
     }
-    
+
     /**
 	 * Returns an array of fields the table can be sorted by
 	 *

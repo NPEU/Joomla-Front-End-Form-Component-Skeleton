@@ -16,6 +16,7 @@ use Joomla\String\StringHelper;
  */
 class _BonesModel_Bone extends JModelAdmin
 {
+
     /**
      * Copied from libraries/src/MVC/Model/AdminModel.php because it uses a hard-coded field name:
      * catid.

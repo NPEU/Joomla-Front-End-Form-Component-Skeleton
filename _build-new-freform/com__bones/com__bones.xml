@@ -10,10 +10,10 @@
     <license>MIT License; see LICENSE.md</license>
 
     <!--  The version string is recorded in the components table -->
-    <version>1.0.0</version>
+    <version>0.0.1</version>
     <!-- The description is optional and defaults to the name -->
     <description>COM_BONES_DESCRIPTION</description>
-    
+
     <updateservers>
         <!-- Note: No spaces or linebreaks allowed between the server tags -->
         <server type="extension" name="{{OWNER}}: com__bones Update Site">https://raw.githubusercontent.com/{{OWNER}}/com__bones/master/update-manifest.xml</server>
@@ -43,7 +43,7 @@
         <file>controller.php</file>
         <file>_bones.php</file>
         <file>index.html</file>
-        <file>router.php</file> 
+        <file>router.php</file>
         <folder>controllers</folder>
         <folder>language</folder>
         <folder>models</folder>
@@ -55,18 +55,18 @@
         <menu>COM_BONES_MENU</menu>
         <!-- Submenu, delete if component has only one view -->
         <submenu>
-			<!--
-				Note that all & must be escaped to &amp; for the file to be valid
-				XML and be parsed by the installer
-			-->
-			<menu link="option=com__bones" view="_bones">
+            <!--
+                Note that all & must be escaped to &amp; for the file to be valid
+                XML and be parsed by the installer
+            -->
+            <menu link="option=com__bones" view="_bones">
                 COM_BONES_MANAGER_SUBMENU_RECORDS
             </menu>
-			<menu link="option=com_categories&amp;extension=com__bones" view="categories">
+            <menu link="option=com_categories&amp;extension=com__bones" view="categories">
                 COM_BONES_MANAGER_SUBMENU_CATEGORIES
             </menu>
-		</submenu>
-        
+        </submenu>
+
         <!-- Administration Main File Copy Section -->
         <!-- Note the folder attribute: This attribute describes the folder
                 to copy FROM in the package to install therefore files copied

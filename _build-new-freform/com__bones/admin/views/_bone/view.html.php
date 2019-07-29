@@ -14,12 +14,11 @@ defined('_JEXEC') or die;
  */
 class _BonesView_Bone extends JViewLegacy
 {
-    /**
-     * View form
-     *
-     * @var         form
-     */
-    protected $form = null;
+	protected $state;
+
+	protected $item;
+
+	protected $form;
 
     /**
      * Display the _Bones view
@@ -30,11 +29,10 @@ class _BonesView_Bone extends JViewLegacy
      */
     public function display($tpl = null)
     {
-        // Get the Data
-        $this->form   = $this->get('Form');
-        $this->item   = $this->get('Item');
-        $this->script = $this->get('Script');
-        $this->canDo  = _BonesHelper::getActions($this->item->id, $this->getModel());
+        $this->state = $this->get('State');
+		$this->item  = $this->get('Item');
+		$this->form  = $this->get('Form');
+
 
         // Check for errors.
         if (count($errors = $this->get('Errors'))) {
@@ -71,14 +69,15 @@ class _BonesView_Bone extends JViewLegacy
         $isNew = ($this->item->id == 0);
 
         // Build the actions for new and existing records.
-        $canDo = $this->canDo;
+        #$canDo = $this->canDo;
+        $canDo = JHelperContent::getActions('com_weblinks');
 
         // Note 'question-circle' is an icon/classname. Change to suit.
         JToolbarHelper::title(
             JText::_('COM_BONES_MANAGER_' . ($checkedOut ? 'RECORD_VIEW' : ($isNew ? 'RECORD_ADD' : 'RECORD_EDIT'))),
             'question-circle'
         );
-        
+
         // For new records, check the create permission.
         if ($isNew && (count($user->getAuthorisedCategories('com__bones', 'core.create')) > 0)) {
             JToolbarHelper::apply('_bone.apply');
@@ -113,7 +112,7 @@ class _BonesView_Bone extends JViewLegacy
      *
      * @return void
      */
-    protected function setDocument() 
+    protected function setDocument()
     {
         $isNew = ($this->item->id < 1);
         $document = JFactory::getDocument();

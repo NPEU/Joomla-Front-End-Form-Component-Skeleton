@@ -8,7 +8,6 @@
  */
 
 defined('_JEXEC') or die;
-
 JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 
 JHtml::_('bootstrap.tooltip');
@@ -33,14 +32,13 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
     <?php else : ?>
     <div id="j-main-container">
     <?php endif;?>
-
-        <div class="row-fluid">
-            <div class="span12">
-                <?php #echo JText::_('COM_BONES_RECORDS_FILTER'); ?>
-                <?php echo JLayoutHelper::render('joomla.searchtools.default', array('view' => $this)); ?>
-            </div>
+        <?php echo JLayoutHelper::render('joomla.searchtools.default', array('view' => $this)); ?>
+        <div class="clearfix"> </div>
+		<?php if (empty($this->items)) : ?>
+        <div class="_bone _bone-no-items">
+            <?php echo JText::_('JGLOBAL_NO_MATCHING_RESULTS'); #COM_BONES_NO_RECORDS ?>
         </div>
-        <?php if (!empty($this->items)): ?>
+		<?php else : ?>
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
@@ -67,30 +65,34 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
                 </tr>
             </tfoot>
             <tbody>  
-            <?php foreach ($this->items as $i => $item) :
-                $link = JRoute::_('index.php?option=com__bones&task=_bone.edit&id=' . $item->id);
-                $canCheckin = $user->authorise('core.manage', 'com_checkin') || $item->checked_out == $user->get('id') || $item->checked_out == 0;
-                // Category link. Delete if component has only one view:
-                $cat_link = JRoute::_('index.php?option=com_categories&task=category.edit&id=' . $item->catid . '&extension=com__bones');
-            ?>
+            <?php foreach ($this->items as $i => $item) : ?>
+                <?php $item->cat_link = JRoute::_('index.php?option=com_categories&extension=com__boness&task=category.edit&id=' . $item->catid); ?>
+                <?php $canCreate      = $user->authorise('core.create',     'com__bones.category.' . $item->catid); ?>
+                <?php $canEdit        = $user->authorise('core.edit',       'com__bones.category.' . $item->catid); ?>
+                <?php $canCheckin     = $user->authorise('core.manage',     'com_checkin') || $item->checked_out == $user->id || $item->checked_out == 0; ?>
+                <?php $canEditOwn     = $user->authorise('core.edit.own',   'com__bones.category.' . $item->catid) && $item->created_by == $user->id; ?>
+                <?php $canChange      = $user->authorise('core.edit.state', 'com__bones.category.' . $item->catid) && $canCheckin; ?>
+
                 <tr>
                     <td><?php echo $this->pagination->getRowOffset($i); ?></td>
                     <td>
                         <?php echo JHtml::_('grid.id', $i, $item->id); ?>
                     </td>
-                    <td>
-                        <div class="pull-left break-word">
-                            <?php if ($item->checked_out) : ?>
-                                <?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, '_bones.', $canCheckin); ?>
-                            <?php endif; ?>
-                            <a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_BONES_EDIT_RECORD'); ?>">
-                                <?php echo $item->title; ?>
-                            </a>
-                            <span class="small">(<?php echo JText::_('COM_BONES_RECORDS_ALIAS'); ?>: <?php echo $item->alias; ?>)</span>
-                            <?php /* Category.  Delete if component has only one view: */ ?>
-                            <div class="small">
-                                <?php echo JText::_('COM_BONES_RECORDS_CATEGORY'); ?>: <a class="hasTooltip" href="<?php echo $cat_link; ?>" title="<?php echo JText::_('COM_BONES_EDIT_CATEGORY'); ?>"><?php echo $item->category; ?></a>
-                            </div>
+                    <td class="nowrap has-context">
+                        <?php if ($item->checked_out) : ?>
+                            <?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, '_bones.', $canCheckin); ?>
+                        <?php endif; ?>
+                        <?php if ($canEdit || $canEditOwn) : ?>
+                            <a href="<?php echo JRoute::_('index.php?option=com__bones&task=_bone.edit&id=' . (int) $item->id); ?>" title="<?php echo JText::_('COM_BONES_EDIT_RECORD'); ?>">
+                                <?php echo $this->escape($item->title); ?></a>
+                        <?php else : ?>
+                                <?php echo $this->escape($item->title); ?>
+                        <?php endif; ?>
+                        <span class="small">
+                            <?php echo JText::sprintf('JGLOBAL_LIST_ALIAS', $this->escape($item->alias)); ?>
+                        </span>
+                        <div class="small">
+                            <?php echo JText::_('JCATEGORY') . ': ' . (empty($item->category_title) ? 'none' : '<a href="' . $item->cat_link . '" target="_blank">' . $this->escape($item->category_title) . '</a>'); ?>
                         </div>
                     </td>
                     <td align="center">
@@ -103,12 +105,8 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
             <?php endforeach; ?>
             </tbody>
         </table>
-        <?php else: ?>
-        <div class="alert alert-no-items">
-            <?php echo JText::_('COM_BONES_NO_RECORDS'); ?>
-        </div>
-        
         <?php endif; ?>
+
         <input type="hidden" name="task" value="" />
         <input type="hidden" name="boxchecked" value="0" />
         <?php echo JHtml::_('form.token'); ?>
