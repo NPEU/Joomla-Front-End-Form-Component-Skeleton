@@ -20,6 +20,8 @@ class _BonesView_Bone extends JViewLegacy
 
     protected $form;
 
+    protected $script;
+
     /**
      * Display the _Bones view
      *
@@ -118,7 +120,11 @@ class _BonesView_Bone extends JViewLegacy
         $document = JFactory::getDocument();
         $document->setTitle($isNew ? JText::_('COM_BONES_RECORD_CREATING') :
                 JText::_('COM_BONES_RECORD_EDITING'));
-        $document->addScript(JURI::root() . $this->script);
+
+        if (!empty($this->script)) {
+            $document->addScript(JURI::root() . $this->script);
+        }
+
         $document->addScript(JURI::root() . "/administrator/components/com__bones"
                                           . "/views/_bone/submitbutton.js");
         JText::script('COM_BONES_RECORD_ERROR_UNACCEPTABLE');

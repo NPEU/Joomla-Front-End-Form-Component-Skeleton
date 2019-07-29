@@ -105,14 +105,14 @@ class _BonesModel_Bones extends JModelList
 
         // Create the base select statement.
         $query->select('a.*')
-              ->from($db->quoteName('#__bones') . ' AS a');
+              ->from($db->quoteName('#___bones') . ' AS a');
 
         /*$query->select(
             $this->getState(
                 'list.select',
                 'a.*'
             )
-        )->from($db->quoteName('#__bones') . ' AS a');*/
+        )->from($db->quoteName('#___bones') . ' AS a');*/
 
         // Join the categories table again for the project group (delete if not using categories):
         $query->select('c.title AS category_title')
