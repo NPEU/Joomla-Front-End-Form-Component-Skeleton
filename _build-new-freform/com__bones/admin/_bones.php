@@ -21,9 +21,9 @@ $lang->load($extension, $base_dir, $language_tag, $reload);*/
 
 if (!JFactory::getUser()->authorise('core.manage', 'com_bones'))
 {
-	throw new JAccessExceptionNotallowed(JText::_('JERROR_ALERTNOAUTHOR'), 403);
+    throw new JAccessExceptionNotallowed(JText::_('JERROR_ALERTNOAUTHOR'), 403);
 }
 
-$controller	= JControllerLegacy::getInstance('Bones');
+$controller    = JControllerLegacy::getInstance('Bones');
 $controller->execute(JFactory::getApplication()->input->get('task'));
 $controller->redirect();

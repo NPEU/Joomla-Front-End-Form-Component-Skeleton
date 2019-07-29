@@ -18,8 +18,8 @@ $user      = JFactory::getUser();
 $userId    = $user->get('id');
 #$listOrder = $this->escape($this->filter_order);
 #$listDirn  = $this->escape($this->filter_order_Dir);
-$listOrder	= $this->escape($this->state->get('list.ordering'));
-$listDirn	= $this->escape($this->state->get('list.direction'));
+$listOrder    = $this->escape($this->state->get('list.ordering'));
+$listDirn    = $this->escape($this->state->get('list.direction'));
 
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com__bones&view=_bones'); ?>" method="post" id="adminForm" name="adminForm">
@@ -34,11 +34,11 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
     <?php endif;?>
         <?php echo JLayoutHelper::render('joomla.searchtools.default', array('view' => $this)); ?>
         <div class="clearfix"> </div>
-		<?php if (empty($this->items)) : ?>
+        <?php if (empty($this->items)) : ?>
         <div class="_bone _bone-no-items">
             <?php echo JText::_('JGLOBAL_NO_MATCHING_RESULTS'); #COM_BONES_NO_RECORDS ?>
         </div>
-		<?php else : ?>
+        <?php else : ?>
         <table class="table table-striped table-hover">
             <thead>
                 <tr>

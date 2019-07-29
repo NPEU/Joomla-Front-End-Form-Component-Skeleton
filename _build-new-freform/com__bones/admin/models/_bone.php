@@ -126,14 +126,14 @@ class _BonesModel_Bone extends JModelAdmin
     }
 
     /**
-	 * Method to get a single record.
-	 *
-	 * @param   integer  $pk  The id of the primary key.
-	 *
-	 * @return  \JObject|boolean  Object on success, false on failure.
-	 */
-	/*public function getItem($pk = null)
-	{
+     * Method to get a single record.
+     *
+     * @param   integer  $pk  The id of the primary key.
+     *
+     * @return  \JObject|boolean  Object on success, false on failure.
+     */
+    /*public function getItem($pk = null)
+    {
         $item = parent:: getItem($pk);
         $cat = JTable::getInstance('category');
         $cat->load($item->catid);

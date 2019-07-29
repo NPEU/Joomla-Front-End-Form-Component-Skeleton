@@ -14,11 +14,11 @@ defined('_JEXEC') or die;
  */
 class _BonesView_Bone extends JViewLegacy
 {
-	protected $state;
+    protected $state;
 
-	protected $item;
+    protected $item;
 
-	protected $form;
+    protected $form;
 
     /**
      * Display the _Bones view
@@ -30,8 +30,8 @@ class _BonesView_Bone extends JViewLegacy
     public function display($tpl = null)
     {
         $this->state = $this->get('State');
-		$this->item  = $this->get('Item');
-		$this->form  = $this->get('Form');
+        $this->item  = $this->get('Item');
+        $this->form  = $this->get('Form');
 
 
         // Check for errors.

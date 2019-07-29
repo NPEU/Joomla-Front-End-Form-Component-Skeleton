@@ -16,9 +16,9 @@ class _BonesView_Bones extends JViewLegacy
 {
     protected $items;
 
-	protected $pagination;
+    protected $pagination;
 
-	protected $state;
+    protected $state;
     
     /**
      * Display the _Bones view
@@ -30,23 +30,23 @@ class _BonesView_Bones extends JViewLegacy
     function display($tpl = null)
     {
         $this->state         = $this->get('State');
-		$this->items         = $this->get('Items');
-		$this->pagination    = $this->get('Pagination');
-		$this->filterForm    = $this->get('FilterForm');
-		$this->activeFilters = $this->get('ActiveFilters');
+        $this->items         = $this->get('Items');
+        $this->pagination    = $this->get('Pagination');
+        $this->filterForm    = $this->get('FilterForm');
+        $this->activeFilters = $this->get('ActiveFilters');
 
-		BonesHelper::addSubmenu('_bones');
+        BonesHelper::addSubmenu('_bones');
 
-		// Check for errors.
-		if (count($errors = $this->get('Errors')))
-		{
-			JError::raiseError(500, implode("\n", $errors));
-			return false;
-		}
+        // Check for errors.
+        if (count($errors = $this->get('Errors')))
+        {
+            JError::raiseError(500, implode("\n", $errors));
+            return false;
+        }
 
-		$this->addToolbar();
-		$this->sidebar = JHtmlSidebar::render();
-		parent::display($tpl);
+        $this->addToolbar();
+        $this->sidebar = JHtmlSidebar::render();
+        parent::display($tpl);
     }
 
     /**
@@ -104,12 +104,12 @@ class _BonesView_Bones extends JViewLegacy
         }
         
         if ($user->authorise('core.admin', 'com__bones') || $user->authorise('core.options', 'com__bones'))
-		{
-			JToolbarHelper::preferences('com__bones');
-		}
+        {
+            JToolbarHelper::preferences('com__bones');
+        }
         
         // Render side bar.
-		$this->sidebar = JHtmlSidebar::render();
+        $this->sidebar = JHtmlSidebar::render();
     }
     
     /**
@@ -124,16 +124,16 @@ class _BonesView_Bones extends JViewLegacy
     }
 
     /**
-	 * Returns an array of fields the table can be sorted by
-	 *
-	 * @return  array  Array containing the field name to sort by as the key and display text as value
-	 */
-	protected function getSortFields()
-	{
-		return array(
-			'a.state' => JText::_('COM_BONES_PUBLISHED'),
-			'a.title' => JText::_('COM_BONES_RECORDS_NAME'),
-			'a.id'    => JText::_('COM_BONES_ID')
-		);
-	}
+     * Returns an array of fields the table can be sorted by
+     *
+     * @return  array  Array containing the field name to sort by as the key and display text as value
+     */
+    protected function getSortFields()
+    {
+        return array(
+            'a.state' => JText::_('COM_BONES_PUBLISHED'),
+            'a.title' => JText::_('COM_BONES_RECORDS_NAME'),
+            'a.id'    => JText::_('COM_BONES_ID')
+        );
+    }
 }
