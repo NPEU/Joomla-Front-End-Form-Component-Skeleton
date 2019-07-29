@@ -1,45 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
     <fieldset
-        name="options"
-        label="COM_BRANDS_CONFIG_SETTINGS_LABEL"
+        name="_bones"
+        label="COM_BONES_CONFIG_RECORDS_SETTINGS_LABEL"
+        description="COM_BONES_CONFIG_RECORDS_SETTINGS_DESC"
     >
         <field
-            name="logo_folder"
-            type="text"
-            label="COM_BRANDS_CONFIG_LOGO_FOLDER_LABEL"
-            description="COM_BRANDS_CONFIG_LOGO_FOLDER_DESC"
-            default=""
-        />
-        <field
-            name="logo_file_suffix"
-            type="text"
-            label="COM_BRANDS_CONFIG_LOGO_FILE_SUFFIX_LABEL"
-            description="COM_BRANDS_CONFIG_LOGO_FILE_SUFFIX_DESC"
-            default=""
-        />
-        <field
-            name="logo_image_height"
-            type="int"
-            label="COM_BRANDS_CONFIG_LOGO_IMAGE_HEIGHT_LABEL"
-            description="COM_BRANDS_CONFIG_LOGO_IMAGE_HEIGHT_DESC"
-            default=""
-        />
-        <field
-            name="favicon_zip_upload_folder"
-            type="text"
-            label="COM_BRANDS_CONFIG_FAVICON_ZIP_FOLDER_LABEL"
-            description="COM_BRANDS_CONFIG_FAVICON_ZIP_FOLDER_DESC"
-            default=""
+            name="email_admins"
+            type="textarea"
+            label="COM_BONES_CONFIG_EMAIL_ADMINS_LABEL"
+            description="COM_BONES_CONFIG_EMAIL_ADMINS_DESC"
+            cols="50"
+            rows="10"
+            filter="string"
         />
     </fieldset>
+
     <fieldset name="permissions"
         description="JCONFIG_PERMISSIONS_DESC"
         label="JCONFIG_PERMISSIONS_LABEL"
     >
 
         <field name="rules" type="rules"
-            component="com_brands"
+            component="com__bones"
             filter="rules"
             validate="rules"
             label="JCONFIG_PERMISSIONS_LABEL"
