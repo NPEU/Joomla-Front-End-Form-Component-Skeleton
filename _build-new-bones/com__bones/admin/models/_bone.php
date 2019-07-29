@@ -25,7 +25,7 @@ class _BonesModel_Bone extends JModelAdmin
      *
      * @return  JTable  A JTable object
      */
-    public function getTable($type = '_Bone', $prefix = '_BonesTable', $config = array())
+    public function getTable($type = '_Bones', $prefix = '_BonesTable', $config = array())
     {
         return JTable::getInstance($type, $prefix, $config);
     }

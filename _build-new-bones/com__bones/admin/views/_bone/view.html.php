@@ -71,8 +71,7 @@ class _BonesView_Bone extends JViewLegacy
         $isNew = ($this->item->id == 0);
 
         // Build the actions for new and existing records.
-        #$canDo = $this->canDo;
-        $canDo = JHelperContent::getActions('com_weblinks');
+        $canDo = JHelperContent::getActions('com__bones');
 
         // Note 'question-circle' is an icon/classname. Change to suit.
         JToolbarHelper::title(

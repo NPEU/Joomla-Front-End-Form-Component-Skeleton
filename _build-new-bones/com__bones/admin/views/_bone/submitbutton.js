@@ -6,8 +6,8 @@ Joomla.submitbutton = function(task)
     }
     else
     {
-        var isValid=true;
-        var action = task.split('.');
+        var isValid = true;
+        var action  = task.split('.');
         if (action[1] != 'cancel' && action[1] != 'close')
         {
             var forms = $$('form.form-validate');
