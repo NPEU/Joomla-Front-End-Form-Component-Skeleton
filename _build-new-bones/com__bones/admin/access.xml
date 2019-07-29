@@ -11,8 +11,8 @@
         <action name="core.edit.own" title="JACTION_EDITOWN" description="JACTION_EDITOWN_COMPONENT_DESC" />
     </section>
     <section name="_bone">
-        <action name="core.delete" title="JACTION_DELETE" description="COM_ALERTS_ACCESS_DELETE_DESC" />
-        <action name="core.edit" title="JACTION_EDIT" description="COM_ALERTS_ACCESS_EDIT_DESC" />
-        <action name="core.edit.state" title="JACTION_EDITSTATE" description="COM_ALERTS_ACCESS_EDITSTATE_DESC" />
+        <action name="core.delete" title="JACTION_DELETE" description="COM_BONES_ACCESS_DELETE_DESC" />
+        <action name="core.edit" title="JACTION_EDIT" description="COM_BONES_ACCESS_EDIT_DESC" />
+        <action name="core.edit.state" title="JACTION_EDITSTATE" description="COM_BONES_ACCESS_EDITSTATE_DESC" />
     </section>
 </access>
