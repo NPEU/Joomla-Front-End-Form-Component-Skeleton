@@ -1,6 +1,9 @@
 Joomla Front-end Form Component Skeleton
 ========================================
 
+**Important** - Front end hasn't been updated yet so it's brokem.
+Will fix ASAP.
+
 A starting point for a Joomla front-end CRUD component.
 
 Presents a front-end user with usual CRUD views, e.g. Table of ALL items and a form to add/edit individual items.
@@ -54,7 +57,7 @@ If you do need routing, just not front-end editing, then delete the 'edit' route
 
 
 Again, if you're not using routes, you probablty only need one view, so delete the 'Record' view.
-Otherwise, just delete `$form = $this->get('Form');` and anything that refers to `$form` from the 
+Otherwise, just delete `$form = $this->get('Form');` and anything that refers to `$form` from the
 views and delete the 'fprm' template: "site/views/record/tmpl/form.php"
 
 
