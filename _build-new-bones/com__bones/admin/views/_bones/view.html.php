@@ -131,8 +131,9 @@ class _BonesView_Bones extends JViewLegacy
     protected function getSortFields()
     {
         return array(
-            'a.state' => JText::_('COM_BONES_PUBLISHED'),
             'a.title' => JText::_('COM_BONES_RECORDS_NAME'),
+            'a.owner_user_id' => JText::_('COM_BONES_RECORDS_OWNER'),
+            'a.state' => JText::_('COM_BONES_PUBLISHED'),
             'a.id'    => JText::_('COM_BONES_ID')
         );
     }

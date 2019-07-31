@@ -5,6 +5,7 @@ CREATE TABLE `#___bones` (
   `title` MEDIUMTEXT COLLATE utf8mb4_unicode_ci NOT NULL,
   `alias` VARCHAR(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `catid` int(11) NOT NULL DEFAULT '0',
+  `owner_user_id` int(11) NOT NULL DEFAULT '0',
   `params` VARCHAR(1024) NOT NULL DEFAULT '',
   `state` tinyint(3) NOT NULL DEFAULT '0',
   `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',

@@ -33,6 +33,10 @@ class _BonesModel_Bones extends JModelList
                 'c.title', 'category_title',
                 'params', 'a.params',
                 'state', 'a.state',
+                'owner_user_id', 'a.owner_user_id',
+                'o.name', 'owner_name',
+                'o.username', 'owner_username',
+                'o.email', 'owner_email',
                 'created', 'a.created',
                 'created_by', 'a.created_by',
                 'modified', 'a.modified',
@@ -103,16 +107,14 @@ class _BonesModel_Bones extends JModelList
         $db    = JFactory::getDbo();
         $query = $db->getQuery(true);
 
-        // Create the base select statement.
-        $query->select('a.*')
-              ->from($db->quoteName('#___bones') . ' AS a');
-
-        /*$query->select(
-            $this->getState(
-                'list.select',
-                'a.*'
-            )
-        )->from($db->quoteName('#___bones') . ' AS a');*/
+        // Select the required fields from the table.
+		$query->select(
+			$this->getState(
+				'list.select',
+				'a.id, a.title, a.alias, a.catid, a.owner_user_id, a.checked_out, a.checked_out_time, a.created_by, a.state'
+			)
+		);
+		$query->from($db->quoteName('#___bones', 'a'));
 
         // Join the categories table again for the project group (delete if not using categories):
         $query->select('c.title AS category_title')
@@ -121,6 +123,12 @@ class _BonesModel_Bones extends JModelList
         // Join over the users for the checked out user.
         $query->select('uc.name AS editor')
             ->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
+
+        // Join over the users for the owner user.
+		$query->select($db->quoteName('o.name', 'owner_name'))
+            ->select($db->quoteName('o.username', 'owner_username'))
+            ->select($db->quoteName('o.email', 'owner_email'))
+			->join('LEFT', $db->quoteName('#__users', 'o') . ' ON ' . $db->qn('o.id') . ' = ' . $db->qn('a.owner_user_id'));
 
         // Delete this filter if not using categories.
         // Filter by a single or group of categories.
@@ -158,7 +166,7 @@ class _BonesModel_Bones extends JModelList
         }
 
         // Add the list ordering clause.
-        $orderCol   = $this->state->get('list.ordering', 'a.title');
+        $orderCol   = $this->state->get('list.ordering', 'title');
         $orderDirn  = $this->state->get('list.direction', 'ASC');
 
         $query->order($db->escape($orderCol) . ' ' . $db->escape($orderDirn));

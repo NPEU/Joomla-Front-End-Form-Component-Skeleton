@@ -232,7 +232,7 @@ class _BonesModel_Bone extends JModelAdmin
                     $data['alias'] = JFilterOutput::stringURLSafe($data['title']);
                 }
 
-                $table = JTable::getInstance('_Bone', '_BonesTable');
+                $table = JTable::getInstance('_Bones', '_BonesTable');
 
                 if ($table->load(array('alias' => $data['alias']))) {
                     $msg = JText::_('COM_CONTENT_SAVE_WARNING');

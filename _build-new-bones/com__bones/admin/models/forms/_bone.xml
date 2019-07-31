@@ -33,6 +33,18 @@
             class=""
             labelclass=""
         />
+            <field
+            name="owner_user_id"
+            type="user"
+            label="COM_BONES_OWNER_LABEL"
+            description="COM_BONES_OWNER_DESC"
+            default="COM_BONES_OWNER_DEFAULT"
+            filter="int"
+            class="inputbox"
+            required="true"
+        >
+            <option value="">COM_BONES_OWNER_DEFAULT</option>
+        </field>
         <!-- Delete if not using categories: -->
         <field
             name="catid"

@@ -49,17 +49,20 @@ $listDirn    = $this->escape($this->state->get('list.direction'));
                     <th width="40%">
                         <?php echo JHtml::_('searchtools.sort', 'COM_BONES_RECORDS_TITLE', 'title', $listDirn, $listOrder); ?>
                     </th>
+                    <th width="34%">
+                        <?php echo JHtml::_('searchtools.sort', 'COM_BONES_RECORDS_OWNER', 'owner_name', $listDirn, $listOrder); ?>
+                    </th>
                     <th width="10%">
                         <?php echo JHtml::_('searchtools.sort', 'COM_BONES_PUBLISHED', 'state', $listDirn, $listOrder); ?>
                     </th>
-                    <th width="4%">
+                    <th width="10%">
                         <?php echo JHtml::_('searchtools.sort', 'COM_BONES_ID', 'id', $listDirn, $listOrder); ?>
                     </th>
                 </tr>
             </thead>
             <tfoot>
                 <tr>
-                    <td colspan="5">
+                    <td colspan="6">
                         <?php echo $this->pagination->getListFooter(); ?>
                     </td>
                 </tr>
@@ -94,6 +97,9 @@ $listDirn    = $this->escape($this->state->get('list.direction'));
                         <div class="small">
                             <?php echo JText::_('JCATEGORY') . ': ' . (empty($item->category_title) ? 'none' : '<a href="' . $item->cat_link . '" target="_blank">' . $this->escape($item->category_title) . '</a>'); ?>
                         </div>
+                    </td>
+                    <td align="center">
+                        <a href="mailto:<?php echo $item->owner_email; ?>"><?php echo $item->owner_name; ?></a>
                     </td>
                     <td align="center">
                         <?php echo JHtml::_('jgrid.published', $item->state, $i, '_bones.', true, 'cb'); ?>
