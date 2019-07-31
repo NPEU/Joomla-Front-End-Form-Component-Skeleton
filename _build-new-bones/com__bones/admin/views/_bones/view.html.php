@@ -66,7 +66,8 @@ class _BonesView_Bones extends JViewLegacy
             $title .= "<span style='font-size: 0.5em; vertical-align: middle;'> (" . $this->pagination->total . ")</span>";
         }
 
-        JToolBarHelper::title($title, '_bone');
+        // Note 'question-circle' is an icon/classname. Change to suit in all views.
+        JToolBarHelper::title($title, 'question-circle');
         /*
         JToolBarHelper::addNew('_bone.add');
         if (!empty($this->items)) {

@@ -42,9 +42,6 @@ class _BonesController extends JControllerLegacy
             return false;
         }
 
-        // Add style
-        _BonesHelper::addStyle();
-
         return parent::display();
     }
 }

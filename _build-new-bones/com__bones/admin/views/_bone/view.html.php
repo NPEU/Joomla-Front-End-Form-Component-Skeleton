@@ -73,7 +73,7 @@ class _BonesView_Bone extends JViewLegacy
         // Build the actions for new and existing records.
         $canDo = JHelperContent::getActions('com__bones');
 
-        // Note 'question-circle' is an icon/classname. Change to suit.
+        // Note 'question-circle' is an icon/classname. Change to suit in all views.
         JToolbarHelper::title(
             JText::_('COM_BONES_MANAGER_' . ($checkedOut ? 'RECORD_VIEW' : ($isNew ? 'RECORD_ADD' : 'RECORD_EDIT'))),
             'question-circle'

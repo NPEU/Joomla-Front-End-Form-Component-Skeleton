@@ -15,18 +15,6 @@ defined('_JEXEC') or die;
 class _BonesHelper extends JHelperContent
 {
     /**
-     * Add style
-     */
-    public static function addStyle()
-    {
-        // Set some global property
-        $document = JFactory::getDocument();
-        // Update this with icon of choice from:
-        // /administrator/templates/isis/css/template.css
-        $document->addStyleDeclaration('.icon-_bone:before {content: "\e222";}');
-    }
-
-    /**
      * Configure the Submenu. Delete if component has only one view.
      *
      * @param   string  The name of the active view.
