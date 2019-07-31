@@ -63,7 +63,7 @@ class _BonesHelper extends JHelperContent
             $assetName = 'com__bones._bone.'.(int) $itemId;
         }
 
-        $actions = JAccess::getActions('com_bones', 'component');
+        $actions = JAccess::getActions('com__bones', 'component');
 
         foreach ($actions as $action) {
             $result->set($action->name, $user->authorise($action->name, $assetName));
@@ -73,7 +73,7 @@ class _BonesHelper extends JHelperContent
         if ($model) {
             $item  = $model->getItem($itemId);
 
-            if (!!($user->authorise('core.edit', 'com_bones')
+            if (!!($user->authorise('core.edit', 'com__bones')
             || $user->authorise('core.edit', 'com_content.category.' . $item->catid))) {
                 $result->set('core.edit', true);
             }

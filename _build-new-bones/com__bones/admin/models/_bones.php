@@ -64,7 +64,7 @@ class _BonesModel_Bones extends JModelList
         $this->setState('filter.category_id', $this->getUserStateFromRequest($this->context . '.filter.category_id', 'filter_category_id', '', 'cmd'));
 
         // Load the parameters.
-        $params = JComponentHelper::getParams('com_bones');
+        $params = JComponentHelper::getParams('com__bones');
         $this->setState('params', $params);
 
         // List state information.
