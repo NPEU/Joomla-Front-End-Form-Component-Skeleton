@@ -94,7 +94,7 @@ class _BonesModel_Bone extends JModelAdmin
     {
         // Check the session for previously entered form data.
         $data = JFactory::getApplication()->getUserState(
-            'com__bones.edit._bones.data',
+            'com__bones.edit._bone.data',
             array()
         );
 
