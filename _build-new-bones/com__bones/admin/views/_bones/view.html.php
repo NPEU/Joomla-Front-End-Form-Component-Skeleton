@@ -108,9 +108,6 @@ class _BonesView_Bones extends JViewLegacy
         {
             JToolbarHelper::preferences('com__bones');
         }
-
-        // Render side bar.
-        $this->sidebar = JHtmlSidebar::render();
     }
 
     /**

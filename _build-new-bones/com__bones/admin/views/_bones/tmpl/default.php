@@ -47,16 +47,16 @@ $listDirn    = $this->escape($this->state->get('list.direction'));
                         <?php echo JHtml::_('grid.checkall'); ?>
                     </th>
                     <th width="40%">
-                        <?php echo JHtml::_('searchtools.sort', 'COM_BONES_RECORDS_TITLE', 'title', $listDirn, $listOrder); ?>
+                        <?php echo JHtml::_('searchtools.sort', 'COM_BONES_RECORDS_TITLE', 'a.title', $listDirn, $listOrder); ?>
                     </th>
                     <th width="34%">
                         <?php echo JHtml::_('searchtools.sort', 'COM_BONES_RECORDS_OWNER', 'owner_name', $listDirn, $listOrder); ?>
                     </th>
                     <th width="10%">
-                        <?php echo JHtml::_('searchtools.sort', 'COM_BONES_PUBLISHED', 'state', $listDirn, $listOrder); ?>
+                        <?php echo JHtml::_('searchtools.sort', 'COM_BONES_PUBLISHED', 'a.state', $listDirn, $listOrder); ?>
                     </th>
                     <th width="10%">
-                        <?php echo JHtml::_('searchtools.sort', 'COM_BONES_ID', 'id', $listDirn, $listOrder); ?>
+                        <?php echo JHtml::_('searchtools.sort', 'COM_BONES_ID', 'a.id', $listDirn, $listOrder); ?>
                     </th>
                 </tr>
             </thead>

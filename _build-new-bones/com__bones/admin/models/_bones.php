@@ -60,7 +60,7 @@ class _BonesModel_Bones extends JModelList
      *
      * @note    Calling getState in this method will result in recursion.
      */
-    protected function populateState($ordering = 'a.title', $direction = 'asc')
+    protected function populateState($ordering = 'a.title', $direction = 'ASC')
     {
         // Load the filter state.
         $this->setState('filter.search', $this->getUserStateFromRequest($this->context . '.filter.search', 'filter_search', '', 'string'));
@@ -122,7 +122,7 @@ class _BonesModel_Bones extends JModelList
 
         // Join over the users for the checked out user.
         $query->select('uc.name AS editor')
-            ->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
+            ->join('LEFT', '#__users AS uc ON uc.id = a.checked_out');
 
         // Join over the users for the owner user.
         $query->select($db->quoteName('o.name', 'owner_name'))
@@ -166,7 +166,7 @@ class _BonesModel_Bones extends JModelList
         }
 
         // Add the list ordering clause.
-        $orderCol   = $this->state->get('list.ordering', 'title');
+        $orderCol   = $this->state->get('list.ordering', 'a.title');
         $orderDirn  = $this->state->get('list.direction', 'ASC');
 
         $query->order($db->escape($orderCol) . ' ' . $db->escape($orderDirn));
