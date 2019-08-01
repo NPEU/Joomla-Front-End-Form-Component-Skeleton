@@ -15,16 +15,16 @@ defined('_JEXEC') or die;
 class _BonesController_Bone extends JControllerForm
 {
     /**
-	 * Constructor.
-	 *
-	 * @param   array  $config  An optional associative array of configuration settings.
-	 *
-	 * @see     \JControllerLegacy
-	 * @throws  \Exception
-	 */
-	public function __construct($config = array())
-	{
-		parent::__construct($config);
+     * Constructor.
+     *
+     * @param   array  $config  An optional associative array of configuration settings.
+     *
+     * @see     \JControllerLegacy
+     * @throws  \Exception
+     */
+    public function __construct($config = array())
+    {
+        parent::__construct($config);
         $this->view_list = '_bones';
     }
 }

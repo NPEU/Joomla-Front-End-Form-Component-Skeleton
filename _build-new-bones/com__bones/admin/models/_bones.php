@@ -108,13 +108,13 @@ class _BonesModel_Bones extends JModelList
         $query = $db->getQuery(true);
 
         // Select the required fields from the table.
-		$query->select(
-			$this->getState(
-				'list.select',
-				'a.id, a.title, a.alias, a.catid, a.owner_user_id, a.checked_out, a.checked_out_time, a.created_by, a.state'
-			)
-		);
-		$query->from($db->quoteName('#___bones', 'a'));
+        $query->select(
+            $this->getState(
+                'list.select',
+                'a.id, a.title, a.alias, a.catid, a.owner_user_id, a.checked_out, a.checked_out_time, a.created_by, a.state'
+            )
+        );
+        $query->from($db->quoteName('#___bones', 'a'));
 
         // Join the categories table again for the project group (delete if not using categories):
         $query->select('c.title AS category_title')
@@ -125,10 +125,10 @@ class _BonesModel_Bones extends JModelList
             ->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
 
         // Join over the users for the owner user.
-		$query->select($db->quoteName('o.name', 'owner_name'))
+        $query->select($db->quoteName('o.name', 'owner_name'))
             ->select($db->quoteName('o.username', 'owner_username'))
             ->select($db->quoteName('o.email', 'owner_email'))
-			->join('LEFT', $db->quoteName('#__users', 'o') . ' ON ' . $db->qn('o.id') . ' = ' . $db->qn('a.owner_user_id'));
+            ->join('LEFT', $db->quoteName('#__users', 'o') . ' ON ' . $db->qn('o.id') . ' = ' . $db->qn('a.owner_user_id'));
 
         // Delete this filter if not using categories.
         // Filter by a single or group of categories.
