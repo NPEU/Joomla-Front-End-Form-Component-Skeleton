@@ -15,6 +15,7 @@ JHtml::_('behavior.keepalive');
 JHtml::_('formbehavior.chosen', 'select', null, array('disable_search_threshold' => 0 ));
 
 $global_edit_fields = array(
+    'id',
     'parent',
     'parent_id',
     'published',
