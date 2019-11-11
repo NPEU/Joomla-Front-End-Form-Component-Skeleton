@@ -9,7 +9,7 @@
 
 defined('_JEXEC') or die;
 
-// Load the Admin language file to avoid repoeating form language strings:
+// Load the Admin language file to avoid repeating form language strings:
 $lang = JFactory::getLanguage();
 $extension = 'com__bones';
 $base_dir = JPATH_COMPONENT_ADMINISTRATOR;
@@ -31,7 +31,7 @@ class _BonesView_Bones extends JViewLegacy
         // We may not actually want to show the form at this point (though we could if we wanted to
         // include the form AND the list on the same page - especially if it's displayed via a
         // modal), but it's useful to have the form so we can retrieve language strings without
-        // having to manually reclare them, along with any other properties of the form that may be
+        // having to manually redeclare them, along with any other properties of the form that may be
         // useful:
         //$this->setModel($this->getModel('_bones'));
         #jimport('joomla.application.component.model');
