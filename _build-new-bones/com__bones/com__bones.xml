@@ -16,7 +16,7 @@
 
     <updateservers>
         <!-- Note: No spaces or linebreaks allowed between the server tags -->
-        <server type="extension" name="{{OWNER}}: com__bones Update Site">https://raw.githubusercontent.com/{{OWNER}}/com__bones/master/update-manifest.xml</server>
+        <server type="extension" name="{{OWNER}}: com__bones Update Site">https://raw.githubusercontent.com/{{OWNER}}/com__bones/main/update-manifest.xml</server>
     </updateservers>
 
     <install> <!-- Runs on install -->
