@@ -57,7 +57,7 @@ $fieldsets = $this->form->getFieldsets();
                         <?php endif; ?>
                         <?php $hidden_fields = array(); foreach($form_fieldset as $field): if(!in_array($field->fieldname, $global_edit_fields)): ?>
                             <?php if($field->type == 'Hidden'){$hidden_fields[] = $field->input; continue;} ?>
-                            <?php if(empty($field->hiddenLabel)){ echo $field->input; continue; } ?>
+                            <?php if(!empty($field->getAttribute('hiddenLabel'))){ echo $field->input; continue; } ?>
 
                             <div class="control-group">
                                 <?php if ($field->type != 'Button'): ?>
