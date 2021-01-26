@@ -36,7 +36,7 @@ class _BonesView_Bones extends JViewLegacy
         //$this->setModel($this->getModel('_bones'));
         #jimport('joomla.application.component.model');
         #JModelLegacy::addIncludePath(JPATH_SITE . '/components/com__bones/models');
-        require JPATH_SITE . '/components/com__bones/models/_bones.php';
+        require JPATH_SITE . '/components/com__bones/models/_bone.php';
         $_bones_model = JModelLegacy::getInstance('_Boneform', '_BonesModel');
         #echo '<pre>'; var_dump($_bones_model); echo '</pre>'; exit;
         $form = $_bones_model->getForm();
