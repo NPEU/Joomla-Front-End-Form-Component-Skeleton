@@ -76,7 +76,7 @@ $doc->addScriptDeclaration($js);
                         <?php echo JHtml::_('grid.id', $i, $row->id); ?>
                     </td>*/ ?>
                     <td>
-                        <a href="<?php echo $view_link; ?>" title="<?php echo JText::_('COM_BONES_EDIT_RECORD'); ?>">
+                        <a href="<?php echo $view_link; ?>" title="<?php echo JText::_('COM_BONES_VIEW_RECORD'); ?>">
                             <?php echo $row->title; ?>
                         </a>
                     </td>
@@ -85,7 +85,7 @@ $doc->addScriptDeclaration($js);
                     </td>
                     <td>
                         <?php if($is_own || $authorised): ?>
-                        <a href="<?php echo $edit_link; ?>">
+                        <a href="<?php echo $edit_link; ?>" title="<?php echo JText::_('COM_BONES_EDIT_RECORD'); ?>">
                             <?php echo JText::_('COM_BONES_RECORDS_ACTION_EDIT'); ?>
                         </a>
                         <?php else: ?>
