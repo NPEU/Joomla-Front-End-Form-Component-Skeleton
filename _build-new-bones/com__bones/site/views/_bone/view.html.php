@@ -28,6 +28,7 @@ class _BonesView_Bone extends JViewLegacy
         #echo '<pre>'; var_dump(JInput::get('layout')); echo '</pre>'; exit;
 
         $user = JFactory::getUser();
+        $user_is_root = $user->authorise('core.admin');
 
         $item = $this->get('Item');
         // We may not actually want to show the form at this point (though we could if we wanted to
@@ -60,7 +61,9 @@ class _BonesView_Bone extends JViewLegacy
         }
 
 
-        if ($is_new) {
+        if ($user_is_root) {
+            $authorised = true;
+        } elseif ($is_new) {
             $authorised = $user->authorise('core.create', 'com__bones');
         } elseif ($is_own) {
             $authorised = $user->authorise('core.edit.own', 'com__bones');
