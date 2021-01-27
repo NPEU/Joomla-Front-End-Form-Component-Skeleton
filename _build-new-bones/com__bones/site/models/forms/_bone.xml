@@ -5,7 +5,7 @@
 >
     <fieldset
         name="inputs"
-        label="COM_BONES_FORM_LABEL"
+        label="COM_BONES_FIELDSET_MAIN_LABEL"
     >
         <field
             name="id"
