@@ -24,9 +24,8 @@
         />
         <field
             name="alias"
-            type="textarea"
-            cols="50"
-            rows="10"
+            type="text"
+            size="30"
             label="COM_BONES_ALIAS_LABEL"
             description="COM_BONES_ALIAS_DESC"
             filter="htmlsafe"
