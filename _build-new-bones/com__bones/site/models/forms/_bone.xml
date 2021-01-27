@@ -28,7 +28,7 @@
             size="30"
             label="COM_BONES_ALIAS_LABEL"
             description="COM_BONES_ALIAS_DESC"
-            filter="htmlsafe"
+            filter="string"
             required="true"
             class=""
             labelclass=""
