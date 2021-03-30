@@ -33,7 +33,7 @@
             class=""
             labelclass=""
         />
-            <field
+        <field
             name="owner_user_id"
             type="user"
             label="COM_BONES_OWNER_LABEL"
