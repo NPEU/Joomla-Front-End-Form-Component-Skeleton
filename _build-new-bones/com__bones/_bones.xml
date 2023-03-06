@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" method="upgrade">
+
+    <name>COM_BONES</name>
+    <author>Andy Kirk</author>
+    <authorEmail>andy.kirk@npeu.ox.ac.uk</authorEmail>
+    <authorUrl>https://www.npeu.ox.ac.uk</authorUrl>
+    <creationDate>{{MONTH}} {{YEAR}}</creationDate>
+    <copyright>(C) {{OWNER}} {{YEAR}}</copyright>
+    <license>MIT License; see LICENSE.md</license>
+
+    <version>0.0.1</version>
+    <description>COM_BONES_DESCRIPTION</description>
+
+    <namespace path="src">{{OWNER}}\Component\_Bones</namespace>
+
+    <updateservers>
+        <server type="extension" name="{{OWNER}}: com__bones Update Site">https://raw.githubusercontent.com/{{OWNER}}/com__bones/main/update-manifest.xml</server>
+    </updateservers>
+
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+    <uninstall>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
+    <update>
+        <schemas>
+            <schemapath type="mysql">sql/updates/mysql</schemapath>
+        </schemas>
+    </update>
+
+    <files folder="site">
+        <folder>forms</folder>
+        <folder>language</folder>
+		<folder>src</folder>
+		<folder>tmpl</folder>
+    </files>
+
+    <administration>
+        <menu>COM_BONES_MENU</menu>
+
+        <files folder="admin">
+            <file>access.xml</file>
+            <file>config.xml</file>
+            <folder>forms</folder>
+            <folder>language</folder>
+            <folder>services</folder>
+            <folder>sql</folder>
+            <folder>src</folder>
+            <folder>tmpl</folder>
+        </files>
+    </administration>
+
+</extension>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form
+    addrulepath="/administrator/components/com__bones/models/rules"
+    addfieldpath="/administrator/components/com__bones/models/fields"
+>
+    <fieldset
+        name="main"
+        label="COM_BONES_FIELDSET_MAIN_LABEL"
+    >
+        <field
+            name="id"
+            type="hidden"
+        />
+        <field
+            name="title"
+            type="text"
+            size="30"
+            label="COM_BONES_TITLE_LABEL"
+            description="COM_BONES_TITLE_DESC"
+            filter="string"
+            required="true"
+            class=""
+            labelclass=""
+        />
+        <field
+            name="alias"
+            type="text"
+            size="30"
+            label="COM_BONES_ALIAS_LABEL"
+            description="COM_BONES_ALIAS_DESC"
+            hint="COM_BONES_ALIAS_HINT"
+            filter="string"
+            class=""
+            labelclass=""
+        />
+        <field
+            name="owner_user_id"
+            type="user"
+            label="COM_BONES_OWNER_LABEL"
+            description="COM_BONES_OWNER_DESC"
+            default="COM_BONES_OWNER_DEFAULT"
+            filter="int"
+            class="inputbox"
+            required="true"
+        >
+            <option value="">COM_BONES_OWNER_DEFAULT</option>
+        </field>
+        <field
+            name="state"
+            type="list"
+            label="JSTATUS"
+            description="JFIELD_PUBLISHED_DESC"
+            class="form-select-color-state"
+            filter="intval"
+            size="1"
+            default="1"
+        >
+            <option value="1">JPUBLISHED</option>
+            <option value="0">JUNPUBLISHED</option>
+            <option value="2">JARCHIVED</option>
+            <option value="-2">JTRASHED</option>
+        </field>
+        <!-- Not sure if needed - from Helloword sample component: -->
+        <field
+            name="access"
+            type="accesslevel"
+            label="JFIELD_ACCESS_LABEL"
+            description="JFIELD_ACCESS_DESC"
+		>
+    </fieldset>
+    <!-- Not sure if needed - from Helloword sample component: -->
+    <fieldset
+        name="accesscontrol"
+        label="COM_BONES_FIELDSET_RULES"
+    >
+        <field
+            name="asset_id"
+            type="hidden"
+            filter="unset"
+        />
+        <field
+            name="rules"
+            type="rules"
+            label="COM_BONES_FIELD_RULES_LABEL"
+            filter="rules"
+            validate="rules"
+            class="inputbox"
+            component="com__bones"
+            section="message"
+        />
+    </fieldset>
+</form>

@@ -43,7 +43,7 @@ function copy_dir($source = '', $destination = '')
 }
 
 
-function perform_renames($source = '', $file_rename1 = array(), $file_rename2 = array(), $content_rename = array())
+function perform_renames($source = '', $file_renames = [], $content_rename = [])
 {
 
     if ($handle = opendir($source)) {
@@ -52,20 +52,19 @@ function perform_renames($source = '', $file_rename1 = array(), $file_rename2 = 
             if (($file != '.') && ($file != '..')) {
                 $source_file = $source . '/' . $file;
                 echo 'Performing renames for: ' . $source_file . "\n";
-                if (strpos($file, $file_rename1[0]) !== false) {
-                    
-                    $new_name = str_replace($file_rename1[0], $file_rename1[1], $source_file);
-                    rename($source_file, $new_name);
-                    $num++;
-                    $source_file = $new_name;
+
+                if (!empty($file_renames)) {
+                    foreach($file_renames as $from => $to) {
+                        if (strpos($file, $from) !== false) {
+
+                            $new_name = str_replace($from, $to, $source_file);
+                            rename($source_file, $new_name);
+                            $num++;
+                            $source_file = $new_name;
+                        }
+                    }
                 }
-                if (strpos($file, $file_rename2[0]) !== false) {
-                    
-                    $new_name = str_replace($file_rename2[0], $file_rename2[1], $source_file);
-                    rename($source_file, $new_name);
-                    $num++;
-                    $source_file = $new_name;
-                }
+
                 if (!empty($content_rename) && is_file($source_file)) {
                     $t = file_get_contents($source_file);
                     foreach ($content_rename as $from => $to) {
@@ -73,8 +72,9 @@ function perform_renames($source = '', $file_rename1 = array(), $file_rename2 = 
                     }
                     file_put_contents($source_file, $t);
                 }
+
                 if (is_dir($source_file)) {
-                    perform_renames($source_file, $file_rename1, $file_rename2, $content_rename);
+                    perform_renames($source_file, $file_renames, $content_rename);
                 }
             }
         }

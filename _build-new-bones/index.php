@@ -33,9 +33,13 @@ copy_dir(__DIR__ . '/com__bones', $new_dir);
 
 perform_renames(
     $new_dir,
-    array('_bones', str_replace(' ', '', $lc_name)),
-    array('_bone',  str_replace(' ', '', $lc_name_singular)),
-    array(
+    [
+        '_bones' => str_replace(' ', '', $lc_name),
+        '_bone'  => str_replace(' ', '', $lc_name_singular),
+        '_Bones' => str_replace(' ', '', $classname),
+        '_Bone'  => str_replace(' ', '', $classname_singular)
+    ],
+    [
         '{{OWNER}}'         => $owner,
         '{{NAME}}'          => $name,
         '{{DESCRIPTION}}'   => $description,
@@ -44,11 +48,11 @@ perform_renames(
         '_bone'             => str_replace(' ', '', $lc_name_singular),
         '_Bones'            => $classname,
         '_Bone'             => $classname_singular,
-        'COM_BONES'          => $com_uc_name,
+        'COM_BONES'         => $com_uc_name,
         '_BONES'            => '_' . str_replace(' ', '', $uc_name),
         '_BONE'             => '_' . str_replace(' ', '', $uc_name_singular),
         '{{MONTH}}'         => date('F'),
         '{{YEAR}}'          => date('Y')
-    )
+    ]
 );
 ?>

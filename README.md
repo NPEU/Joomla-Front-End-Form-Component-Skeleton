@@ -37,36 +37,12 @@ If you're not using windows you can use the PHP-CLI directly by replacing the pl
 `php -f _build-new-bones/index.php nowner=%Ow%ame=%Nm% description=%Ds%`
 
 
-Don't need a front-end form?
-----------------------------
+Other
+-----
 
-Make the following changes:
+To add Categories support, follow this guide:
+https://blog.astrid-guenther.de/en/joomla-kategorien-im-backend-einrichten/
 
+Adding admin submenus:
+https://www.dionysopoulos.me/book/com-menus.html
 
-### Router
-
-
-If you don't need routes at all, you can delete this file. Remember to remove it from the manifest.
-
-If you do need routing, just not front-end editing, then delete the 'edit' route block which begins:
-
-`if ($segments[0] == 'edit') {`
-
-
-### Views
-
-
-Again, if you're not using routes, you probably only need one view, so delete the 'Record' view.
-Otherwise, just delete `$form = $this->get('Form');` and anything that refers to `$form` from the
-views and delete the 'form' template: "site/views/record/tmpl/form.php"
-
-
-### Models
-
-You can also delete "site/models/forms/record.xml".
-
-
-### Controllers
-
-
-Similarly, you can delete "site/controllers" directory.
