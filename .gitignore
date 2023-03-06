@@ -3,6 +3,7 @@
 /T/*
 /__builds/*
 !/__builds/.gitkeep
+!/__builds/com_alerts/*
 
 ####################################################################################################
 # Windows (https://github.com/github/gitignore/blob/master/Global/Windows.gitignore)               #
