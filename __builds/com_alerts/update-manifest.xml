@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<updates>
+    <update>
+        <name>NPEU: com_alerts</name>
+        <description>Joomla! com_alerts component</description>
+        <element>com_alerts</element>
+        <type>component</type>
+        <version>0.0.1</version>
+        <client>administrator</client>
+        <infourl title="NPEU: com_alerts">https://github.com/NPEU/com_alerts/releases/tag/v0.0.1</infourl>
+        <downloads>
+            <downloadurl type="full" format="zip">https://github.com/NPEU/com_alerts/archive/v0.0.1.zip</downloadurl>
+        </downloads>
+        <targetplatform name="joomla" />
+        <tags>
+            <tag>stable</tag>
+        </tags>
+    </update>
+</updates>

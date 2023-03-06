@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form
+    addruleprefix="NPEU\Component\Alerts\Administrator\Rule"
+    addfieldprefix="NPEU\Component\Alerts\Administrator\Field"
+>
+    <fieldset
+        name="inputs"
+        label="COM_ALERTS_FIELDSET_MAIN_LABEL"
+    >
+        <field
+            name="id"
+            type="hidden"
+        />
+        <field
+            name="title"
+            type="text"
+            size="30"
+            label="COM_ALERTS_TITLE_LABEL"
+            description="COM_ALERTS_TITLE_DESC"
+            filter="string"
+            required="true"
+            class=""
+            labelclass=""
+        />
+        <field
+            name="alias"
+            type="text"
+            size="30"
+            label="COM_ALERTS_ALIAS_LABEL"
+            description="COM_ALERTS_ALIAS_DESC"
+            filter="string"
+            required="true"
+            class=""
+            labelclass=""
+        />
+    </fieldset>
+</form>
