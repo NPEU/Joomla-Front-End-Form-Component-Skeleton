@@ -35,16 +35,18 @@ class HtmlView extends BaseHtmlView {
 		$app = Factory::getApplication();
 
         // Get data from the model
-		$this->items		= $this->get('Items');
-		$this->pagination	= $this->get('Pagination');
-        $this->state			= $this->get('State');
-		$this->filterForm    	= $this->get('FilterForm');
-		$this->activeFilters 	= $this->get('ActiveFilters');
+		$this->items		 = $this->get('Items');
+		$this->pagination	 = $this->get('Pagination');
+        $this->state	 	 = $this->get('State');
+		$this->filterForm    = $this->get('FilterForm');
+		$this->activeFilters = $this->get('ActiveFilters');
 
         // What Access Permissions does this user have? What can (s)he do?
 		$this->canDo = ContentHelper::getActions('com_alerts');
 
-        if (\count($errors = $this->get('Errors'))) {
+		echo '<pre>'; var_dump($this->state); echo '</pre>'; exit;
+		$errors = $this->get('Errors');
+        if (!empty($errors)) {
             throw new GenericDataException(implode("\n", $errors), 500);
         }
 

@@ -7,7 +7,7 @@
  * @license     MIT License; see LICENSE.md
  */
 
-namespace {{OWNER}}\Component\_Bone\Administrator\Controller;
+namespace {{OWNER}}\Component\_Bones\Administrator\Controller;
 
 defined('_JEXEC') or die;
 

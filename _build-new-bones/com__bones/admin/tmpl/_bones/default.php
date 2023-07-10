@@ -89,7 +89,7 @@ $listDirn      = $this->escape($this->state->get('list.direction'));
                                     <?php echo HTMLHelper::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'weblinks.', $canCheckin); ?>
                                     <?php endif; ?>
                                     <?php if ($canEdit || $canEditOwn) : ?>
-                                    <a href="<?php echo Route::_('index.php?option=com__bones&task=com_bone.edit&id=' . $item->id); ?>" title="<?php echo Text::_('JACTION_EDIT'); ?> <?php echo $this->escape($item->title); ?>">
+                                    <a href="<?php echo Route::_('index.php?option=com__bones&task=_bone.edit&id=' . $item->id); ?>" title="<?php echo Text::_('JACTION_EDIT'); ?> <?php echo $this->escape($item->title); ?>">
                                         <?php echo $this->escape($item->title); ?>
                                     </a>
                                     <?php else : ?>

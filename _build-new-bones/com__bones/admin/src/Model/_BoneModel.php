@@ -84,7 +84,7 @@ class _BonesModel_Bone extends AdminModel
     protected function loadFormData()
     {
         // Check the session for previously entered form data.
-        $data = JFactory::getApplication()->getUserState(
+        $data = Factory::getApplication()->getUserState(
             'com__bones.edit._bone.data',
             array()
         );
@@ -137,8 +137,8 @@ class _BonesModel_Bone extends AdminModel
      */
     protected function prepareTable($table)
     {
-        $date = JFactory::getDate();
-        $user = JFactory::getUser();
+        $date = Factory::getDate();
+        $user = Factory::getUser();
 
         $table->title = htmlspecialchars_decode($table->title, ENT_QUOTES);
         $table->alias = JApplicationHelper::stringURLSafe($table->alias);
@@ -168,8 +168,8 @@ class _BonesModel_Bone extends AdminModel
     public function save($data)
     {
         $is_new = empty($data['id']);
-        $input  = JFactory::getApplication()->input;
-        $app    = JFactory::getApplication();
+        $input  = Factory::getApplication()->input;
+        $app    = Factory::getApplication();
 
         // Get parameters:
         $params = JComponentHelper::getParams(JRequest::getVar('option'));
@@ -191,7 +191,7 @@ class _BonesModel_Bone extends AdminModel
         // Alter the title for save as copy
         if ($app->input->get('task') == 'save2copy')
         {
-            list($title, $alias) = $this->generateNewTitle($data['alias'], $data['title']);
+            list($title, $alias) = $this->generateNewTitle(false, $data['alias'], $data['title']);
             $data['title']    = $title;
             $data['alias']    = $alias;
             $data['state']    = 0;
@@ -201,7 +201,7 @@ class _BonesModel_Bone extends AdminModel
         // Taken from com_content/models/article.php
         if (in_array($input->get('task'), array('apply', 'save', 'save2new'))) {
             if (empty($data['alias'])) {
-                if (JFactory::getConfig()->get('unicodeslugs') == 1) {
+                if (Factory::getConfig()->get('unicodeslugs') == 1) {
                     $data['alias'] = JFilterOutput::stringURLUnicodeSlug($data['title']);
                 } else {
                     $data['alias'] = JFilterOutput::stringURLSafe($data['title']);
@@ -213,11 +213,11 @@ class _BonesModel_Bone extends AdminModel
                     $msg = JText::_('COM_CONTENT_SAVE_WARNING');
                 }
 
-                list($title, $alias) = $this->generateNewTitle($data['alias'], $data['title']);
+                list($title, $alias) = $this->generateNewTitle(false, $data['alias'], $data['title']);
                 $data['alias'] = $alias;
 
                 if (isset($msg)) {
-                    JFactory::getApplication()->enqueueMessage($msg, 'warning');
+                    Factory::getApplication()->enqueueMessage($msg, 'warning');
                 }
             }
         }
@@ -228,12 +228,13 @@ class _BonesModel_Bone extends AdminModel
     /**
      * Method to change the title & alias.
      *
-     * @param   string   $alias        The alias.
-     * @param   string   $name         The title.
-     *
-     * @return  array  Contains the modified title and alias.
-     */
-    protected function generateNewTitle($alias, $name)
+	 * @param   integer  $category_id  The id of the parent.
+	 * @param   string   $alias        The alias.
+	 * @param   string   $name         The title.
+	 *
+	 * @return  array  Contains the modified title and alias.
+	 */
+	protected function generateNewTitle($category_id, $alias, $name)
     {
         // Alter the title & alias
         $table = $this->getTable();
@@ -296,7 +297,7 @@ class _BonesModel_Bone extends AdminModel
      */
     /*private function _sendEmail($email_data)
     {
-            $app        = JFactory::getApplication();
+            $app        = Factory::getApplication();
             $mailfrom   = $app->getCfg('mailfrom');
             $fromname   = $app->getCfg('fromname');
             $sitename   = $app->getCfg('sitename');
@@ -304,7 +305,7 @@ class _BonesModel_Bone extends AdminModel
 
             // Ref: JText::sprintf('LANG_STR', $var, ...);
 
-            $mail = JFactory::getMailer();
+            $mail = Factory::getMailer();
             $mail->addRecipient($email);
             $mail->addReplyTo($mailfrom);
             $mail->setSender(array($mailfrom, $fromname));

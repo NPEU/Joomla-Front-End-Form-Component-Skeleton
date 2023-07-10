@@ -38,7 +38,7 @@ class HtmlView extends BaseHtmlView {
         $this->item  = $this->get('Item');
 
         // What Access Permissions does this user have? What can (s)he do?
-		$this->canDo = ContentHelper::getActions('com__bone', '_bone', $this->item->id);
+		$this->canDo = ContentHelper::getActions('com__bones', '_bone', $this->item->id);
 
         // Check for errors.
         if (count($errors = $this->get('Errors'))) {
@@ -61,8 +61,8 @@ class HtmlView extends BaseHtmlView {
 
 		$isNew = ($this->item->id == 0);
 
-		ToolBarHelper::title($isNew ? Text::_('COM_BONES_MANAGER_BONE_NEW')
-		                            : Text::_('COM_BONES_MANAGER_BONE_EDIT'), '_bone');
+		ToolBarHelper::title($isNew ? Text::_('COM_BONES_MANAGER_RECORD_ADD')
+		                            : Text::_('COM_BONES_MANAGER_RECORD_EDIT'), '_bone');
 		// Build the actions for new and existing records.
 		if ($isNew)
 		{
