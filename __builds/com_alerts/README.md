@@ -1,3 +1,0 @@
-# Alerts
-
-com_alerts
