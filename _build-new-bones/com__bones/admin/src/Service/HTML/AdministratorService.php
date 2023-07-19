@@ -8,7 +8,7 @@
  */
 
 /**
- * Helper file for outputting html associated with the alerts administrator functionality
+ * Helper file for outputting html associated with the _bones administrator functionality
  */
 
 namespace {{OWNER}}\Component\_Bones\Administrator\Service\HTML;

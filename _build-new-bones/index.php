@@ -42,6 +42,7 @@ perform_renames(
     [
         '{{OWNER}}'         => $owner,
         '{{NAME}}'          => $name,
+        '{{SINGULAR}}'      => $singular,
         '{{DESCRIPTION}}'   => $description,
         '{{NAME-NO-SPACE}}' => str_replace(' ', '', $name),
         '_bones'            => str_replace(' ', '', $lc_name),

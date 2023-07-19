@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
 use Joomla\CMS\MVC\Controller\AdminController;
 
 
-class _BonessController extends AdminController
+class _BonesController extends AdminController
 {
 
     public function getModel($name = '_Bone', $prefix = 'Administrator', $config = array('ignore_request' => true))

@@ -37,8 +37,8 @@
     <files folder="site">
         <folder>forms</folder>
         <folder>language</folder>
-		<folder>src</folder>
-		<folder>tmpl</folder>
+        <folder>src</folder>
+        <folder>tmpl</folder>
     </files>
 
     <administration>

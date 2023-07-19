@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form
+    addruleprefix="{{OWNER}}\Component\_Bones\Administrator\Rule"
+    addfieldprefix="{{OWNER}}\Component\_Bones\Administrator\Field"
+>
+    <fieldset
+        name="main"
+        label="COM_BONES_FIELDSET_MAIN_LABEL"
+    >
+        <field
+            name="id"
+            type="hidden"
+        />
+        <field
+            name="title"
+            type="text"
+            size="30"
+            label="COM_BONES_TITLE_LABEL"
+            description="COM_BONES_TITLE_DESC"
+            filter="string"
+            required="true"
+            class=""
+            labelclass=""
+        />
+        <field
+            name="alias"
+            type="text"
+            size="30"
+            label="COM_BONES_ALIAS_LABEL"
+            description="COM_BONES_ALIAS_DESC"
+            filter="string"
+            required="true"
+            class=""
+            labelclass=""
+        />
+    </fieldset>
+</form>

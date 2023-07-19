@@ -20,21 +20,20 @@ use Joomla\CMS\Factory;
  */
 class DisplayController extends BaseController {
 
-    public function display($cachable = false, $urlparams = array()) {
+    public function display($cachable = false, $urlparams = []) {
         $viewName = $this->input->get('view', '');
-		$cachable = true;
-		if ($viewName == 'form' || Factory::getApplication()->getIdentity()->get('id'))
-		{
-			$cachable = false;
-		}
+        $cachable = true;
+        if ($viewName == 'form' || Factory::getApplication()->getIdentity()->get('id')) {
+            $cachable = false;
+        }
 
-		$safeurlparams = array(
-			'id'               => 'ARRAY',
-			'view'             => 'CMD',
-			'lang'             => 'CMD',
-		);
+        $safeurlparams = [
+            'id'   => 'INT', /* should be ARRAY if using `id:alias` style ids */
+            'view' => 'CMD',
+            'lang' => 'CMD',
+        ];
 
-		parent::display($cachable, $safeurlparams);
+        parent::display($cachable, $safeurlparams);
 
         return $this;
     }

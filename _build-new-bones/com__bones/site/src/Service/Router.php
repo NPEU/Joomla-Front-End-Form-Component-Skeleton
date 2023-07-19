@@ -20,13 +20,18 @@ use Joomla\CMS\Component\Router\RouterViewConfiguration;
 use Joomla\CMS\Component\Router\Rules\MenuRules;
 use Joomla\CMS\Component\Router\Rules\NomenuRules;
 use Joomla\CMS\Component\Router\Rules\StandardRules;
+/**/use Joomla\CMS\MVC\Factory\MVCFactoryAwareTrait;
 use Joomla\CMS\Menu\AbstractMenu;
 use Joomla\Database\DatabaseInterface;
 use Joomla\Database\ParameterType;
 
+use {{OWNER}}\Component\_Bones\Site\Service\CustomRouterRules;
+
+
 
 class Router extends RouterView
 {
+    use MVCFactoryAwareTrait;
 
     private $categoryFactory;
 
@@ -42,40 +47,74 @@ class Router extends RouterView
      * @param   CategoryFactoryInterface  $categoryFactory  The category object
      * @param   DatabaseInterface         $db               The database object
      */
-    public function __construct(SiteApplication $app, AbstractMenu $menu, CategoryFactoryInterface $categoryFactory, DatabaseInterface $db)
+    public function __construct(SiteApplication $app, AbstractMenu $menu)
     {
-        $this->categoryFactory = $categoryFactory;
-        $this->db              = $db;
+        //$this->categoryFactory = $categoryFactory;
+        //$this->db              = $db;
+        $this->db = \Joomla\CMS\Factory::getContainer()->get('DatabaseDriver');
+
+        //$this->attachRule(new CustomRouterRules($this));
 
         #$category = new RouterViewConfiguration('category');
         #$category->setKey('id')->setNestable();
         #$this->registerView($category);
-
         $_bones = new RouterViewConfiguration('_bones');
-        #$_bones->setKey('id')->setParent($category, 'catid');
+        $_bones->addLayout('other');
         $this->registerView($_bones);
 
-        $form = new RouterViewConfiguration('form');
-        $this->registerView($form);
+        $_bone = new RouterViewConfiguration('_bone');
+        $_bone->setKey('id')->setParent($_bones);
+        $this->registerView($_bone);
+
+        $edit = new RouterViewConfiguration('edit');
+        $edit->setParent($_bone);
+        $this->registerView($edit);
+
+        $alt = new RouterViewConfiguration('alt');
+        $alt->setParent($_bones);
+        $this->registerView($alt);
+
+        $other = new RouterViewConfiguration('other');
+        $other->setParent($_bones);
+        $this->registerView($other);
+
+        $add = new RouterViewConfiguration('add');
+        $add->setParent($_bones);
+        $this->registerView($add);
+
+        //$this->attachRule(new CustomRouterRules($this));
 
         parent::__construct($app, $menu);
 
         $this->attachRule(new MenuRules($this));
         $this->attachRule(new StandardRules($this));
         $this->attachRule(new NomenuRules($this));
+
+        $this->attachRule(new CustomRouterRules($this));
     }
 
     /**
-     * Method to get the id for a _bones item from the segment
+     * Method to get the id for an _bones item from the segment
      *
      * @param   string  $segment  Segment of the _bones to retrieve the ID for
      * @param   array   $query    The request that is parsed right now
      *
      * @return  mixed   The id of this item or false
      */
-    public function get_BonesId($segment, $query)
+    public function get_BoneId(string $segment, array $query): bool|int
     {
-        return (int) $segment;
+        // If the alias (segment) has been constructed to include the id as a
+        // prefixed part of it, (e.g. 123-thing-name) then we can use this:
+        //return (int) $segment;
+        // Otherwise we'll need to query the database:
+        $db = $this->db;
+        $dbQuery = $db->getQuery(true)
+            ->select($db->quoteName('id'))
+            ->from($db->quoteName('#___bones'))
+            ->where($db->quoteName('alias') . ' = :alias')
+            ->bind(':alias', $segment);
+
+        return  $db->setQuery($dbQuery)->loadResult() ?: false;
     }
 
     /**
@@ -86,89 +125,138 @@ class Router extends RouterView
      *
      * @return  array|string  The segments of this item
      */
-    public function get_BonesSegment($id, $query)
+    public function get_BoneSegment(int $id, array $query): array
     {
-        if (!strpos($id, ':')) {
-            $id      = (int) $id;
-            $dbquery = $this->db->getQuery(true);
-            $dbquery->select($this->db->quoteName('alias'))
-                ->from($this->db->quoteName('#___bones'))
-                ->where($this->db->quoteName('id') . ' = :id')
-                ->bind(':id', $id, ParameterType::INTEGER);
-            $this->db->setQuery($dbquery);
+        #echo 'get_BoneSegment<pre>'; var_dump($query); echo '</pre>';# exit;
 
-            $id .= ':' . $this->db->loadResult();
+        $db = $this->db;
+
+        $dbQuery = $db->getQuery(true)
+            ->select($db->quoteName('alias'))
+            ->from($db->quoteName('#___bones'))
+            ->where($db->quoteName('id') . ' = :id')
+            ->bind(':id', $id);
+
+            $segment = $db->setQuery($dbQuery)->loadResult() ?: null;
+
+        if ($segment === null) {
+            return [];
         }
-
-        return array((int) $id => $id);
+        return [$id => $segment];
     }
 
+
+
     /**
-     * Method to get the id for a category
+     * Method to get the id for edit view
      *
-     * @param   string  $segment  Segment to retrieve the ID for
+     * @param   string  $segment  Segment of the _bones to retrieve the ID for
      * @param   array   $query    The request that is parsed right now
      *
      * @return  mixed   The id of this item or false
      */
-    /*public function getCategoryId($segment, $query)
+    public function getEditId(string $segment, array $query): bool|int
     {
-        if (isset($query['id'])) {
-            $category = $this->getCategories(['access' => false])->get($query['id']);
-
-            if ($category) {
-                foreach ($category->getChildren() as $child) {
-                    if ($child->id == (int) $segment) {
-                        return $child->id;
-                    }
-                }
-            }
-        }
-
-        return false;
-    }*/
+        #echo 'getEditIdsegemnt<pre>'; var_dump($query); echo '</pre>';# exit;
+        return true;
+    }
 
     /**
-     * Method to get the segment(s) for a category
+     * Method to get the segment(s) for edit view
      *
-     * @param   string  $id     ID of the category to retrieve the segments for
+     * @param   string  $id     ID of the _bone to retrieve the segments for
      * @param   array   $query  The request that is built right now
      *
      * @return  array|string  The segments of this item
-     */
-    /*public function getCategorySegment($id, $query)
-    {
-        $category = $this->getCategories(['access' => true])->get($id);
-
-        if ($category) {
-            $path = array_reverse($category->getPath(), true);
-            $path[0] = '1:root';
-
-            return $path;
-        }
-
-        return array();
-    }*/
-
-    /**
-     * Method to get categories instance
-     * The instance is stored in a cache to speed up subsequent invocations, keyed by the
-     *   option of whether or not to take Access into consideration when analysing the categories
-     *
-     * @param   array  $options   The options for retrieving categories
-     *
-     * @return  CategoryInterface  The object containing categories
      *
      * @since   4.0.0
      */
-    /*private function getCategories(array $options = []): CategoryInterface
+    public function getEditSegment($id, $query)
     {
-        $key = serialize($options);
+        return 'edit';
+    }
 
-        if (!isset($this->categoryCache[$key])) {
-            $this->categoryCache[$key] = $this->categoryFactory->createCategory($options);
-        }
+    /**
+     * Method to get the id for add view
+     *
+     * @param   string  $segment  Segment of the _bones to retrieve the ID for
+     * @param   array   $query    The request that is parsed right now
+     *
+     * @return  mixed   The id of this item or false
+     */
+    public function getAddId(string $segment, array $query): bool|int
+    {
+        return true;
+    }
 
-        return $this->categoryCache[$key];
-    }*/
+    /**
+     * Method to get the segment(s) for add view
+     *
+     * @param   string  $id     ID of the _bone to retrieve the segments for
+     * @param   array   $query  The request that is built right now
+     *
+     * @return  array|string  The segments of this item
+     *
+     * @since   4.0.0
+     */
+    public function getAddSegment($id, $query)
+    {
+        return 'add';
+    }
+
+    /**
+     * Method to get the id for alt view
+     *
+     * @param   string  $segment  Segment of the _bones to retrieve the ID for
+     * @param   array   $query    The request that is parsed right now
+     *
+     * @return  mixed   The id of this item or false
+     */
+    public function getAltId(string $segment, array $query): bool|int
+    {
+        return true;
+    }
+
+    /**
+     * Method to get the segment(s) for alt view
+     *
+     * @param   string  $id     ID of the _bone to retrieve the segments for
+     * @param   array   $query  The request that is built right now
+     *
+     * @return  array|string  The segments of this item
+     *
+     * @since   4.0.0
+     */
+    public function getAltSegment($id, $query)
+    {
+        return 'alt';
+    }
+
+    /**
+     * Method to get the id for alt view
+     *
+     * @param   string  $segment  Segment of the _bones to retrieve the ID for
+     * @param   array   $query    The request that is parsed right now
+     *
+     * @return  mixed   The id of this item or false
+     */
+    public function geOtherId(string $segment, array $query): bool|int
+    {
+        return true;
+    }
+
+    /**
+     * Method to get the segment(s) for alt view
+     *
+     * @param   string  $id     ID of the _bone to retrieve the segments for
+     * @param   array   $query  The request that is built right now
+     *
+     * @return  array|string  The segments of this item
+     *
+     * @since   4.0.0
+     */
+    public function getOtherSegment($id, $query)
+    {
+        return 'other';
+    }
 }

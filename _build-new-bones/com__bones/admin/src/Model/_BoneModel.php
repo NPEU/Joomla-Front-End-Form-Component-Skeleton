@@ -12,12 +12,26 @@ namespace {{OWNER}}\Component\_Bones\Administrator\Model;
 defined('_JEXEC') or die;
 
 
-use Joomla\String\StringHelper;
+use Joomla\CMS\MVC\Model\AdminModel;
+use Joomla\CMS\Application\ApplicationHelper;
+#use Joomla\String\StringHelper;
+use Joomla\CMS\Factory;
+#use Joomla\Registry\Registry;
+#use Joomla\CMS\Form\Form;
+#use Joomla\Component\Categories\Administrator\Helper\CategoriesHelper;
+#use Joomla\CMS\Language\Associations;
+#use Joomla\CMS\Language\LanguageHelper;
+use Joomla\CMS\Language\Text;
+#use Joomla\CMS\Versioning\VersionableModelTrait;
+#use Joomla\CMS\Helper\TagsHelper;
+#use Joomla\CMS\UCM\UCMType;
+
+
 
 /**
- * _Bones _Bone Model
+ * _Bone Model
  */
-class _BonesModel_Bone extends AdminModel
+class _BoneModel extends AdminModel
 {
     /**
      * Method to get a table object, load it if necessary.
@@ -26,12 +40,12 @@ class _BonesModel_Bone extends AdminModel
      * @param   string  $prefix  The class prefix. Optional.
      * @param   array   $config  Configuration array for model. Optional.
      *
-     * @return  JTable  A JTable object
+     * @return  \Joomla\CMS\Table\Table  A \Joomla\CMS\Table\Table object
      */
-    public function getTable($type = '_Bones', $prefix = '_BonesTable', $config = array())
+    /*public function getTable($type = '_Bones', $prefix = '_BonesTable', $config = array())
     {
-        return JTable::getInstance($type, $prefix, $config);
-    }
+        return \Joomla\CMS\Table\Table::getInstance($type, $prefix, $config);
+    }*/
 
     /**
      * Method to get the record form.
@@ -53,14 +67,12 @@ class _BonesModel_Bone extends AdminModel
             )
         );
 
-        if (empty($form))
-        {
+        if (empty($form)) {
             return false;
         }
 
         // Modify the form based on access controls.
-        if (!$this->canEditState((object) $data))
-        {
+        if (!$this->canEditState((object) $data)) {
             // Disable fields for display.
             $form->setFieldAttribute('state', 'disabled', 'true');
             $form->setFieldAttribute('publish_up', 'disabled', 'true');
@@ -105,8 +117,7 @@ class _BonesModel_Bone extends AdminModel
      */
     /*public function getItem($pk = null)
     {
-        if ($item = parent::getItem($pk))
-        {
+        if ($item = parent::getItem($pk)) {
             // Convert the metadata field to an array.
             $registry = new Registry;
             $registry->loadString($item->metadata);
@@ -117,8 +128,7 @@ class _BonesModel_Bone extends AdminModel
             $registry->loadString($item->images);
             $item->images = $registry->toArray();
 
-            if (!empty($item->id))
-            {
+            if (!empty($item->id)) {
                 $item->tags = new JHelperTags;
                 $item->tags->getTagIds($item->id, 'com_weblinks.weblink');
                 $item->metadata['tags'] = $item->tags;
@@ -128,34 +138,58 @@ class _BonesModel_Bone extends AdminModel
         return $item;
     }*/
 
+
+
     /**
      * Prepare and sanitise the table data prior to saving.
      *
-     * @param   JTable  $table  A reference to a JTable object.
+     * @param   \Joomla\CMS\Table\Table  $table  A reference to a \Joomla\CMS\Table\Table object.
      *
      * @return  void
      */
     protected function prepareTable($table)
     {
         $date = Factory::getDate();
-        $user = Factory::getUser();
+        $user = Factory::getApplication()->getIdentity();
 
         $table->title = htmlspecialchars_decode($table->title, ENT_QUOTES);
-        $table->alias = JApplicationHelper::stringURLSafe($table->alias);
+        $table->alias = ApplicationHelper::stringURLSafe($table->alias);
 
-        if (empty($table->alias))
-        {
-            $table->alias = JApplicationHelper::stringURLSafe($table->title);
+        if (empty($table->alias)) {
+            $table->alias = ApplicationHelper::stringURLSafe($table->title);
         }
 
         $table->modified    = $date->toSql();
         $table->modified_by = $user->id;
 
-        if (empty($table->id))
-        {
+        if (empty($table->id)) {
             $table->created    = $date->toSql();
             $table->created_by = $user->id;
         }
+
+        /*if (empty($table->id)) {
+            // Set the values
+
+            // Set ordering to the last item if not set
+            if (empty($table->ordering)) {
+                $db    = $this->getDbo();
+                $query = $db->getQuery(true)
+                    ->select('MAX(ordering)')
+                    ->from($db->quoteName('#__weblinks'));
+
+                $db->setQuery($query);
+                $max = $db->loadResult();
+
+                $table->ordering = $max + 1;
+            } else {
+                // Set the values
+                $table->modified    = $date->toSql();
+                $table->modified_by = $user->id;
+            }
+        }
+
+        // Increment the weblink version number.
+        $table->version++;*/
     }
 
     /**
@@ -168,11 +202,13 @@ class _BonesModel_Bone extends AdminModel
     public function save($data)
     {
         $is_new = empty($data['id']);
-        $input  = Factory::getApplication()->input;
         $app    = Factory::getApplication();
+        $input  = $app->input;
+
 
         // Get parameters:
-        $params = JComponentHelper::getParams(JRequest::getVar('option'));
+        #$params = \Joomla\CMS\Component\ComponentHelper::getParams(JRequest::getVar('option'));
+        $params = \Joomla\CMS\Component\ComponentHelper::getParams($input->get('option'));
 
         // For reference if needed:
         // By default we're only looking for and acting upon the 'email admins' setting.
@@ -189,8 +225,7 @@ class _BonesModel_Bone extends AdminModel
         }*/
 
         // Alter the title for save as copy
-        if ($app->input->get('task') == 'save2copy')
-        {
+        if ($app->input->get('task') == 'save2copy') {
             list($title, $alias) = $this->generateNewTitle(false, $data['alias'], $data['title']);
             $data['title']    = $title;
             $data['alias']    = $alias;
@@ -202,15 +237,15 @@ class _BonesModel_Bone extends AdminModel
         if (in_array($input->get('task'), array('apply', 'save', 'save2new'))) {
             if (empty($data['alias'])) {
                 if (Factory::getConfig()->get('unicodeslugs') == 1) {
-                    $data['alias'] = JFilterOutput::stringURLUnicodeSlug($data['title']);
+                    $data['alias'] = \Joomla\CMS\Filter\OutputFilter::stringURLUnicodeSlug($data['title']);
                 } else {
-                    $data['alias'] = JFilterOutput::stringURLSafe($data['title']);
+                    $data['alias'] = \Joomla\CMS\Filter\OutputFilter::stringURLSafe($data['title']);
                 }
 
-                $table = JTable::getInstance('_Bones', '_BonesTable');
+                $table = $this->getMVCFactory()->createTable('_Bone', 'Administrator');
 
                 if ($table->load(array('alias' => $data['alias']))) {
-                    $msg = JText::_('COM_CONTENT_SAVE_WARNING');
+                    $msg = \Joomla\CMSanguage\Text::_('COM_CONTENT_SAVE_WARNING');
                 }
 
                 list($title, $alias) = $this->generateNewTitle(false, $data['alias'], $data['title']);
@@ -228,25 +263,23 @@ class _BonesModel_Bone extends AdminModel
     /**
      * Method to change the title & alias.
      *
-	 * @param   integer  $category_id  The id of the parent.
-	 * @param   string   $alias        The alias.
-	 * @param   string   $name         The title.
-	 *
-	 * @return  array  Contains the modified title and alias.
-	 */
-	protected function generateNewTitle($category_id, $alias, $name)
+     * @param   integer  $category_id  The id of the parent.
+     * @param   string   $alias        The alias.
+     * @param   string   $name         The title.
+     *
+     * @return  array  Contains the modified title and alias.
+     */
+    protected function generateNewTitle($category_id, $alias, $name)
     {
         // Alter the title & alias
         $table = $this->getTable();
 
-        while ($table->load(array('alias' => $alias)))
-        {
-            if ($name == $table->title)
-            {
-                $name = JString::increment($name);
+        while ($table->load(array('alias' => $alias))) {
+            if ($name == $table->title) {
+                $name = \Joomla\String\StringHelper::increment($name);
             }
 
-            $alias = JString::increment($alias, 'dash');
+            $alias = \Joomla\String\StringHelper::increment($alias, 'dash');
         }
 
         return array($name, $alias);
@@ -301,16 +334,16 @@ class _BonesModel_Bone extends AdminModel
             $mailfrom   = $app->getCfg('mailfrom');
             $fromname   = $app->getCfg('fromname');
             $sitename   = $app->getCfg('sitename');
-            $email      = JStringPunycode::emailToPunycode($email_data['email']);
+            $email      = \Joomla\String\StringHelperPunycode::emailToPunycode($email_data['email']);
 
-            // Ref: JText::sprintf('LANG_STR', $var, ...);
+            // Ref: Text::sprintf('LANG_STR', $var, ...);
 
             $mail = Factory::getMailer();
             $mail->addRecipient($email);
             $mail->addReplyTo($mailfrom);
             $mail->setSender(array($mailfrom, $fromname));
-            $mail->setSubject(JText::_('COM_ALERTS_EMAIL_ADMINS_SUBJECT'));
-            $mail->setBody(JText::_('COM_ALERTS_EMAIL_ADMINS_BODY'));
+            $mail->setSubject(Text::_('COM_BONES_EMAIL_ADMINS_SUBJECT'));
+            $mail->setBody(Text::_('COM_BONES_EMAIL_ADMINS_BODY'));
             $sent = $mail->Send();
 
             return $sent;

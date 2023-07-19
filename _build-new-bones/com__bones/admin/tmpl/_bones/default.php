@@ -29,18 +29,18 @@ $listDirn      = $this->escape($this->state->get('list.direction'));
 ?>
 <form action="<?php echo Route::_('index.php?option=com__bones&view=_bones'); ?>" method="post" id="adminForm" name="adminForm">
     <div class="row">
-		<div class="col-md-12">
-			<div id="j-main-container" class="j-main-container">
-				<?php
-				// Search tools bar
-				echo LayoutHelper::render('joomla.searchtools.default', ['view' => $this]);
-				?>
-				<?php if (empty($this->items)) : ?>
+        <div class="col-md-12">
+            <div id="j-main-container" class="j-main-container">
+                <?php
+                // Search tools bar
+                echo LayoutHelper::render('joomla.searchtools.default', ['view' => $this]);
+                ?>
+                <?php if (empty($this->items)) : ?>
                 <div class="alert alert-info">
                     <span class="icon-info-circle" aria-hidden="true"></span><span class="visually-hidden"><?php echo Text::_('INFO'); ?></span>
                     <?php echo Text::_('JGLOBAL_NO_MATCHING_RESULTS'); ?>
                 </div>
-				<?php else : ?>
+                <?php else : ?>
                 <table class="table" id="_bonesList">
                     <caption class="visually-hidden">
                         <?php echo Text::_('COM_BONES_TABLE_CAPTION'); ?>,
@@ -48,26 +48,26 @@ $listDirn      = $this->escape($this->state->get('list.direction'));
                         <span id="filteredBy"><?php echo Text::_('JGLOBAL_FILTERED_BY'); ?></span>
                     </caption>
                     <thead>
-						<tr>
-							<td class="w-1 text-center">
-								<?php echo HTMLHelper::_('grid.checkall'); ?>
-							</td>
+                        <tr>
+                            <td class="w-1 text-center">
+                                <?php echo HTMLHelper::_('grid.checkall'); ?>
+                            </td>
                             <th class="w-1 text-center">
                                 <?php echo Text::_('COM_BONES_NUM'); ?>
                             </th>
-							<th scope="col" style="min-width:85px" class="w-1 text-center">
-								<?php echo HTMLHelper::_('searchtools.sort', 'JSTATUS', 'a.state', $listDirn, $listOrder); ?>
-							</th>
-							<th scope="col">
-								<?php echo HTMLHelper::_('searchtools.sort', 'COM_BONES_RECORDS_TITLE', 'a.title', $listDirn, $listOrder); ?>
-							</th>
-							<th scope="col" class="w-10 d-none d-md-table-cell">
-								<?php echo HTMLHelper::_('searchtools.sort', 'COM_BONES_PUBLISHED', 'a.state', $listDirn, $listOrder); ?>
-							</th>
-							<th scope="col" class="w-5 d-none d-md-table-cell">
-								<?php echo HTMLHelper::_('searchtools.sort', 'COM_BONES_ID', 'a.id', $listDirn, $listOrder); ?>
-							</th>
-						</tr>
+                            <th scope="col" style="min-width:85px" class="w-1 text-center">
+                                <?php echo HTMLHelper::_('searchtools.sort', 'JSTATUS', 'a.state', $listDirn, $listOrder); ?>
+                            </th>
+                            <th scope="col">
+                                <?php echo HTMLHelper::_('searchtools.sort', 'COM_BONES_RECORDS_TITLE', 'a.title', $listDirn, $listOrder); ?>
+                            </th>
+                            <th scope="col" class="w-10 d-none d-md-table-cell">
+                                <?php echo HTMLHelper::_('searchtools.sort', 'COM_BONES_DATE_CREATED', 'a.created', $listDirn, $listOrder); ?>
+                            </th>
+                            <th scope="col" class="w-5 d-none d-md-table-cell">
+                                <?php echo HTMLHelper::_('searchtools.sort', 'COM_BONES_ID', 'a.id', $listDirn, $listOrder); ?>
+                            </th>
+                        </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($this->items as $i => $item) : ?>
@@ -83,10 +83,13 @@ $listDirn      = $this->escape($this->state->get('list.direction'));
                             <td>
                                 <?php echo $this->pagination->getRowOffset($i); ?>
                             </td>
+                            <td class="text-center">
+                                <?php echo HTMLHelper::_('jgrid.published', $item->state, $i, '_bones.', $canChange, 'cb'); ?>
+                            </td>
                             <th scope="row" class="has-context">
                                 <div>
                                     <?php if ($item->checked_out) : ?>
-                                    <?php echo HTMLHelper::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'weblinks.', $canCheckin); ?>
+                                    <?php echo HTMLHelper::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, '_bones.', $canCheckin); ?>
                                     <?php endif; ?>
                                     <?php if ($canEdit || $canEditOwn) : ?>
                                     <a href="<?php echo Route::_('index.php?option=com__bones&task=_bone.edit&id=' . $item->id); ?>" title="<?php echo Text::_('JACTION_EDIT'); ?> <?php echo $this->escape($item->title); ?>">
@@ -101,7 +104,7 @@ $listDirn      = $this->escape($this->state->get('list.direction'));
                                 </div>
                             </th>
                             <td class="text-center">
-                                <?php echo HTMLHelper::_('jgrid.published', $item->state, $i, '_bones.', $canChange, 'cb'); ?>
+                                <?php echo $item->created; ?>
                             </td>
                             <td class="d-none d-md-table-cell">
                                 <?php echo $item->id; ?>
@@ -116,9 +119,9 @@ $listDirn      = $this->escape($this->state->get('list.direction'));
                 <?php echo $this->pagination->getListFooter(); ?>
 
                 <input type="hidden" name="task" value="">
-				<input type="hidden" name="boxchecked" value="0">
-				<?php echo HTMLHelper::_('form.token'); ?>
-			</div>
-		</div>
-	</div>
+                <input type="hidden" name="boxchecked" value="0">
+                <?php echo HTMLHelper::_('form.token'); ?>
+            </div>
+        </div>
+    </div>
 </form>

@@ -15,12 +15,12 @@ use Joomla\CMS\MVC\Controller\BaseController;
 
 
 /**
- * _Frecom Component Controller
+ * _Bones Component Controller
  */
 class DisplayController extends BaseController {
     protected $default_view = '_bones';
 
-    public function display($cachable = false, $urlparams = array()) {
+    public function display($cachable = false, $urlparams = []) {
         return parent::display($cachable, $urlparams);
     }
 }

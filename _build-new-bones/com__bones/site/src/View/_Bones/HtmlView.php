@@ -27,25 +27,61 @@ use Joomla\CMS\Language\Text;
 class HtmlView extends BaseHtmlView {
 
 
+    /**
+     * The page parameters
+     *
+     * @var    \Joomla\Registry\Registry|null
+     */
+    protected $params;
+
+    /**
+     * The item model state
+     *
+     * @var    \Joomla\Registry\Registry
+     */
+    protected $state;
+
+    // This allows alternate views to overide this and supply a different title:
+    protected function getTitle($title = '') {
+        return $title;
+    }
+
     public function display($template = null)
     {
         $app = Factory::getApplication();
 
+        $this->state  = $this->get('State');
+        $this->params = $this->state->get('params');
+        $this->items  = $this->get('Items');
+
 
         $user = $app->getIdentity();
         $user_is_root = $user->authorise('core.admin');
+        $this->user  = $user;
 
 
+        $this->state  = $this->get('State');
+        $this->params = $this->state->get('params');
 
-		$this->state  = $this->get('State');
-		$this->params = $this->state->get('params');
-
-
+        // We may not actually want to show the form at this point (though we could if we wanted to
+        // include the form AND the record on the same page - especially if it's displayed via a
+        // modal), but it's useful to have the form so we can retrieve language strings without
+        // having to manually reclare them, along with any other properties of the form that may be
+        // useful:
         $this->form = $this->get('Form');
+
+        // Load admin lang file for use in the form:
+        $app->getLanguage()->load('com__bones', JPATH_COMPONENT_ADMINISTRATOR);
+
 
         $uri    = Uri::getInstance();
         $menus  = $app->getMenu();
         $menu   = $menus->getActive();
+
+        $this->title = $this->getTitle($menu->title);
+        #echo '<pre>'; var_dump($this->title); echo '</pre>'; exit;
+        $this->menu_params = $menu->getParams();
+
 
         /*
         // We may not actually want to show the form at this point (though we could if we wanted to
@@ -63,35 +99,26 @@ class HtmlView extends BaseHtmlView {
         #echo '<pre>'; var_dump($form); echo '</pre>'; exit;
         */
 
-
-        // Get the parameters
-        //$this->com_params  = JComponentHelper::getParams('com__bones');
-        $this->menu_params = $menu->params;
+        // Add to breadcrumbs:
+        $pathway = $app->getPathway();
 
         $layout = $this->getLayout();
         if ($layout != 'default') {
-            $breadcrumb_title = $breadcrumb_title  = Text::_('COM_BONES_PAGE_TITLE_' . strtoupper($layout));
 
-            #echo '<pre>'; var_dump($breadcrumb_title); echo '</pre>'; exit;
-
-            $pathway = $app->getPathway();
-            $pathway->addItem($breadcrumb_title);
+            $page_title = Text::_('COM_BONES_PAGE_TITLE_' . strtoupper($layout));
+            $pathway->addItem($page_title);
+            $menu->title = $page_title;
         }
-
-
 
         // Check for errors.
         $errors = $this->get('Errors', false);
 
-		if (!empty($errors)) {
-			Log::add(implode('<br />', $errors), Log::WARNING, 'jerror');
+        if (!empty($errors)) {
+            Log::add(implode('<br />', $errors), Log::WARNING, 'jerror');
 
-			return false;
-		}
+            return false;
+        }
 
-        $this->items = $this->get('Items');
-        $this->user  = $user;
-        $this->title = $menu->title;
 
         // Call the parent display to display the layout file
         parent::display($template);
@@ -117,12 +144,12 @@ class HtmlView extends BaseHtmlView {
         $menu   = $menus->getActive();
         #echo '<pre>'; var_dump($menu); echo '</pre>'; exit;
         #echo '<pre>'; var_dump(JRoute::_($menu->link)); echo '</pre>'; exit;
-        #echo '<pre>'; var_dump(JURI::base()); echo '</pre>'; exit;
+        #echo '<pre>'; var_dump(URI::base()); echo '</pre>'; exit;
         #echo '<pre>'; var_dump($item->id); echo '</pre>'; exit;
         #echo '<pre>'; var_dump($user, $item); echo '</pre>'; exit;
         #echo '<pre>'; var_dump($user->id, $item->created_by); echo '</pre>'; exit;
 
-        $this->return_page = base64_encode(JURI::base() . $menu->route);
+        $this->return_page = base64_encode(URI::base() . $menu->route);
 
 
         $is_new = empty($item->id);
@@ -150,25 +177,6 @@ class HtmlView extends BaseHtmlView {
         }
 
 
-        // Add to breadcrumbs:
-        if ((!$breadcrumb_title = $item->title) && $is_new) {
-            $breadcrumb_title  = JText::_('COM_BONES_PAGE_TITLE_ADD_NEW');
-        }
-
-        #echo '<pre>'; var_dump($breadcrumb_title); echo '</pre>'; exit;
-
-        $app     = JFactory::getApplication();
-        $pathway = $app->getPathway();
-        $pathway->addItem($breadcrumb_title);
-
-        // Check for errors.
-        if (count($errors = $this->get('Errors'))) {
-            JLog::add(implode('<br />', $errors), JLog::WARNING, 'jerror');
-
-            return false;
-        }
-
-
         // Assign data to the view
         $this->item = $item;
         // Although we're not actually showing the form, it's useful to use it to be able to show
@@ -183,35 +191,35 @@ class HtmlView extends BaseHtmlView {
         /*
         $app = Factory::getApplication();
 
-		$this->item   = $this->get('Item');
-		$this->state  = $this->get('State');
-		$this->params = $this->state->get('params');
+        $this->item   = $this->get('Item');
+        $this->state  = $this->get('State');
+        $this->params = $this->state->get('params');
 
-		// Create a shortcut for $item.
-		$item = $this->item;
+        // Create a shortcut for $item.
+        $item = $this->item;
 
-		$item->slug = $item->alias ? ($item->id . ':' . $item->alias) : $item->id;
+        $item->slug = $item->alias ? ($item->id . ':' . $item->alias) : $item->id;
 
-		$temp         = $item->params;
-		$item->params = clone $app->getParams();
-		$item->params->merge($temp);
+        $temp         = $item->params;
+        $item->params = clone $app->getParams();
+        $item->params->merge($temp);
 
-		$offset = $this->state->get('list.offset');
+        $offset = $this->state->get('list.offset');
 
-		$app->triggerEvent('onContentPrepare', array('com_weblinks.weblink', &$item, &$item->params, $offset));
+        $app->triggerEvent('onContentPrepare', array('com_weblinks.weblink', &$item, &$item->params, $offset));
 
-		$item->event = new \stdClass;
+        $item->event = new \stdClass;
 
-		$results = $app->triggerEvent('onContentAfterTitle', array('com_weblinks.weblink', &$item, &$item->params, $offset));
-		$item->event->afterDisplayTitle = trim(implode("\n", $results));
+        $results = $app->triggerEvent('onContentAfterTitle', array('com_weblinks.weblink', &$item, &$item->params, $offset));
+        $item->event->afterDisplayTitle = trim(implode("\n", $results));
 
-		$results = $app->triggerEvent('onContentBeforeDisplay', array('com_weblinks.weblink', &$item, &$item->params, $offset));
-		$item->event->beforeDisplayContent = trim(implode("\n", $results));
+        $results = $app->triggerEvent('onContentBeforeDisplay', array('com_weblinks.weblink', &$item, &$item->params, $offset));
+        $item->event->beforeDisplayContent = trim(implode("\n", $results));
 
-		$results = $app->triggerEvent('onContentAfterDisplay', array('com_weblinks.weblink', &$item, &$item->params, $offset));
-		$item->event->afterDisplayContent = trim(implode("\n", $results));
+        $results = $app->triggerEvent('onContentAfterDisplay', array('com_weblinks.weblink', &$item, &$item->params, $offset));
+        $item->event->afterDisplayContent = trim(implode("\n", $results));
 
-		parent::display($tpl);
+        parent::display($tpl);
         */
 
 
@@ -222,16 +230,6 @@ class HtmlView extends BaseHtmlView {
 
         /*// Assign data to the view
         $this->msg = 'Get from API';
-
-        // Check for errors.
-        $errors = $this->get('Errors', false);
-
-		if (!empty($errors))
-        {
-			Log::add(implode('<br />', $errors), Log::WARNING, 'jerror');
-
-			return false;
-		}
         */
 
     }

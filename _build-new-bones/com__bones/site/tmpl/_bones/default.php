@@ -20,11 +20,16 @@ use Joomla\CMS\Router\Route;
 
 defined('_JEXEC') or die;
 
+$language = JFactory::getLanguage();
+$language->load('com__bones', JPATH_ADMINISTRATOR . '/components/com__bones');
+
 $table_id = '_bonesTable';
 
 // Get the user object.
 $user = Factory::getUser();
 
+$uri  = JUri::getInstance();
+#echo '<pre>'; echo $uri; echo '</pre>'; exit;
 // Check if user is allowed to add/edit based on tags permissions.
 $can_edit       = $user->authorise('core.edit', 'com__bones');
 $can_create     = $user->authorise('core.create', 'com__bones');
@@ -39,7 +44,7 @@ $can_edit_state = $user->authorise('core.edit.state', 'com__bones');
 
 <?php if ($can_create) : ?>
 <p>
-    <a href="<?php echo JRoute::_('index.php?option=com__bones&task=_bone.add'); ?>">Add new</a>
+    <a href="<?php echo Route::_('index.php?option=com__bones&view=add'); ?>"><?php echo Text::_('COM_BONES_RECORD_CREATING'); ?></a>
 </p>
 <?php endif; ?>
 
@@ -48,7 +53,7 @@ $can_edit_state = $user->authorise('core.edit.state', 'com__bones');
         <tr>
             <?php /*<th width="2%"><?php echo Text::_('COM_BONES_NUM'); ?></th>
             <th width="4%">
-                <?php echo JHtml::_('grid.checkall'); ?>
+                <?php echo HTMLHelper::_('grid.checkall'); ?>
             </th>*/ ?>
             <th width="50%">
                 <?php echo Text::_('COM_BONES_RECORDS_TITLE'); ?>
@@ -60,29 +65,34 @@ $can_edit_state = $user->authorise('core.edit.state', 'com__bones');
                 <?php echo Text::_('COM_BONES_RECORDS_ACTIONS'); ?>
             </th>
             <?php /*<th width="10%">
-                <?php echo JHtml::_('grid.sort', 'COM_BONES_PUBLISHED', 'published', $listDirn, $listOrder); ?>
+                <?php echo HTMLHelper::_('grid.sort', 'COM_BONES_PUBLISHED', 'published', $listDirn, $listOrder); ?>
             </th>
             <th width="4%">
-                <?php echo JHtml::_('grid.sort', 'COM_BONES_ID', 'id', $listDirn, $listOrder); ?>
+                <?php echo HTMLHelper::_('grid.sort', 'COM_BONES_ID', 'id', $listDirn, $listOrder); ?>
             </th>*/ ?>
         </tr>
     </thead>
     <tbody>
         <?php if (!empty($this->items)) : ?>
-            <?php foreach ($this->items as $i => $item) :
-                $view_link = Route::_('index.php?option=com__bones&task=_bone.view&id=' . $item->id);
-                $edit_link = Route::_('index.php?option=com__bones&task=_bone.edit&id=' . $item->id);
-                $is_own = false;
-                if ($this->user->authorise('core.edit.own', 'com__bones') && ($this->user->id == $item->created_by)) {
-                    $is_own = true;
-                }
-            ?>
+            <?php foreach ($this->items as $i => $item) : ?>
                 <tr>
                     <?php /*<td><?php echo $this->pagination->getitemOffset($i); ?></td>
                     <td>
-                        <?php echo JHtml::_('grid.id', $i, $item->id); ?>
+                        <?php echo HTMLHelper::_('grid.id', $i, $item->id); ?>
                     </td>*/ ?>
                     <td>
+                        <?php
+                        //$view_link ='test';
+                        $view_link = Route::_('index.php?option=com__bones&view=_bone&id=' . $item->id);
+                        //$edit_link = $uri . '?task=_bone.edit&view=_bone&id=' . $item->id;
+                        //$edit_link = 'index.php?option=com__bones&task=_bone.edit&view=_bone&id=' . $item->id;
+                        $edit_link = Route::_('index.php?option=com__bones&view=_bone&task=_bone.edit&id=' . $item->id);
+                        $is_own = false;
+                        if ($this->user->authorise('core.edit.own', 'com__bones') && ($this->user->id == $item->created_by)) {
+                            $is_own = true;
+                        }
+                        ?>
+                        <?php echo $view_link; ?><br>
                         <a href="<?php echo $view_link; ?>" title="<?php echo Text::_('COM_BONES_VIEW_RECORD'); ?>">
                             <?php echo $item->title; ?>
                         </a>
@@ -92,6 +102,7 @@ $can_edit_state = $user->authorise('core.edit.state', 'com__bones');
                     </td>
                     <td>
                         <?php if($is_own || $can_edit): ?>
+                        <?php echo $edit_link; ?><br>
                         <a href="<?php echo $edit_link; ?>" title="<?php echo Text::_('COM_BONES_EDIT_RECORD'); ?>">
                             <?php echo Text::_('COM_BONES_RECORDS_ACTION_EDIT'); ?>
                         </a>
@@ -100,7 +111,7 @@ $can_edit_state = $user->authorise('core.edit.state', 'com__bones');
                         <?php endif; ?>
                     </td>
                     <?php /*<td align="center">
-                        <?php echo JHtml::_('jgrid.published', $item->published, $i, '_bones.', true, 'cb'); ?>
+                        <?php echo HTMLHelper::_('jgrid.published', $item->state, $i, '_bones.', true, 'cb'); ?>
                     </td>
                     <td align="center">
                         <?php echo $item->id; ?>
@@ -112,5 +123,11 @@ $can_edit_state = $user->authorise('core.edit.state', 'com__bones');
 </table>
 
 <p>
-    <a href="<?php $altview = 'alt'; echo Route::_('index.php?option=com__bones&view=' . $altview); ?>">Sample alternative view</a>
+    <?php //$alt = 'alt'; ?>
+    <?php $alt = Route::_('index.php?option=com__bones&view=alt'); ?>
+    <?php echo $alt; ?> <a href="<?php echo $alt; ?>">Sample alternative view</a>
+</p>
+<p>
+    <?php $alt = Route::_('index.php?option=com__bones&layout=other'); ?>
+    <?php echo $alt; ?> <a href="<?php echo $alt; ?>">Sample alternative (other) template</a>
 </p>

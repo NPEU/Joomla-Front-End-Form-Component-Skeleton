@@ -7,12 +7,22 @@
  * @license     MIT License; see LICENSE.md
  */
 
+namespace {{OWNER}}\Component\_Bones\Administrator\Model;
+
 defined('_JEXEC') or die;
+
+
+use Joomla\CMS\Component\ComponentHelper;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Associations;
+use Joomla\CMS\MVC\Factory\MVCFactoryInterface;
+use Joomla\CMS\MVC\Model\ListModel;
+use Joomla\Database\ParameterType;
 
 /**
  * _Bones List Model
  */
-class _BonesModel_Bones extends JModelList
+class _BonesModel extends ListModel
 {
     /**
      * Constructor.
@@ -23,8 +33,7 @@ class _BonesModel_Bones extends JModelList
      */
     public function __construct($config = array())
     {
-        if (empty($config['filter_fields']))
-        {
+        if (empty($config['filter_fields'])) {
             $config['filter_fields'] = array(
                 'id', 'a.id',
                 'title', 'a.title',
@@ -65,7 +74,7 @@ class _BonesModel_Bones extends JModelList
         $this->setState('filter.published', $this->getUserStateFromRequest($this->context . '.filter.published', 'filter_published', '', 'string'));
 
         // Load the parameters.
-        $params = JComponentHelper::getParams('com__bones');
+        $params = ComponentHelper::getParams('com__bones');
         $this->setState('params', $params);
 
         // List state information.
@@ -100,14 +109,14 @@ class _BonesModel_Bones extends JModelList
     protected function getListQuery()
     {
         // Initialize variables.
-        $db    = JFactory::getDbo();
+        $db    = $this->getDbo();
         $query = $db->getQuery(true);
 
         // Select the required fields from the table.
         $query->select(
             $this->getState(
                 'list.select',
-                'a.id, a.title, a.alias, a.catid, a.owner_user_id, a.checked_out, a.checked_out_time, a.created_by, a.state'
+                'a.id, a.title, a.alias, a.catid, a.owner_user_id, a.checked_out, a.checked_out_time, a.created, a.created_by, a.state'
             )
         );
         $query->from($db->quoteName('#___bones', 'a'));
@@ -126,8 +135,7 @@ class _BonesModel_Bones extends JModelList
         // Filter: like / search
         $search = $this->getState('filter.search');
 
-        if (!empty($search))
-        {
+        if (!empty($search)) {
             $like = $db->quote('%' . $search . '%');
             $query->where('a.title LIKE ' . $like);
             $query->where('a.alias LIKE ' . $like);
@@ -136,12 +144,9 @@ class _BonesModel_Bones extends JModelList
         // Filter by published state
         $published = $this->getState('filter.published');
 
-        if (is_numeric($published))
-        {
+        if (is_numeric($published)) {
             $query->where($db->quoteName('a.state') . ' = ' . (int) $published);
-        }
-        elseif ($published === '')
-        {
+        } elseif ($published === '') {
             $query->where('(' . $db->quoteName('a.state') . ' IN (0, 1))');
         }
 
