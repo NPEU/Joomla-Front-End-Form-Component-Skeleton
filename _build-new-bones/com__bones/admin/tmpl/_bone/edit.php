@@ -78,11 +78,17 @@ $field_types_no_label = [
                 <div class="control-group">
                     <?php if (!in_array($field->type, $field_types_no_label)): ?>
                     <div class="control-label">
-                        <?php echo JText::_($field->label); ?>
+                        <?php echo Text::_($field->label); ?>
                     </div>
                     <?php endif; ?>
                     <div class="controls"<?php if (in_array($field->type, $field_types_full_width)): ?> style="flex-basis:100%;"<?php endif; ?>>
                         <?php echo $field->input; ?>
+
+                        <?php if ($field->description != ''): ?>
+                        <div id="<?php echo $field->id; ?>-desc">
+                            <small class="form-text"><?php echo Text::_($field->description); ?></small>
+                        </div>
+                        <?php endif; ?>
                     </div>
                 </div>
 
