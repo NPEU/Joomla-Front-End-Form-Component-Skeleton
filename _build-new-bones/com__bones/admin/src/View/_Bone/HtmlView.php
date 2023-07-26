@@ -103,8 +103,9 @@ class HtmlView extends BaseHtmlView {
         //HtmlHelper::_('behavior.framework');
         //HtmlHelper::_('behavior.formvalidator');
 
-        $isNew = ($this->item->id < 1);
-        $this->document->setTitle($isNew ? Text::_('COM_BONES_BONE_CREATING') :
-                Text::_('COM_BONES_BONE_EDITING'));
+        $this->document->setTitle($isNew
+          ? Text::_('COM_BONES_RECORD_CREATING')
+          : Text::_('COM_BONES_RECORD_EDITING')
+        );
     }
 }
