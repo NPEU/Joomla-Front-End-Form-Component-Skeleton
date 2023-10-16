@@ -11,14 +11,14 @@ namespace {{OWNER}}\Component\_Bones\Site\Model;
 
 defined('_JEXEC') or die;
 
-use Joomla\CMS\Factory;
-#use Joomla\CMS\MVC\Model\ItemModel;
-use Joomla\CMS\Language\Text;
-use Joomla\Registry\Registry;
 #use {{OWNER}}\Component\_Bones\Site\Helper\_BoneHelper;
-use Joomla\CMS\Router\Route;
-use Joomla\CMS\Language\Multilanguage;
+#use Joomla\CMS\MVC\Model\ItemModel;
 use Joomla\CMS\Cache\CacheControllerFactoryInterface;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Multilanguage;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Router\Route;
+use Joomla\Registry\Registry;
 
 /**
  * _Bone Component Model

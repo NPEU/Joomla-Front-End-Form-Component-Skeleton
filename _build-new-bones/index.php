@@ -18,8 +18,8 @@ $uc_name            = strtoupper($name);
 $uc_name_singular   = strtoupper($singular);
 $com_lc_name        = 'com_' . str_replace(' ', '', $lc_name);
 $com_uc_name        = strtoupper(str_replace(' ', '', $com_lc_name));
-$classname          = str_replace(' ', '', $name);
-$classname_singular = str_replace(' ', '', $singular);
+$classname          = ucfirst(strtolower(str_replace(' ', '', $name)));
+$classname_singular = ucfirst(strtolower(str_replace(' ', '', $singular)));
 $description        = $_GET['description'];
 
 echo 'Classname: ' . $classname . "\n";

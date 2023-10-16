@@ -37,7 +37,7 @@ function copy_dir($source = '', $destination = '')
         closedir($handle);
         return $num;
     } else {
-        trigger_error('Unable to open directory: ' . $directory . '.', E_USER_ERROR);
+        trigger_error('Unable to open directory: ' . $source . '.', E_USER_ERROR);
         return false;
     }
 }
@@ -81,7 +81,7 @@ function perform_renames($source = '', $file_renames = [], $content_rename = [])
         closedir($handle);
         return $num;
     } else {
-        trigger_error('Unable to open directory: ' . $directory . '.', E_USER_ERROR);
+        trigger_error('Unable to open directory: ' . $source . '.', E_USER_ERROR);
         return false;
     }
 }

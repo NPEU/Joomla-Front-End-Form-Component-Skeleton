@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form
-    addrulepath="/administrator/components/com__bones/models/rules"
-    addfieldpath="/administrator/components/com__bones/models/fields"
+    addruleprefix="{{OWNER}}\Component\_Bones\Administrator\Rule"
+    addfieldprefix="{{OWNER}}\Component\_Bones\Administrator\Field"
 >
     <fieldset
         name="main"

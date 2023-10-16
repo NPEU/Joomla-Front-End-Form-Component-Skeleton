@@ -11,15 +11,15 @@ namespace {{OWNER}}\Component\_Bones\Site\View\_Bones;
 
 defined('_JEXEC') or die;
 
-use Joomla\CMS\Factory;
-use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
-use Joomla\CMS\Log\Log;
-use Joomla\CMS\Uri\Uri;
-use Joomla\CMS\Language\Text;
 #use Joomla\CMS\Helper\TagsHelper;
-#use Joomla\CMS\Router\Route;
 #use Joomla\CMS\Plugin\PluginHelper;
+#use Joomla\CMS\Router\Route;
 #use Joomla\Event\Event;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Log\Log;
+use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
+use Joomla\CMS\Uri\Uri;
 
 /**
  * _Bones Component HTML View
@@ -59,9 +59,6 @@ class HtmlView extends BaseHtmlView {
         $user_is_root = $user->authorise('core.admin');
         $this->user  = $user;
 
-
-        $this->state  = $this->get('State');
-        $this->params = $this->state->get('params');
 
         // We may not actually want to show the form at this point (though we could if we wanted to
         // include the form AND the record on the same page - especially if it's displayed via a

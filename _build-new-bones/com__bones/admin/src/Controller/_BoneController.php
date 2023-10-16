@@ -13,8 +13,8 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\Controller\FormController;
-use Joomla\CMS\Versioning\VersionableControllerTrait;
 use Joomla\CMS\Uri\Uri;
+use Joomla\CMS\Versioning\VersionableControllerTrait;
 
 
 class _BoneController extends FormController

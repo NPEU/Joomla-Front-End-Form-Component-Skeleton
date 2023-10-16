@@ -12,15 +12,15 @@ namespace {{OWNER}}\Component\_Bones\Administrator\View\_Bone;
 defined('_JEXEC') or die;
 
 
-use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
-use Joomla\CMS\MVC\View\GenericDataException;
-use Joomla\CMS\Language\Text;
+use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Helper\ContentHelper;
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\MVC\View\GenericDataException;
+use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 use Joomla\CMS\Toolbar\Toolbar;
 use Joomla\CMS\Toolbar\ToolbarHelper;
-use Joomla\CMS\HTML\HTMLHelper;
-use Joomla\CMS\Helper\ContentHelper;
-use Joomla\CMS\Component\ComponentHelper;
 
 
 class HtmlView extends BaseHtmlView {
@@ -103,6 +103,7 @@ class HtmlView extends BaseHtmlView {
         //HtmlHelper::_('behavior.framework');
         //HtmlHelper::_('behavior.formvalidator');
 
+        $isNew = ($this->item->id < 1);
         $this->document->setTitle($isNew
           ? Text::_('COM_BONES_RECORD_CREATING')
           : Text::_('COM_BONES_RECORD_EDITING')

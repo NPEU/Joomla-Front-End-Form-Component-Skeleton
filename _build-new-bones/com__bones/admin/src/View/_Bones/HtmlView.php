@@ -12,15 +12,15 @@ namespace {{OWNER}}\Component\_Bones\Administrator\View\_Bones;
 defined('_JEXEC') or die;
 
 
-use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
-use Joomla\CMS\MVC\View\GenericDataException;
-use Joomla\CMS\Toolbar\Toolbar;
-use Joomla\CMS\Toolbar\ToolbarHelper;
-use Joomla\CMS\Toolbar\ToolbarFactoryInterface;
-use Joomla\CMS\Language\Text;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Helper\ContentHelper;
+use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\FileLayout;
+use Joomla\CMS\MVC\View\GenericDataException;
+use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
+use Joomla\CMS\Toolbar\Toolbar;
+use Joomla\CMS\Toolbar\ToolbarFactoryInterface;
+use Joomla\CMS\Toolbar\ToolbarHelper;
 
 class HtmlView extends BaseHtmlView {
     /**
@@ -78,7 +78,7 @@ class HtmlView extends BaseHtmlView {
 
         // Get data from the model
         $this->items         = $this->get('Items');
-        $this->pagination     = $this->get('Pagination');
+        $this->pagination    = $this->get('Pagination');
         $this->state         = $this->get('State');
         $this->filterForm    = $this->get('FilterForm');
         $this->activeFilters = $this->get('ActiveFilters');
@@ -87,7 +87,7 @@ class HtmlView extends BaseHtmlView {
         $this->canDo = ContentHelper::getActions('com__bones');
 
         $errors = $this->get('Errors');
-        if (count($errors = $this->get('Errors'))) {
+        if (is_array($errors) && count($errors)) {
             throw new GenericDataException(implode("\n", $errors), 500);
         }
 
@@ -176,7 +176,7 @@ class HtmlView extends BaseHtmlView {
 
         if ($this->canDo->get('core.admin')) {
             ToolBarHelper::divider();
-            ToolBarHelper::preferences('com__bone');
+            ToolBarHelper::preferences('com__bones');
         }
     }
 

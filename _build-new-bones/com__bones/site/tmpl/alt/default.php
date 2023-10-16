@@ -7,8 +7,8 @@
  * @license     MIT License; see LICENSE.md
  */
 
-use Joomla\CMS\Language\Text;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
 
 defined('_JEXEC') or die;

@@ -12,26 +12,26 @@ namespace {{OWNER}}\Component\_Bones\Administrator\Extension;
 defined('JPATH_PLATFORM') or die;
 
 
+#use {{OWNER}}\Component\_Bones\Site\Service\TraditionalRouter;
 #use Joomla\CMS\Association\AssociationServiceInterface;
 #use Joomla\CMS\Association\AssociationServiceTrait;
 #use Joomla\CMS\Categories\CategoryServiceInterface;
 #use Joomla\CMS\Categories\CategoryServiceTrait;
+#use Joomla\CMS\Fields\FieldsServiceInterface;
+use {{OWNER}}\Component\_Bones\Administrator\Service\HTML\AdministratorService;
+use Joomla\CMS\Application\CMSApplicationInterface;
+use Joomla\CMS\Component\Router\RouterInterface;
+use Joomla\CMS\Component\Router\RouterServiceInterface;
+use Joomla\CMS\Component\Router\RouterServiceTrait;
 use Joomla\CMS\Extension\BootableExtensionInterface;
 use Joomla\CMS\Extension\MVCComponent;
-use Joomla\CMS\HTML\HTMLRegistryAwareTrait;
-use Psr\Container\ContainerInterface;
-use Joomla\CMS\Helper\ContentHelper;
-use Joomla\CMS\Component\Router\RouterServiceTrait;
-use Joomla\CMS\Component\Router\RouterServiceInterface;
-#use {{OWNER}}\Component\_Bones\Site\Service\TraditionalRouter;
-use Joomla\CMS\Component\Router\RouterInterface;
-use Joomla\CMS\Application\CMSApplicationInterface;
-use Joomla\CMS\Menu\AbstractMenu;
-use {{OWNER}}\Component\_Bones\Administrator\Service\HTML\AdministratorService;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Helper\ContentHelper;
+use Joomla\CMS\HTML\HTMLRegistryAwareTrait;
 use Joomla\CMS\Language\Text;
-#use Joomla\CMS\Fields\FieldsServiceInterface;
+use Joomla\CMS\Menu\AbstractMenu;
 use Joomla\Database\DatabaseAwareTrait;
+use Psr\Container\ContainerInterface;
 
 class _BonesComponent extends MVCComponent implements
     RouterServiceInterface, BootableExtensionInterface

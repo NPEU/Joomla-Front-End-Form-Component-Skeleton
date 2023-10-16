@@ -11,15 +11,15 @@ namespace {{OWNER}}\Component\_Bones\Site\View\Alt;
 
 defined('_JEXEC') or die;
 
-use Joomla\CMS\Factory;
-use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
-use Joomla\CMS\Log\Log;
-use Joomla\CMS\Uri\Uri;
-use Joomla\CMS\Language\Text;
 #use Joomla\CMS\Helper\TagsHelper;
-use Joomla\CMS\Router\Route;
 #use Joomla\CMS\Plugin\PluginHelper;
 #use Joomla\Event\Event;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Log\Log;
+use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
+use Joomla\CMS\Router\Route;
+use Joomla\CMS\Uri\Uri;
 
 use {{OWNER}}\Component\_Bones\Site\View;
 

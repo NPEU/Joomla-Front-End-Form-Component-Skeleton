@@ -12,19 +12,19 @@ namespace {{OWNER}}\Component\_Bones\Administrator\Model;
 defined('_JEXEC') or die;
 
 
-use Joomla\CMS\MVC\Model\AdminModel;
-use Joomla\CMS\Application\ApplicationHelper;
-#use Joomla\String\StringHelper;
-use Joomla\CMS\Factory;
-#use Joomla\Registry\Registry;
 #use Joomla\CMS\Form\Form;
-#use Joomla\Component\Categories\Administrator\Helper\CategoriesHelper;
+#use Joomla\CMS\Helper\TagsHelper;
 #use Joomla\CMS\Language\Associations;
 #use Joomla\CMS\Language\LanguageHelper;
-use Joomla\CMS\Language\Text;
-#use Joomla\CMS\Versioning\VersionableModelTrait;
-#use Joomla\CMS\Helper\TagsHelper;
 #use Joomla\CMS\UCM\UCMType;
+#use Joomla\CMS\Versioning\VersionableModelTrait;
+#use Joomla\Component\Categories\Administrator\Helper\CategoriesHelper;
+#use Joomla\Registry\Registry;
+#use Joomla\String\StringHelper;
+use Joomla\CMS\Application\ApplicationHelper;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\MVC\Model\AdminModel;
 
 
 
