@@ -120,8 +120,6 @@ class HtmlView extends BaseHtmlView {
 
         // Display the layout
         parent::display($tpl);
-
-        $this->setDocument();
     }
 
     protected function addToolBar()
@@ -134,7 +132,7 @@ class HtmlView extends BaseHtmlView {
         {
             $title .= "<span style='font-size: 0.5em; vertical-align: middle;'>(" . $this->pagination->total . ")</span>";
         }*/
-        ToolBarHelper::title($title, 'Messages');
+        ToolBarHelper::title($title, 'smiley');
 
         if ($this->canDo->get('core.create')) {
             ToolBarHelper::addNew('_bone.add', 'JTOOLBAR_NEW');
@@ -179,11 +177,4 @@ class HtmlView extends BaseHtmlView {
             ToolBarHelper::preferences('com__bones');
         }
     }
-
-    protected function setDocument()
-    {
-        //$document = Factory::getApplication()->getDocument();
-        $this->document->setTitle(Text::_('COM_BONES_ADMINISTRATION'));
-    }
-
 }

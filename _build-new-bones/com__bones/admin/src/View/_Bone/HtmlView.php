@@ -47,8 +47,6 @@ class HtmlView extends BaseHtmlView {
 
         $this->addToolBar();
 
-        $this->setDocument();
-
         parent::display($tpl);
     }
 
@@ -62,7 +60,7 @@ class HtmlView extends BaseHtmlView {
         $isNew = ($this->item->id == 0);
 
         ToolBarHelper::title($isNew ? Text::_('COM_BONES_MANAGER_RECORD_ADD')
-                                    : Text::_('COM_BONES_MANAGER_RECORD_EDIT'), '_bone');
+                                    : Text::_('COM_BONES_MANAGER_RECORD_EDIT'), 'smiley');
         // Build the actions for new and existing records.
         if ($isNew) {
             // For new records, check the create permission.
@@ -97,16 +95,5 @@ class HtmlView extends BaseHtmlView {
             }
             ToolbarHelper::cancel('_bone.cancel', 'JTOOLBAR_CLOSE');
         }
-    }
-
-    protected function setDocument() {
-        //HtmlHelper::_('behavior.framework');
-        //HtmlHelper::_('behavior.formvalidator');
-
-        $isNew = ($this->item->id < 1);
-        $this->document->setTitle($isNew
-          ? Text::_('COM_BONES_RECORD_CREATING')
-          : Text::_('COM_BONES_RECORD_EDITING')
-        );
     }
 }

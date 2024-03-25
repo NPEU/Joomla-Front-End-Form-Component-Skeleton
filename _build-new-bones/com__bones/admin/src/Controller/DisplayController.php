@@ -20,7 +20,8 @@ use Joomla\CMS\MVC\Controller\BaseController;
 class DisplayController extends BaseController {
     protected $default_view = '_bones';
 
-    public function display($cachable = false, $urlparams = []) {
+    public function display($cachable = false, $urlparams = [])
+    {
         return parent::display($cachable, $urlparams);
     }
 }
