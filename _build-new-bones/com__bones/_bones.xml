@@ -9,7 +9,7 @@
     <copyright>(C) {{OWNER}} {{YEAR}}</copyright>
     <license>MIT License; see LICENSE.md</license>
 
-    <version>0.0.1</version>
+    <version>4.0.0</version>
     <description>COM_BONES_DESCRIPTION</description>
 
     <namespace path="src">{{OWNER}}\Component\_Bones</namespace>
