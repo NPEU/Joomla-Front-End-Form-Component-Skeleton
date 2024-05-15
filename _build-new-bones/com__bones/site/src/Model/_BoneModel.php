@@ -182,6 +182,7 @@ class _BoneModel extends \{{OWNER}}\Component\_Bones\Administrator\Model\_BoneMo
     public function getForm($data = array(), $loadData = true)
     {
         // Get the form.
+        // Note we're probably using the form to provice assosiated labels to data fields for display.
         // To DRY use the admin form use:
         // JPATH_COMPONENT_ADMINISTRATOR . '/forms/_bone.xml',
         // or if you need a separate site form, use:
