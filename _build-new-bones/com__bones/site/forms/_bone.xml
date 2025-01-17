@@ -33,5 +33,17 @@
             class=""
             labelclass=""
         />
+        <field
+            name="created_by_alias"
+            type="hidden"
+            filter="unset"
+            default=""
+        />
+        <field
+            name="modified_by_alias"
+            type="hidden"
+            filter="unset"
+            default=""
+        />
     </fieldset>
 </form>
