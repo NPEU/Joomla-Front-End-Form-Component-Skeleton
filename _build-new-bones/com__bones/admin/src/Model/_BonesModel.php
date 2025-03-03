@@ -129,7 +129,7 @@ class _BonesModel extends ListModel
         $query->select($db->quoteName('o.name', 'owner_name'))
             ->select($db->quoteName('o.username', 'owner_username'))
             ->select($db->quoteName('o.email', 'owner_email'))
-            ->join('LEFT', $db->quoteName('#__users', 'o') . ' ON ' . $db->qn('o.id') . ' = ' . $db->qn('a.owner_user_id'));
+            ->join('LEFT', $db->quoteName('#__users', 'o') . ' ON ' . $db->quoteName('o.id') . ' = ' . $db->quoteName('a.owner_user_id'));
 
 
         // Filter: like / search
