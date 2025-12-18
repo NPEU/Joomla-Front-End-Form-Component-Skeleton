@@ -35,7 +35,7 @@ class _BoneController extends FormController
 {
     protected $view_item;  // default view within JControllerForm for reload function
 
-    public function __construct($config = array())
+    public function __construct($config = [])
     {
         $input = Factory::getApplication()->input;
         $this->view_item = $input->get("view", "_bone", "string");
@@ -95,7 +95,7 @@ class _BoneController extends FormController
         $context = "$this->option.edit.$this->context";
 
         // Get the data from POST
-        $data = $this->input->post->get('jform', array(), 'array');
+        $data = $this->input->post->get('jform', [], 'array');
 
         // Save the data in the session.
         $app->setUserState($context . '.data', $data);
@@ -149,7 +149,7 @@ class _BoneController extends FormController
         // input names change this will break. I guess thats' why it's usual to redirect to the
         // listing page to avoud this issue. If it becomes a problem, do that.
         $r = base64_decode($return);
-        $alias = $this->input->post->get('jform', array(), 'array')['alias'];
+        $alias = $this->input->post->get('jform', [], 'array')['alias'];
         $original_alias = $this->input->post->get('original_alias');
 
         $r = str_replace('/' . $original_alias . '/', '/' . $alias . '/', $r);

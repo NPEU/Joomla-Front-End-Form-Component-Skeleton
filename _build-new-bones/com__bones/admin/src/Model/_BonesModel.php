@@ -31,10 +31,10 @@ class _BonesModel extends ListModel
      *
      * @see     JController
      */
-    public function __construct($config = array())
+    public function __construct($config = [])
     {
         if (empty($config['filter_fields'])) {
-            $config['filter_fields'] = array(
+            $config['filter_fields'] = [
                 'id', 'a.id',
                 'title', 'a.title',
                 'alias', 'a.alias',
@@ -51,7 +51,7 @@ class _BonesModel extends ListModel
                 'checked_out', 'a.checked_out',
                 'checked_out_time', 'a.checked_out_time',
                 'access', 'a.access'
-            );
+            ];
         }
 
         parent::__construct($config);

@@ -179,7 +179,7 @@ class _BoneModel extends \{{OWNER}}\Component\_Bones\Administrator\Model\_BoneMo
      *
      * @since   1.6
      */
-    public function getForm($data = array(), $loadData = true)
+    public function getForm($data = [], $loadData = true)
     {
         // Get the form.
         // Note we're probably using the form to provice assosiated labels to data fields for display.
@@ -190,10 +190,10 @@ class _BoneModel extends \{{OWNER}}\Component\_Bones\Administrator\Model\_BoneMo
         $form = $this->loadForm(
             'com__bones.form',
             JPATH_COMPONENT_SITE . '/forms/_bone.xml',
-            array(
+            [
                 'control' => 'jform',
                 'load_data' => $loadData
-            )
+            ]
         );
 
         if (empty($form)) {
@@ -216,7 +216,7 @@ class _BoneModel extends \{{OWNER}}\Component\_Bones\Administrator\Model\_BoneMo
      * We need to override this - otherwise it would take 'Form' as the $name
      */
 
-    public function getTable($name = '_Bone', $prefix = 'administrator', $options = array())
+    public function getTable($name = '_Bone', $prefix = 'administrator', $options = [])
     {
         return parent::getTable($name, $prefix, $options);
     }

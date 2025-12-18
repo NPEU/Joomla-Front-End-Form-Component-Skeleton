@@ -39,7 +39,7 @@ if (!empty($this->item) && !empty($this->item->id)) {
     $inputs_fieldset_class = isset($inputs_fieldset_info->class)
                         ? ' class="' . $inputs_fieldset_info->class . '"'
                         : '';
-    $hidden_inputs = array();
+    $hidden_inputs = [];
     ?>
     <fieldset<?php echo $inputs_fieldset_class; ?>>
         <legend><?php echo Text::_($inputs_fieldset_info->label); ?></legend>

@@ -22,10 +22,10 @@ use Joomla\CMS\Router\Route;
 
 defined('_JEXEC') or die;
 
-$skip = array(
+$skip = [
     'id',
     'title'
-);
+];
 ?>
 <?php foreach ($this->form->getFieldsets() as $name => $fieldset): ?>
 <?php /*<h2><?php echo Text::_($fieldset->label); ?></h2>*/ ?>

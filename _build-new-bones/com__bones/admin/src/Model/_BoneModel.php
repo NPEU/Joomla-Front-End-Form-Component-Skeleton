@@ -42,7 +42,7 @@ class _BoneModel extends AdminModel
      *
      * @return  \Joomla\CMS\Table\Table  A \Joomla\CMS\Table\Table object
      */
-    /*public function getTable($type = '_Bones', $prefix = '_BonesTable', $config = array())
+    /*public function getTable($type = '_Bones', $prefix = '_BonesTable', $config = [])
     {
         return \Joomla\CMS\Table\Table::getInstance($type, $prefix, $config);
     }*/
@@ -55,16 +55,16 @@ class _BoneModel extends AdminModel
      *
      * @return  mixed    A JForm object on success, false on failure
      */
-    public function getForm($data = array(), $loadData = true)
+    public function getForm($data = [], $loadData = true)
     {
         // Get the form.
         $form = $this->loadForm(
             'com__bones._bone',
             '_bone',
-            array(
+            [
                 'control' => 'jform',
                 'load_data' => $loadData
-            )
+            ]
         );
 
         if (empty($form)) {
@@ -98,7 +98,7 @@ class _BoneModel extends AdminModel
         // Check the session for previously entered form data.
         $data = Factory::getApplication()->getUserState(
             'com__bones.edit._bone.data',
-            array()
+            []
         );
 
         if (empty($data)) {
@@ -219,7 +219,7 @@ class _BoneModel extends AdminModel
             foreach ($email_admins as $email) {
                 // Sending email as an array to make it easier to expand; it's quite likely that a
                 // real app would need more info here.
-                $email_data = array('email' => $email);
+                $email_data = ['email' => $email];
                 $this->_sendEmail($email_data);
             }
         }*/
@@ -234,7 +234,7 @@ class _BoneModel extends AdminModel
 
         // Automatic handling of alias for empty fields
         // Taken from com_content/models/article.php
-        if (in_array($input->get('task'), array('apply', 'save', 'save2new'))) {
+        if (in_array($input->get('task'), ['apply', 'save', 'save2new'])) {
             if (empty($data['alias'])) {
                 if (Factory::getConfig()->get('unicodeslugs') == 1) {
                     $data['alias'] = \Joomla\CMS\Filter\OutputFilter::stringURLUnicodeSlug($data['title']);
@@ -244,7 +244,7 @@ class _BoneModel extends AdminModel
 
                 $table = $this->getMVCFactory()->createTable('_Bone', 'Administrator');
 
-                if ($table->load(array('alias' => $data['alias']))) {
+                if ($table->load(['alias' => $data['alias']])) {
                     $msg = \Joomla\CMSanguage\Text::_('COM_CONTENT_SAVE_WARNING');
                 }
 
@@ -274,7 +274,7 @@ class _BoneModel extends AdminModel
         // Alter the title & alias
         $table = $this->getTable();
 
-        while ($table->load(array('alias' => $alias))) {
+        while ($table->load(['alias' => $alias])) {
             if ($name == $table->title) {
                 $name = \Joomla\String\StringHelper::increment($name);
             }
@@ -282,7 +282,7 @@ class _BoneModel extends AdminModel
             $alias = \Joomla\String\StringHelper::increment($alias, 'dash');
         }
 
-        return array($name, $alias);
+        return [$name, $alias];
     }
 
     /**
@@ -301,13 +301,13 @@ class _BoneModel extends AdminModel
         // Alter the title & alias
         $table = $this->getTable();
 
-        while ($table->load(array('alias' => $alias)))
+        while ($table->load(['alias' => $alias]))
         {
             $title = StringHelper::increment($title);
             $alias = StringHelper::increment($alias, 'dash');
         }
 
-        return array($title, $alias);
+        return [$title, $alias];
     }*/
 
 
@@ -341,7 +341,7 @@ class _BoneModel extends AdminModel
             $mail = Factory::getMailer();
             $mail->addRecipient($email);
             $mail->addReplyTo($mailfrom);
-            $mail->setSender(array($mailfrom, $fromname));
+            $mail->setSender([$mailfrom, $fromname]);
             $mail->setSubject(Text::_('COM_BONES_EMAIL_ADMINS_SUBJECT'));
             $mail->setBody(Text::_('COM_BONES_EMAIL_ADMINS_BODY'));
             $sent = $mail->Send();

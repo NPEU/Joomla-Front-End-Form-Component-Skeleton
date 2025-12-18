@@ -18,7 +18,7 @@ use Joomla\CMS\Router\Route;
 
 HTMLHelper::_('behavior.formvalidator');
 
-$global_edit_fields = array(
+$global_edit_fields = [
     'id',
     'parent',
     'parent_id',
@@ -34,12 +34,12 @@ $global_edit_fields = array(
     'tags',
     'note',
     'version_note'
-);
+];
 
 $app = Factory::getApplication();
 $input = $app->input;
 
-#$this->ignore_fieldsets = array('details', 'images', 'item_associations', 'jmetadata');
+#$this->ignore_fieldsets = ['details', 'images', 'item_associations', 'jmetadata'];
 $this->useCoreUI = true;
 
 $fieldsets = $this->form->getFieldsets();
@@ -61,7 +61,7 @@ $field_types_no_label = [
     <?php #echo LayoutHelper::render('joomla.edit.title_alias', $this); ?>
 
     <div class="main-card">
-        <?php echo HTMLHelper::_('uitab.startTabSet', 'myTab', array('active' => 'main')); ?>
+        <?php echo HTMLHelper::_('uitab.startTabSet', 'myTab', ['active' => 'main']); ?>
 
         <?php $i=0; foreach ($fieldsets as $fieldset): $i++; ?>
         <?php $form_fieldset = $this->form->getFieldset($fieldset->name); ?>
@@ -71,7 +71,7 @@ $field_types_no_label = [
         <div class="row">
             <?php if ($fieldset->name == 'main'): ?>
             <div class="col-xl-9"><?php else: ?><div class="col-12"><?php endif; ?>
-                <?php $hidden_fields = array(); foreach($form_fieldset as $field): if(!in_array($field->fieldname, $global_edit_fields)): ?>
+                <?php $hidden_fields = []; foreach($form_fieldset as $field): if(!in_array($field->fieldname, $global_edit_fields)): ?>
                 <?php if($field->type == 'Hidden'){$hidden_fields[] = $field->input; continue;} ?>
                 <?php if(!empty($field->getAttribute('hiddenLabel'))){ echo $field->input; continue; } ?>
 

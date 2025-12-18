@@ -36,7 +36,7 @@ class FormModel extends \{{OWNER}}\Component\_Bones\Administrator\Model\_BoneMod
      * We need to override this - otherwise it would take 'Form' as the $name
      */
 
-    public function getTable($name = '_Bone', $prefix = 'Administrator', $options = array())
+    public function getTable($name = '_Bone', $prefix = 'Administrator', $options = [])
     {
         return parent::getTable($name, $prefix, $options);
     }
@@ -50,16 +50,16 @@ class FormModel extends \{{OWNER}}\Component\_Bones\Administrator\Model\_BoneMod
      * @return  mixed    A JForm object on success, false on failure
      *
      */
-    public function getForm($data = array(), $loadData = true)
+    public function getForm($data = [], $loadData = true)
     {
         // Get the form.
         $form = $this->loadForm(
             'com__bones.form',
             '_bone',
-            array(
+            [
                 'control' => 'jform',
                 'load_data' => $loadData
-            )
+            ]
         );
 
         if (empty($form))
@@ -85,7 +85,7 @@ class FormModel extends \{{OWNER}}\Component\_Bones\Administrator\Model\_BoneMod
         // Check the session for previously entered form data.
         $data = Factory::getApplication()->getUserState(
             'com__bones.edit._bone.data',
-            array()
+            []
         );
 
         return $data;

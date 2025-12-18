@@ -17,7 +17,7 @@ use Joomla\CMS\MVC\Controller\AdminController;
 class _BonesController extends AdminController
 {
 
-    public function getModel($name = '_Bone', $prefix = 'Administrator', $config = array('ignore_request' => true))
+    public function getModel($name = '_Bone', $prefix = 'Administrator', $config = ['ignore_request' => true])
     {
         return parent::getModel($name, $prefix, $config);
     }

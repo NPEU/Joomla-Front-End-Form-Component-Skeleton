@@ -160,7 +160,7 @@ class HtmlView extends BaseHtmlView {
             {
                 // we use a standard Joomla layout to get the html for the batch button
                 $layout = new FileLayout('joomla.toolbar.batch');
-                $batchButtonHtml = $layout->render(array('title' => Text::_('JTOOLBAR_BATCH')));
+                $batchButtonHtml = $layout->render(['title' => Text::_('JTOOLBAR_BATCH')]);
                 $bar->appendButton('Custom', $batchButtonHtml, 'batch');
             }*/
         }

@@ -30,7 +30,7 @@ class _BoneController extends FormController
     * @param array $data
     * @return bool
     */
-    protected function allowAdd($data = array())
+    protected function allowAdd($data = [])
     {
         return parent::allowAdd($data);
     }
@@ -42,7 +42,7 @@ class _BoneController extends FormController
     * @param string $key
     * @return bool
     */
-    protected function allowEdit($data = array(), $key = 'id')
+    protected function allowEdit($data = [], $key = 'id')
     {
         $id = isset( $data[ $key ] ) ? $data[ $key ] : 0;
         if( !empty( $id ) )
