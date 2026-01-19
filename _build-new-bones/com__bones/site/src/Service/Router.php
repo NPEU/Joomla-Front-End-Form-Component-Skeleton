@@ -9,7 +9,7 @@
 
 namespace {{OWNER}}\Component\_Bones\Site\Service;
 
-defined('_JEXEC') or die;
+\defined('_JEXEC') or die;
 
 use Joomla\CMS\Application\SiteApplication;
 use Joomla\CMS\Categories\CategoryFactoryInterface;
@@ -26,7 +26,6 @@ use Joomla\Database\DatabaseInterface;
 use Joomla\Database\ParameterType;
 
 use {{OWNER}}\Component\_Bones\Site\Service\CustomRouterRules;
-
 
 
 class Router extends RouterView

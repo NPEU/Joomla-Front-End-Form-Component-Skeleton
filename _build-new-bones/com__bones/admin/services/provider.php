@@ -7,10 +7,8 @@
  * @license     MIT License; see LICENSE.md
  */
 
-defined('_JEXEC') or die;
+\defined('_JEXEC') or die;
 
-#use {{OWNER}}\Component\_Bones\Administrator\Helper\AssociationsHelper;
-use {{OWNER}}\Component\_Bones\Administrator\Extension\_BonesComponent;
 use Joomla\CMS\Component\Router\RouterFactoryInterface;
 use Joomla\CMS\Dispatcher\ComponentDispatcherFactoryInterface;
 use Joomla\CMS\Extension\ComponentInterface;
@@ -24,7 +22,10 @@ use Joomla\Database\DatabaseInterface;
 use Joomla\DI\Container;
 use Joomla\DI\ServiceProviderInterface;
 
+#use {{OWNER}}\Component\_Bones\Administrator\Helper\AssociationsHelper;
+use {{OWNER}}\Component\_Bones\Administrator\Extension\_BonesComponent;
 use {{OWNER}}\Component\_Bones\Administrator\Service\Provider;
+
 
 return new class implements ServiceProviderInterface {
 

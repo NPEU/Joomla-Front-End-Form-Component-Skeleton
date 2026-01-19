@@ -9,11 +9,10 @@
 
 namespace {{OWNER}}\Component\_Bones\Site\Service;
 
-// phpcs:disable PSR1.Files.SideEffects
-\defined('JPATH_PLATFORM') or die;
-// phpcs:enable PSR1.Files.SideEffects
+\defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+
 
 /**
  * RouterRules interface for Joomla

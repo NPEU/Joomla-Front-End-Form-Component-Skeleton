@@ -7,13 +7,14 @@
  * @license     MIT License; see LICENSE.md
  */
 
+\defined('_JEXEC') or die;
+
 use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Uri\Uri;
 
-defined('_JEXEC') or die;
 
 // These are for the Joomla way of doing things. You may not need these if you're doing things
 // differently.

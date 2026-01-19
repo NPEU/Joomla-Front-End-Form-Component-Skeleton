@@ -9,7 +9,7 @@
 
 namespace {{OWNER}}\Component\_Bones\Site\Model;
 
-defined('_JEXEC') or die;
+\defined('_JEXEC') or die;
 
 /**
  * _Bone Component Model

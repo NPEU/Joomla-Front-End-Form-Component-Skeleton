@@ -9,9 +9,7 @@
 
 namespace {{OWNER}}\Component\_Bones\Site\Model;
 
-
-// No direct access to this file
-defined('_JEXEC') or die('Restricted access');
+\defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\Model\AdminModel;

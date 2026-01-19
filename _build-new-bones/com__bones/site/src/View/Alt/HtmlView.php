@@ -9,7 +9,7 @@
 
 namespace {{OWNER}}\Component\_Bones\Site\View\Alt;
 
-defined('_JEXEC') or die;
+\defined('_JEXEC') or die;
 
 #use Joomla\CMS\Helper\TagsHelper;
 #use Joomla\CMS\Plugin\PluginHelper;
@@ -22,6 +22,7 @@ use Joomla\CMS\Router\Route;
 use Joomla\CMS\Uri\Uri;
 
 use {{OWNER}}\Component\_Bones\Site\View;
+
 
 //require_once(dirname(__DIR__) . '/_Bone/HtmlView.php');
 

@@ -9,8 +9,7 @@
 
 namespace {{OWNER}}\Component\_Bones\Administrator\Model;
 
-defined('_JEXEC') or die;
-
+\defined('_JEXEC') or die;
 
 #use Joomla\CMS\Form\Form;
 #use Joomla\CMS\Helper\TagsHelper;
@@ -25,7 +24,6 @@ use Joomla\CMS\Application\ApplicationHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\MVC\Model\AdminModel;
-
 
 
 /**

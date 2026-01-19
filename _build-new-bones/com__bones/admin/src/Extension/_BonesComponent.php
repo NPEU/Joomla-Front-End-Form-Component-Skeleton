@@ -9,7 +9,7 @@
 
 namespace {{OWNER}}\Component\_Bones\Administrator\Extension;
 
-defined('JPATH_PLATFORM') or die;
+\defined('_JEXEC') or die;
 
 
 #use {{OWNER}}\Component\_Bones\Site\Service\TraditionalRouter;
@@ -32,6 +32,7 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\Menu\AbstractMenu;
 use Joomla\Database\DatabaseAwareTrait;
 use Psr\Container\ContainerInterface;
+
 
 class _BonesComponent extends MVCComponent implements
     RouterServiceInterface, BootableExtensionInterface

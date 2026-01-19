@@ -9,8 +9,7 @@
 
 namespace {{OWNER}}\Component\_Bones\Site\Controller;
 
-defined('_JEXEC') or die;
-
+\defined('_JEXEC') or die;
 
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
@@ -25,6 +24,7 @@ use Joomla\CMS\Session\Session;
 use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\User\User;
 use Joomla\CMS\User\UserFactoryInterface;
+
 
 /**
  * _Bone Component Controller

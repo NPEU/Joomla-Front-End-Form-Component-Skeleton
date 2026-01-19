@@ -9,7 +9,7 @@
 
 namespace {{OWNER}}\Component\_Bones\Site\Model;
 
-defined('_JEXEC') or die;
+\defined('_JEXEC') or die;
 
 #use {{OWNER}}\Component\_Bones\Site\Helper\_BoneHelper;
 #use Joomla\CMS\MVC\Model\ItemModel;
@@ -19,6 +19,7 @@ use Joomla\CMS\Language\Multilanguage;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
 use Joomla\Registry\Registry;
+
 
 /**
  * Alt Component Model

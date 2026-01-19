@@ -7,6 +7,8 @@
  * @license     MIT License; see LICENSE.md
  */
 
+ \defined('_JEXEC') or die;
+
 #use Joomla\CMS\Language\Multilanguage;
 #use Joomla\CMS\Layout\FileLayout;
 #use Joomla\CMS\Layout\LayoutHelper;
@@ -18,7 +20,6 @@ use Joomla\CMS\Router\Route;
 
 #use Joomla\CMS\HTML\HTMLHelper;
 
-defined('_JEXEC') or die;
 
 $language = JFactory::getLanguage();
 $language->load('com__bones', JPATH_ADMINISTRATOR . '/components/com__bones');

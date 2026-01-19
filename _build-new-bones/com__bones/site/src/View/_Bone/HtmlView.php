@@ -9,7 +9,7 @@
 
 namespace {{OWNER}}\Component\_Bones\Site\View\_Bone;
 
-defined('_JEXEC') or die;
+\defined('_JEXEC') or die;
 
 #use Joomla\CMS\Helper\TagsHelper;
 #use Joomla\CMS\Plugin\PluginHelper;
@@ -20,6 +20,7 @@ use Joomla\CMS\Log\Log;
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Uri\Uri;
+
 
 /**
  * _Bone Component HTML View

@@ -7,6 +7,7 @@
  * @license     MIT License; see LICENSE.md
  */
 
+\defined('_JEXEC') or die;
 
 #use Joomla\CMS\Factory;
 #use Joomla\CMS\Language\Multilanguage;
@@ -20,7 +21,6 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
 
-defined('_JEXEC') or die;
 
 $skip = [
     'id',

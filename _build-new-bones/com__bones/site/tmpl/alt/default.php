@@ -7,11 +7,12 @@
  * @license     MIT License; see LICENSE.md
  */
 
+\defined('_JEXEC') or die;
+
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
 
-defined('_JEXEC') or die;
 
 $count  = count($this->items);
 $is_are = $count == 1 ? 'is' : 'are';
